@@ -55,7 +55,7 @@ class ExponentialDecay(DecayLearnigRate):
                 x_train, y_train, x_val, y_val = self.my_shuffle()
                 
                 def exp_decay(epoch):
-                    new_lr = lr*math.exp(-decayc*epoch)
+                    new_lr = lr*math.exp(-decay*epoch)
                     
                     if new_lr < 10**-9:
                         # stop returning and return from the method

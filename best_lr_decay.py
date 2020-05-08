@@ -22,11 +22,11 @@ model = structure(3, 950, 'mean_squared_error', 'relu', 'random_uniform', 'adam'
 # Las variables varian proximas al area de aprendizaje obtenidas del 
 # método de de Smith
 
-expon = ExponentialDecay(model, x, y, [0.0005, 0.00075, 0.001, 0.0025, 0.005, 0.0075, 0.01], [0.8, 0.825, 0.85, 0.875, 0.9, 0.95])
+expon = ExponentialDecay(model, x, y, [0.0005, 0.00075, 0.001, 0.0025, 0.005, 0.0075, 0.01], [0.0025, 0.005, 0.009, 0.0095, 0.01, 0.015])
 
 expon.grid_search()
 
-timety = TimeDecay(model, x, y, [0.0005, 0.00075, 0.001, 0.0025, 0.005, 0.0075, 0.01], [0.8, 0.825, 0.85, 0.875, 0.9, 0.95])
+timety = TimeDecay(model, x, y, [0.0005, 0.00075, 0.001, 0.0025, 0.005, 0.0075, 0.01], [0.01, 0.05, 0.1, 0.5, 1, 1.5, 2, 4, 8])
 
 timety.grid_search()
 
