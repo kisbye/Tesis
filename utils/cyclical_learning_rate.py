@@ -2,6 +2,8 @@
 from keras.callbacks import *
 import numpy as np
 
+
+#https://www.pyimagesearch.com/2019/08/05/keras-learning-rate-finder/
 class CyclicLR(Callback):
     """This callback implements a cyclical learning rate policy (CLR).
     The method cycles the learning rate between two boundaries with
