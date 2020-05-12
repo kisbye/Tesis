@@ -5,7 +5,7 @@ import gc
 from keras.callbacks.callbacks import LearningRateScheduler
 import numpy as np
 from utils.structure import my_split,structure
-from utils.structure import Sample
+from utils.sample import Sample
 from keras.models import clone_model
 import math
 #Exponential Decay
@@ -26,8 +26,7 @@ class DecayLearnigRate:
         self.best_loss = 100
 
     def __str__(self):
-        print('Learning Rate, Decay, epoch_drop')
-        return self.best_lr, self.best_decay, self.best_epoch_drop
+        return 'Learning Rate: {}, Decay: {}, epoch_drop: {}'.format(self.best_lr, self.best_decay, self.best_epoch_drop)
 
     def my_shuffle(self):
         x_cpy = self.x.copy()
@@ -47,7 +46,7 @@ class ExponentialDecay(DecayLearnigRate):
 
         for lr in self.lrs:
             for decay in self.decays:
-
+                print('Learning Rate: {}\nDecay: {}'.format(lr, decay))
                 copy_model = clone_model(self.model)
 
                 copy_model.compile(loss='mean_squared_error', optimizer='adam', metrics=['mse', 'mae' ,'mape'])
@@ -58,7 +57,7 @@ class ExponentialDecay(DecayLearnigRate):
                     new_lr = lr*math.exp(-decay*epoch)
                     
                     if new_lr < 10**-9:
-                        # stop returning and return from the method
+                        #learning rate muy chico, deja de entrenar
                         copy_model.stop_training = True
 
                     return new_lr
@@ -87,7 +86,7 @@ class TimeDecay(DecayLearnigRate):
 
         for lr in self.lrs:
             for decay in self.decays:
-
+                print('Learning Rate: {}\nDecay: {}'.format(lr, decay))
                 copy_model = clone_model(self.model)
 
                 copy_model.compile(loss='mean_squared_error', optimizer='adam', metrics=['mse', 'mae' ,'mape'])
@@ -128,7 +127,7 @@ class StepDecay(DecayLearnigRate):
         for lr in self.lrs:
             for decay in self.decays:
                 for epoch_drop in self.epochs_drop:
-
+                    print('Learning Rate: {}\nDecay: {}\nEpoch Drop: {}'.format(lr, decay, epoch_drop))
                     copy_model = clone_model(self.model)
 
                     copy_model.compile(loss='mean_squared_error', optimizer='adam', metrics=['mse', 'mae' ,'mape'])
