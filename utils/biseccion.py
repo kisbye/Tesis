@@ -1,6 +1,6 @@
 #coding=utf-8
 
-def bisec(f, a, b, tol):
+def bisec(f, a, b, tol, maxiter=100):
 	if f(a) == 0:
 		return a
 	if f(b) == 0:
@@ -10,7 +10,8 @@ def bisec(f, a, b, tol):
 		return -1
 	assert f(a)*f(b) < 0, "No cumple pre-condición"
 	o = 0 #volatilidad
-	while(tol<abs(b-a)):
+	i = 0
+	while tol<abs(b-a) and i < maxiter:
 		o = (a+b)/2
 		tmp = f(o)
 		if tmp > 0:
@@ -19,5 +20,6 @@ def bisec(f, a, b, tol):
 			a = o
 		else:
 			return o
+		i += 1
 	return o
 
