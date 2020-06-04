@@ -16,7 +16,7 @@ En caso que la presición sea imprescindible, entonces se utilizará el método 
 
 \vspace{5mm}
 
-Dentro de las posibilidades de continuación del trabajo tenemos uso de GPU en la implementacón de los
+Dentro de las posibilidades de continuar con el trabajo tenemos, uso de GPU en la implementacón de los
 modelos matématicos propuestos, presentar soluciones para el problema numérico del capítulo 4.6.
 
 En este trabajo se planteo el cálculo de la volatilidad implícita mediante opciones call europeas, ademas se podrían proponer otros modelos obtener la volatilidad impícita mediante puts europeas. 
