@@ -1,0 +1,284 @@
+\chapter{Implementaci\'on con Red Neuronal Feed-Forward}
+\label{Red Neuronal}
+\markboth{}{}
+
+En esta sección presentaremos el cálculo de la volatilidad implícita mediante redes neuronales.
+
+
+\section{Calculo de prima de opción call con ratio}
+
+En el paper \cite{Gencay} se demostró que las redes neuronales estiman mejor el precio de la opción mediante el ratio(S/K), entonces obtenemos:
+
+\vspace{5mm}
+
+$\displaystyle\frac{c}{K} = \displaystyle\frac{S(0)}{K}\Phi(d_1) - e^{-rT}\Phi(d_2) = B'(S(0)/K, T, r, \sigma)$.
+
+\vspace{5mm}
+
+donde:
+
+$d_1 = \displaystyle\frac{Log \left(\displaystyle\frac{S(0)}{K}\right)+ \left( r + \displaystyle\frac{\sigma^2}{2}\right)T}{\sigma\sqrt{T}}$
+\qquad  $d_2 = d_1 - \sigma\sqrt{T}$.
+
+
+
+\section{Generación de muestra}
+
+Como hemos visto en la sección anterior, el nuevo cálculo de de prima nos dará un valor $\displaystyle\frac{c}{K}$.
+En nuestro caso buscamos estimar la volatilidad implícita, pero usaremos el ratio para generar la muestra ya
+que en la práctica la red estima mejor.
+
+Luego vamos a generar 2 muestras, una muestra amplia y una muestra estrecha.
+
+Las variables de la muestra ya sea amplia o estrecha, pertenecerán a un ambiente previamente definido, pero las variables de la muestra estrecha sera un subconjunto de la amplia.
+
+\begin{table}[!htbp]
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+ & Parametros & muestra amplia  &  muestra estrecha   \\ \hline
+ & precio ratio($S_0$/K) & [$A^1$,$B^1$] & [$A^1+C^1_1$,$B^1-C^1_2$]   \\ \cline{2-4} 
+ Entrada & Tiempo de madurez($\tau$) &  [$A^2$,$B^2$] & [$A^2+C^2_1$,$B^2-C^2_2$]   \\ \cline{2-4} 
+ & volatilidad($\sigma$) &  [$A^3$,$B^3$] & [$A^3+C^3_1$,$B^3-C^3_2$]  \\ \cline{2-4} 
+ & Tasa libre de riesgo($r$) &  [$A^4$,$B^4$] & [$A^4+C^4_1$,$B^4-C^4_2$] \\ \hline
+ Salida & Precio de Call(c/K) &  $(O^1,L^1)$ & ($O^2,L^2$) \\ \hline
+\end{tabular}
+\end{table}
+
+donde \quad $A^i+C^i_1 < B^i-C^i_2$, \quad $C^i_j > 0$, \quad  $O^j < L^j$, para $i = 1,2,3,4$, $j = 1,2$.
+
+\vspace{5mm}
+
+Luego para generar una muestra de tamaño N, aplicaremos N veces el siguiente algoritmo, donde:
+
+\begin{itemize}
+  \item \textbf{numero\_aleatorio:} Es una función que dado un rango genera un número aleatorio perteneciente a dicho rango.
+  \item \textbf{B$'$:} Es la fórmula de Black-Scholes dada en la sección anterior.
+  \item \textbf{rango\_ratio:} Es el rango de valores de el ratio($S_0/K$).
+  \item \textbf{rango\_T:} es el rango de valores de el tiempo de maturez($\tau$).
+  \item \textbf{rango\_$\sigma$:} es el rango de valores de la volatilidad implícita ($\sigma$).
+  \item \textbf{rango\_$r$:} es el rango de valores de la tasa libre riesgo($r$).
+\end{itemize} 
+
+\begin{algorithm}[H]
+\SetAlgoLined
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+\ResetInOut{output}
+\Input{rango\_ratio, rango\_T, rango\_$\sigma$, rango\_$r$ }
+\Output{C}
+ ratio := numero\_aleatorio(rango\_ratio)\;
+ T := numero\_aleatorio(rango\_T)\;
+ $\sigma$ := numero\_aleatorio(rango\_ratio)\;
+ $r$ := numero\_aleatorio(rango\_$r$)\;
+ C := B$'$(ratio, T, $\sigma$, r)\;
+ return\;
+ \caption{Generación muestra}
+\end{algorithm}
+
+Observar que C es $c/K$.
+
+\vspace{5mm}
+
+\section{k-fold cross validation}
+
+En nuestro caso utilizaremos 8-fold cross validation para estimar los siguientes hiperparámetros. Primero definiremos la estructura de la red neuronal entre 1 y 10 capas ocultas, variando entre 50 a 1000 neuronas por capa oculta. Luego definiremos la función de activación \cite{Activation}, la inicialización de pesos de la red \cite{Init} y el algoritmo de optimización del decenso del gradiente \cite{Opti} en simultaneo(haciendo todas las convinaciones posibles definidas). Siguiendo por determinar la mejor función de error \cite{Loss}.
+
+Luego determinaremos el dropout. Y por ultimo el tamaño del batch. 
+
+Los hiperparámetros propuesto para aplicar 8-fold cross validation están definidos en el Cuadro 5.2.
+
+\vspace{5mm}
+
+Mientras se vayan definiendo los hiperparámetros óptimos, se usarán los hiperparámetros por defecto que utiliza Keras Sequential \cite{Keras}, excepto el tamaño del batch que será de 1024 como se observa en el Cuadro 5.1.
+
+\begin{table}[h!]
+\begin{center}
+\caption{Hiperparametros por defecto}
+
+\begin{tabular}{c|c}
+\hline
+
+Parametros & Opciones  \\ \hline
+ 
+Función de error & ECM  \\ 
+Función de activación & ReLu  \\ 
+Inicialización de pesos &  glorot\_uniform \\ 
+Algoritmo de optimización & SGD  \\ 
+Dropout & 0  \\ 
+Tamaño de batch &  1024 \\
+Learning rate & 0.001 \\
+epocas & 200 \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+
+
+\begin{table}[h!]
+\begin{center}
+\caption{Estimación de hiperparametros}
+
+
+\begin{tabular}{c|c}
+\hline
+
+Parametros & Opciones o Rango  \\ \hline
+Capas & [1,5]    \\ 
+Neuronas & [50,500]  \\ 
+Función de error & ECM, EAM, EPAM  \\ 
+Función de activación & ReLu, elu  \\ 
+Inicialización de pesos & uniform, glorot\_uniform, he\_uniform  \\ 
+Algoritmo de optimización & SGD, RMSprop, Adam  \\ 
+Dropout & [0,0.2]  \\ 
+Tamaño de batch & [256, 2048] \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+Sea:
+
+ECM =  $\displaystyle\frac{1}{N} \sum_{i=1}^{N}(y_i - \hat{y_i})^2$
+
+EAM = $\displaystyle\frac{1}{N} \sum_{i=1}^{N}|y_i - \hat{y_i}|$
+
+EPAM = $100 \displaystyle\frac{1}{N} \sum_{i=1}^{N}\displaystyle\frac{|y_i - \hat{y_i}|}{y_i}$
+
+$\overline{y} = \displaystyle\frac{1}{N}\sum_{i=1}^{N} y_i$
+
+$SS_{tot} =\displaystyle\sum_{i=1}^{N} (y_i-\overline{y})^2$
+
+$R^2 = 1 - \displaystyle\frac{ECM}{SS_{tot}}$
+
+\vspace{5mm}
+
+Donde $y_i$ es el valor esperado de salida de la red, $\hat{y_i}$ es el valor que predice la red y N es el tamaño de muestra.
+
+\vspace{5mm}
+
+En el Cuadro 5.3 se observan los hiperparámetros que utilizaremos en el entrenamiento de la red.
+
+\begin{table}[]
+\begin{center}
+\caption{Hiperparametros}
+\begin{tabular}{c|c}
+\hline
+
+Parametros & Opciones  \\ \hline
+Capas & 3   \\ 
+Neuronas & 950  \\  
+Función de error & ECM  \\ 
+Función de activación & ReLu  \\ 
+Inicialización de pesos &  random\_uniform \\ 
+Algoritmo de optimización & Adam  \\ 
+Dropout & 0  \\ 
+Tamaño de batch &  1024 \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\vspace{5mm}
+
+\textbf{\large Learning Rate}
+
+
+Anteriormente hemos usado un \textbf{learning rate} fijo($10^{-3}$). 
+
+Tomando los hiperparámetros del Cuadro 5.3 utilizaremos un método similiar al de Smith \cite{Smith} para determinar el learning rate, a diferencia del método de Smith, iremos subiendo el learning rate exponencialmente por cada batch.
+Empezaremos con un learning rate de $10^{-10}$ hasta llegar a 1, comparando ECM contra el learning rate.
+
+Como se puede observar en la Figura 5.1, el rango de learning rate óptimo
+ se encuentra entre $5*10^{-6}$ y $5*10^{-3}$.
+
+\begin{figure}
+  \includegraphics[width=13cm, height=9cm]{imagenes/learning_rate_post}
+  \caption{Método de Smith}
+\end{figure}
+
+\vspace{5mm}
+
+
+Luego vamos a proponer 3 métodos de decrecimiento del learning rate. Utilizaremos grid-search para encontrar los parámetros óptimos de los algoritmos de decrecimiento del learning rate. Tomando los hiperparámetros del Cuadro 5.3. En el Cuadro 5.4 se definen los intervalos sobre los cuales aplicaremos grid-search, usando como referencia el método de Smith. Dando como resultado el Cuadro 5.5.
+
+
+\begin{table}[h!]
+\begin{center}
+\caption{Grid-Search}
+\begin{tabular}{c|c|c|c}
+\hline
+
+Parametros & Step Decay & Exponential Decay  & Time-Based Decay\\ \hline
+base\_lr & [$10^{-2}$, $10^{-4}]$ & [$10^{-2}$, $10^{-4}$] & [$10^{-2}$, $10^{-4}$]\\  
+decay & [0.9, 0.95] & [0.007, 0.002] & [0.01, 8]\\ 
+epoch\_drop & 5, 10, 20, 40, 50 & - & -\\ 
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\vspace{5mm}
+
+
+ 
+
+\begin{table}[h!]
+\begin{center}
+\caption{Parametros de los Algoritmos de Decrecimiento}
+\begin{tabular}{c|c|c|c}
+\hline
+
+Parametros & Step Decay & Exponential Decay  & Time-Based Decay\\ \hline
+base\_lr & $5*10^{-4}$ & 0.0005 & 0.005 \\  
+decay & 0.9 & 0.002 & 0.875 \\ 
+epoch\_drop & 20 & - & -\\ 
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\vspace{5mm}
+
+
+Observando los parámetros del Cuadro 5.5 entrenaremos la red por 1000 épocas ulizando los algoritmos de decrecimiento del learning rate y los hiperpárametros del Cuadro 5.3 antes mencionados. Los vamos a comparar mediante su ECM, para obtener el mejor algoritmo de decrecimiento. Como se puede observar en la Figura 5.2 Step Decay es el algoritmo que mejor resultado obtuvo.
+
+\begin{figure}[t!]
+  \includegraphics[width=16cm, height=9cm]{imagenes/comparacion_post}
+  \caption{Learning Rate Decay}
+\end{figure}
+
+\vspace{5mm}
+
+
+Luego comparamos Step Decay con Cyclical Decay \cite{Smith}, donde el learning rate varia entre un máximo de
+$5*10^{-3}$ y un mínimo de $5*10^{-6}$, con un paso cada 8 epocas aproximadamente(ver Figura 2.6). Observando la
+Figura 5.3, podemos concluir que Step Decay da un mejor resultado. 
+
+
+
+\begin{figure}[t!]
+  \includegraphics[width=16cm, height=9cm]{imagenes/step_vs_cyclical}
+  \caption{Cyclical LR vs Step Decay}
+\end{figure}
+
+
+
+\section{Optimización}
+
+Notar que si sigma es grande, la derivada de la call respecto de sigma es muy pequeña, esto puedo ocasionar un problema de gradiente pronunciado. Por lo tanto se propone un aplanamiento del gradiente para manejar este problema.
+
+Primero, cada opción puede ser dividida entre el valor intrínseco y un valor de tiempo, luego sustraemos el valor intrínseco de la siguiente manera:
+
+\vspace{5mm}
+
+\hspace{3cm} $\tilde{C} = C - max(S_0 - Ke^{-r\tau}, 0) $
+
+\vspace{5mm}  
+
+El nuevo cálculo propone superar el problema, logrando reducir el gradiente pronunciado aplicando una transformación logarítmica sobre el valor de la opción \cite{Logaritmo}. En nuestro caso sería:
+
+
+\begin{equation}
+ \displaystyle\frac{\tilde{C}}{K} = \displaystyle\frac{C}{K} - max(ratio - e^{-r\tau}, 0)
+\end{equation}

@@ -1,0 +1,228 @@
+\chapter{Resultados}
+\label{Resultados}
+\markboth{}{}
+
+En este capítulo vamos a analizar la efectividad de los modelos propuestos.
+El experimiento se realizó en CPU(Intel(R) Core(TM) i5-8265U CPU @ 1.60GHz)
+ 
+\section{Primera Red}
+
+Ya tenemos los hiperparámetros óptimos del capítulo anterior, entonces vamos a definir la muestra de entrenamiento, validación y test. Crearemos 2 muestras, una amplia y una estrecha. En el cuadro 6.1 se define el ambiente de las muestras, y para generar la muestra se usa el algoritmo 5.1.
+
+
+\begin{table}[!htbp]
+\begin{center}
+\caption{Hiperparametros de la Muestra}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+ & Parametros & muestra amplia  &  muestra estrecha   \\ \hline
+  & precio ratio($S_0$/K) & [0.4, 1.6] & [0.5, 1.5]   \\ \cline{2-4} 
+ Entrada & Tiempo de madurez($\tau$) &  [0.2, 1.1] & [0.3, 0.95]   \\ \cline{2-4} 
+  & volatilidad($\sigma$) &  [0.01, 1] & [0.02, 0.9]  \\ \cline{2-4} 
+  & Tasa libre de riesgo($r$) &  [0.02, 0.1] & [0.03, 0.08] \\ \hline
+ Salida & Precio de Call(c/K) &  (0, 0.9) & (0, 0.73) \\ \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+Una vez obtenida la muestra, la entrada de la red será \{c/K, $S_0$/K, $r$, $\tau$\} y la salida \{$\sigma$\}. Vamos a entrenar la red durante 1000 épocas utilizando la muestra amplia y los hiperparámetros del obtenidos capítulo anterior. 
+
+Una vez entrenada la red, en el Cuadro 6.2 y en las Figuras 6.1 y 6.2 se pueden observar los resultados.
+
+
+\begin{figure}[!tbp]
+  \centering
+  \begin{minipage}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{Predic_w_n.png}
+    \caption{Predicción muestra amplia.}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{Predic_n_n.png}
+    \caption{Predicción muestra estrecha.}
+  \end{minipage}
+\end{figure}
+
+\begin{table}[!htbp]
+\begin{center}
+\caption{Error Red}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+ & ECM & EAM  &  EPAM & $R^2$  \\ \hline
+Muestra Amplia  & $3.21e(-4)$ & $6.09e(-3)$ & $9.30$ & 0.996031  \\ \hline
+Muestra Estrecha & $1.47e(-4)$ &  $4.07e(-3)$ & $5.46$ & 0.997714  \\ \hline
+  
+\end{tabular}
+\end{center}
+\end{table}
+
+
+\section{Optimización}
+
+Ya tenemos los hiperparámetros óptimos del capítulo anterior, entonces vamos a definir la muestra de entrenamiento, validación y test. Crearemos 2 muestras, una amplia y una estrecha. A diferencia de la muestra de la sección anterior, en esta se va a modificar utilizando la ecuación 5.1 del cápitulo anterior. En el cuadro 6.3 se define el ambiente de la muestra, y para generar las muestras se usa el algoritmo 5.1.
+
+\begin{table}[!htbp]
+\begin{center}
+\caption{Hiperparametros de la Muestra}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+ & Parametros & muestra amplia  &  muestra estrecha   \\ \hline
+  & precio ratio($S_0$/K) & [0.4, 1.6] & [0.5, 1.5]   \\ \cline{2-4} 
+ Entrada & Tiempo de madurez($\tau$) &  [0.2, 1.1] & [0.3, 0.95]   \\ \cline{2-4} 
+  & volatilidad($\sigma$) &  [0.01, 1] & [0.02, 0.9]  \\ \cline{2-4} 
+  & Tasa libre de riesgo($r$) &  [0.02, 0.1] & [0.03, 0.08] \\ \hline
+ Salida & Precio de Call(log($\tilde{C}/{K}$)) &  [-16.12,-0.94] & [-16.12,-0.94] \\ \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+Una vez obtenida la muestra, la entrada de la red será \{log($\tilde{C}/K$), $S_0$/K, $r$, $\tau$\} y la salida \{$\sigma$\}. Vamos a entrenar la red durante 1000 épocas.
+
+Una vez entrenada la red, en el Cuadro 6.4 y en las Figuras 6.3 y 6.4 se pueden observar los resultados.
+
+
+\begin{figure}[!tbp]
+  \centering
+  \begin{minipage}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{Predic_w_log_mil.png}
+    \caption{Predicción muestra amplia.}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{Predic_n_log_mil.png}
+    \caption{Predicción muestra estrecha.}
+  \end{minipage}
+\end{figure}
+
+\begin{table}[!htbp]
+\begin{center}
+\caption{Error Red Optimizada}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+ & ECM & EAM  &  EPAM & $R^2$  \\ \hline
+Muestra Amplia  & $6.24e(-8)$ & $1.92e(-4)$ & $0.059$ & 0.999999104  \\ \hline
+Muestra Estrecha & $5.58e(-8)$ &  $ 1.84e(-4)$ & $0.062$ & 0.999999020  \\ \hline
+  
+\end{tabular}
+\end{center}
+\end{table}
+
+
+\subsection{Cambio en función de decrecimiento del Learning Rate}
+
+Observando la Figura 5.1 podemos concluir que el entrenamiento de la red con un learning rate menor a $10^{-7}$ prácticamente no actualizaría los pesos, entonces si queremos hacer mas épocas en el entrenamiento de la red, con el algoritmo que usamos en la sección anterior tendríamos en la época 3000 un learning rate aproximado de $1.87e^{-17}$, y en la época 1000 el learning rate aproximado sería de $2.65e^{-8}$. Una posible solución a este problema es modificar los hiperparámetros óptimos aumentando el $base\_lr$, aumentar el $decay$, y aumentar el $epoch\_drop$, para que el learnig rate descienda mas lentamente. Otra solución sería cuando el learning rate sea menor a un umbral, aumentar el $base\_lr$. El umbral puede ser variable.
+
+El algoritmo 6.1 muestra el método de decrecimiento de learning rate que utilizaremos:
+
+\vspace{5mm}
+
+\begin{algorithm}[H]
+\SetAlgoLined
+\SetKwInOut{Input}{Input}
+\SetKwInOut{Output}{Output}
+\ResetInOut{output}
+\Input{epoch}
+\Output{lrate}
+ i := 0\;
+ step := floor((1+epoch)/10)\;
+ lrate := 0.0005 * pow(0.9, step)\;
+ \While{lrate $< 10^{-(6+i)}$}{
+  lrate := 100*lrate\;
+  i = i + 0.5\;
+ }
+ return\;
+ \caption{Step Decay Modificado}
+\end{algorithm}
+
+\vspace{5mm}
+
+La Figura 6.5 muestra la comparación entre el step decay usado anteriormente y el step decay modificado.
+
+\begin{figure}[t!]
+  \includegraphics[width=16cm, height=10cm]{imagenes/comparacion_step_1000}
+  \caption{Step Decay Modificado}
+\end{figure}
+
+Las Figuras 6.6 y 6.7 muestan el learning rate resultante con los diferentes algoritmos.
+
+\begin{figure}[!tbp]
+  \centering
+  \begin{minipage}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{lr_1000.png}
+    \caption{Learning Rate sobre 1000 epocas.}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{lr_3000.png}
+    \caption{Learning Rate sobre 3000 epocas.}
+  \end{minipage}
+\end{figure}
+
+Luego vamos a entrenar la red durante 3000 epocas usando step decay modificado. En las Figuras 6.8, 6.9, y en el Cuadro 6.5 se muestran los resultados.
+
+\begin{figure}[!tbp]
+  \centering
+  \begin{minipage}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{Predic_w_log_3mil.png}
+    \caption{Predicción muestra amplia.}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{Predic_n_log_3mil.png}
+    \caption{Predicción muestra estrecha.}
+  \end{minipage}
+\end{figure} 
+
+\begin{table}[!htbp]
+\begin{center}
+\caption{Error Red Optimizada}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+ & ECM & EAM  &  EPAM & $R^2$  \\ \hline
+Muestra Amplia  & $4.67e(-8)$ & $1.66e(-4)$ & $0.0515$ & 0.999999329  \\ \hline
+Muestra Estrecha & $4.02e(-8)$ &  $ 1.57e(-4)$ & $0.0526$ & 0.999999295  \\ \hline
+  
+\end{tabular}
+\end{center}
+\end{table}
+
+
+\section{Métodos Numéricos}
+
+
+En el capítulo 4 vimos que hay casos en los que no se puede aplicar los métodos numéricos, exceptuando esos casos, vamos a analizar su precisión. Ademas en el capítulo 4 se vió que lo máximo que podemos aspirar es un error absoluto de 
+$2^{-56}$. Ahora vamos a analizar si en la práctica, la tolerancia de los métodos corresponden con los resultados obtenidos de aplicar los mismos. En el método de Brent utilizamos el de la librería Scipy. \cite{Brentq}
+
+En el cuadro 6.6 se muestran los resultados.
+
+\begin{table}[!htbp]
+\begin{center}
+\caption{Error brent y Bisección}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+ & ECM & EAM  &  EPAM & $R^2$  \\ \hline
+Bisección  & $1.10e(-8)$ & $2.89e(-6)$ & $0.00469$ & 0.99999986  \\ \hline
+Brent & $8.17e(-6)$ &  $ 9.18e(-5)$ & $0.35894$ & 0.99989551  \\ \hline
+  
+\end{tabular}
+\end{center}
+\end{table}
+
+
+\section{Tiempo de Ejecución y Robustez}
+
+
+En el Cuadro 6.8 se observan el tiempo de ejecución y la Robustez. 
+
+\begin{table}[!htbp]
+\begin{center}
+\caption{Robustez y Tiempo de Ejecución}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+ & Red Neuronal & Método de Brent  &  Método de Bisección  \\ \hline
+Tiempo de Ejecución(segundos)  & $7.34$  & $157.05$ & $318.31$   \\ \hline
+Robustez & Si  &  No & No \\ \hline
+  
+\end{tabular}
+\end{center}
+\end{table}

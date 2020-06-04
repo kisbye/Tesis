@@ -1,0 +1,37 @@
+\chapter{Introducción}
+\label{Introduccion}
+
+\markboth{}{} % encabezado
+
+Para el desarrollo del trabajo que presentamos en este informe, es necesario estudiar y comprender varias herramientas y t\'ecnicas que usaremos a lo largo del proyecto. A continuaci\'on presentamos un resumen de los temas que abordaremos.
+
+\section{Motivación}
+
+La volatilidad implícita en estos días ha adquirido una gran importancia. Se puede utilizar para el calculo de superficies de volatilidad. Las superficies de volatilidad son usadas para valuar opciones mediante modelos matématicos.
+
+Otra utilidad es como parametro de riesgo para inversores, dependiendo de la volatilidad implícita se pondera algunas estrategias sobre otras para disminuir el riesgo y aumentar su posibilidad de rentabilidad.
+
+Por eso es indispensable poder calcular la volatilidad implícita, generalmente se utilizan métodos iterativos para
+estimarla, pero estos métodos suelen ser lentos. Por lo tanto se propone el cálculo de la volatilidad implícita mediante
+redes neuronales para desminuir considerablemente el tiempo de calculo.
+
+
+
+\section{Objetivos del trabajo}
+
+El objetivo del trabajo es determinar la volatilidad implícita sobre call europeas, mediante métodos numéricos, o el uso de métodos de aprendizaje automático para modelar de manera empírica la función que provee la volatilidad implícita. Ya que se trata de resolver una ecuación no lineal sin una solución cerrada.
+
+
+\section{Estructura de la Tesis}
+
+La tesis esta estructurada de la siguiente manera:
+
+\begin{itemize}
+    \item Nociones Preliminares: Se presentan los conceptos básicos utilizados a lo largo del trabajo.
+    \item Implicancias de la volatilidad implícita: Se muestra la importancia de su calculo mediante aplicaciones de
+    la misma.
+    \item Implementación númerica del método de Bisección y de Brent: Se implementa el método de Bisección y del método brent para aproximar la volatilidad ímplicita utilizando la fórmula de Black Scholes.
+    \item Implementación con Red Neuronal Feed-Forward: Se implementa una red neuronal para aproximar la volatilidad implicita utilizando la fórmula de Balck Scholes.
+    \item Resultados: Se presentan los resultados obtenidos comparando los métodos numéricos con la red nueronal.
+    \item Conclusiones: Se presentan conclusiones del trabajo y posibles mejoras.
+\end{itemize}
