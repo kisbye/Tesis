@@ -26,6 +26,9 @@ def call_price(S0, k, r, o, T):
 	norm2 = st.norm.cdf(d_2)
 	return S0*norm1 - k*math.exp(-r*T)*norm2
 
+def raiz(c, S0, k, r, o, T):
+	return call_price(S0, k, r, o, T) - c
+
 #d1 auxiliar de la fórmula de Black-Scholes
 def d1_ratio(ratio, r, o, T):
 	ln = np.log(ratio)
