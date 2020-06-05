@@ -80,7 +80,7 @@ class HyperParameter:
 
         self.activation, self.initialization, self.optimizer = parameters
 
-        return parameter
+        return parameters
 
     def search_loss_function(self, losses=LOSSES):
         
