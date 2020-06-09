@@ -163,4 +163,4 @@ class StepDecay(DecayLearnigRate):
 
                     del copy_model
                     gc.collect()
-        print(self.lr, self.best_decay, self.best_epoch_drop)
+        print(self.best_lr, self.best_decay, self.best_epoch_drop)
