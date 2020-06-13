@@ -4,6 +4,8 @@
 
 En esta sección presentaremos el cálculo de la volatilidad implícita mediante redes neuronales.
 
+Todo cálculo realizado en este cápitulo es sobre GPU(GeForce GTX 1080/PCIe/SSE2), RAM(15.6 GiB).
+
 
 \section{Calculo de prima de opción call con ratio}
 
@@ -81,7 +83,9 @@ Observar que C es $c/K$.
 
 \section{k-fold cross validation}
 
-En nuestro caso utilizaremos 8-fold cross validation para estimar los siguientes hiperparámetros. Primero definiremos la estructura de la red neuronal entre 1 y 10 capas ocultas, variando entre 50 a 1000 neuronas por capa oculta. Luego definiremos la función de activación \cite{Activation}, la inicialización de pesos de la red \cite{Init} y el algoritmo de optimización del decenso del gradiente \cite{Opti} en simultaneo(haciendo todas las convinaciones posibles definidas). Siguiendo por determinar la mejor función de error \cite{Loss}.
+En nuestro caso utilizaremos 8-fold cross validation para estimar los siguientes hiperparámetros.
+
+Primero definiremos la estructura de la red neuronal entre 1 y 10 capas ocultas, variando entre 50 a 1000 neuronas por capa oculta. Luego definiremos la función de activación \cite{Activation}, la inicialización de pesos de la red \cite{Init} y el algoritmo de optimización del decenso del gradiente \cite{Opti} en simultaneo(haciendo todas las convinaciones posibles). Siguiendo por determinar la mejor función de error \cite{Loss}.
 
 Luego determinaremos el dropout. Y por ultimo el tamaño del batch. 
 
@@ -124,10 +128,10 @@ epocas & 200 \\
 \hline
 
 Parametros & Opciones o Rango  \\ \hline
-Capas & [1,5]    \\ 
-Neuronas & [50,500]  \\ 
+Capas & [1,10]    \\ 
+Neuronas & [50,1000]  \\ 
 Función de error & ECM, EAM, EPAM  \\ 
-Función de activación & ReLu, elu  \\ 
+Función de activación & ReLu, Elu, tanh  \\ 
 Inicialización de pesos & uniform, glorot\_uniform, he\_uniform  \\ 
 Algoritmo de optimización & SGD, RMSprop, Adam  \\ 
 Dropout & [0,0.2]  \\ 
@@ -203,6 +207,7 @@ Como se puede observar en la Figura 5.1, el rango de learning rate óptimo
 Luego vamos a proponer 3 métodos de decrecimiento del learning rate. Utilizaremos grid-search para encontrar los parámetros óptimos de los algoritmos de decrecimiento del learning rate. Tomando los hiperparámetros del Cuadro 5.3. En el Cuadro 5.4 se definen los intervalos sobre los cuales aplicaremos grid-search, usando como referencia el método de Smith. Dando como resultado el Cuadro 5.5.
 
 
+
 \begin{table}[h!]
 \begin{center}
 \caption{Grid-Search}
@@ -219,8 +224,6 @@ epoch\_drop & 5, 10, 20, 40, 50 & - & -\\
 \end{table}
 
 \vspace{5mm}
-
-
  
 
 \begin{table}[h!]

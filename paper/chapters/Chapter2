@@ -464,11 +464,11 @@ Otra importante caractirística que debe tener la función de activación es ser
 algoritmo del \textit{descenso del gradiente}, cuando se propaga para hacia atras, calcula los gradientes de error
 con respecto a los pesos, para calcular los nuevos pesos acordemente. \cite{ActivationL}
 
-La Figura 2.3 muestra algunas funciones de activación:
+El Figura 2.2 muestra las funciones de activación que vamos a utilizar, en nuestro caso el $\alpha$ de la Elu es 1. 
 
 \begin{figure}[t!]
-  \includegraphics[width=14cm, height=10cm]{funcion_activacion}
-  \caption{Función de activación(imagen extraida de Deep Learning Essentials \cite{ActivationL})}
+  \includegraphics[width=13cm, height=2cm]{funcion_activacion}
+  \caption{Función de activación}
 \end{figure}
 
 \subsection{Aprendizaje por Descenso del Gradiente}

@@ -6,11 +6,10 @@ volatilidad implícita utilizando la fórmula de Black Scholes.
 
 \section{Introducción}
 
-Tanto el método de Bisección como el método de Brent son algoritmos de busqueda de raíces de funciones. Luego
-como nuestro objetivo es encontrar el valor de la volatilidad implícita. 
+Tanto el método de Bisección como el método de Brent son algoritmos de búsqueda de raíces de funciones. Luego
+como nuestro objetivo es encontrar el valor de la volatilidad implícita.
 
 La función 4.1 va a ser la función a la cual aplicaremos los métodos matemáticos.
-
 
 Sea c la prima de una opción call europea.
 

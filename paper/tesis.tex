@@ -1,0 +1,280 @@
+\documentclass[a4paper,openright, 12pt, oneside]{book}
+
+
+\setlength{\parindent}{0cm}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{amsthm,amssymb}
+\usepackage{graphics, graphicx}
+\usepackage[hidelinks]{hyperref}
+\graphicspath{ {./imagenes/} }
+\renewcommand{\qedsymbol}{\rule{0.7em}{0.7em}}
+\usepackage[ruled,vlined,linesnumbered,dotocloa,boxed,algochapter]{algorithm2e} 
+\setlength{\columnsep}{1in}
+%\usepackage[headheight = 11ex, margin = .5cm, top = 3.2cm, nofoot]{geometry}
+\usepackage{float}
+
+\usepackage{wrapfig}
+
+
+\begin{document}
+
+
+\begin{titlepage}
+\begin{center}
+
+
+\begin{figure}
+  \begin{center}
+    \leavevmode
+
+    \includegraphics[width=0.6\linewidth]{UNCLOGO.png}
+  \end{center}
+\end{figure}
+
+\vspace*{0.4in}
+UNIVERSIDAD NACIONAL DE C\'ORDOBA\\
+\vspace*{0.15in}
+FACULTAD DE MATEM\'ATICA, ASTRONOMIA, F\'ISICA Y COMPUTACI\'ON.\\
+\vspace*{0.6in}
+\begin{large}
+\end{large}
+\vspace*{0.2in}
+\begin{Large}
+\textbf{M\'etodos computacionales para el c\'alculo de la volatilidad impl\'icita del modelo de Black Scholes} \\
+\end{Large}
+\vspace*{0.3in}
+\begin{large}
+Tesis realizada por Diego Juan Nasareno Lupi para la Licenciatura en Ciencias de la Computaci\'on en la Universidad Nacional de C\'ordoba\end{large}
+
+\vspace*{0.3in}
+\rule{80mm}{0.1mm}\\
+\vspace*{0.1in}
+\begin{large}
+Dirigida por: \\
+Doctora Noem\'i Patricia Kisbye \\
+Licenciado Pedro \'Angel Pury\\
+\vspace*{0.1in}
+\end{large}
+\end{center}
+\end{titlepage}
+
+
+\chapter*{Agradecimientos} % si no queremos que a\~nada la palabra "Capitulo"
+\addcontentsline{toc}{chapter}{Agradecimientos} % si queremos que aparezca en el \'indice
+\markboth{AGRADECIMIENTOS}{AGRADECIMIENTOS} % encabezado
+
+\begin{itemize}
+\item completar
+
+\item completar
+
+\item completar
+
+\end{itemize}
+
+\chapter*{\hspace{0.65cm}Resumen} % si no queremos que a\~nada la palabra "Capitulo"
+\addcontentsline{toc}{chapter}{Resumen} % si queremos que aparezca en el \'indice
+\markboth{RESUMEN}{RESUMEN} % encabezado
+
+Las finanzas cuantitativas constituyen, desde hace varias décadas, un área particular de estudio dentro de la matemática. Esta nueva disciplina surge de la necesidad de encontrar modelos cuantitativos que permitan describir el comportamiento aleatorio de activos financieros y, en particular, valorar los productos llamados derivados financieros.
+
+Si la hipótesis sobre la dinámica de los activos es que estos siguen un proceso estocástico lognormal, con tendencia y volatilidad constante, entonces la valoración de una opción call sobre el activo está dada por la fórmula de Black Scholes. Ahora bien, dado que la volatilidad no es observable en el mercado, se define la volatilidad implícita del activo como aquella que iguala la prima del mercado con el valor dado por la fórmula.
+
+La obtención de este parámetro de volatilidad implícita permite luego valorar otros derivados financieros como así también comprender movimientos propios del mercado.
+
+\vspace{5mm}
+
+Por otra parte, la determinación de la volatilidad implícita requiere de la aplicación de métodos numéricos, puesto que se trata de resolver una ecuación no lineal sin una solución cerrada. En los últimos años, a su vez, han aparecido propuestas de uso de métodos de aprendizaje automático para modelar de manera empírica la función que provee la volatilidad implícita.
+
+\vspace{5mm}
+
+Este trabajo incluye la exploración bibliográfica referida al concepto de volatilidad implícita y sus implicancias, y de métodos computacionales factibles de ser implementados para su cálculo. Además se realizará la implementación efectiva en computadora de algunas soluciones y se hará un análisis comparativo de la eficiencia de los distintos métodos estudiados.
+
+
+
+
+\tableofcontents
+
+
+
+\input{chapters/Chapter1}
+
+\input{chapters/Chapter2}
+
+\input{chapters/Chapter3}
+
+\input{chapters/Chapter4}
+
+\input{chapters/Chapter5}
+
+\input{chapters/Chapter6}
+
+\input{chapters/Chapter7}
+
+\begin{thebibliography}{X}
+
+\bibitem{Kisbye}  
+  Patricia Kisbye:
+  \emph{Modelos Matemáticos en Finanzas Cuantitativas},
+  (2019)
+
+\bibitem{Surface}  
+  John C. Hull:
+  \emph{Options, Futures, and Other Derivatives - 7th edition},
+  381-389 (2009).
+
+\bibitem{ICAP}  
+  ICAP:
+  \emph{The Future of the OTC Markets},
+   (2008) \url{https://thehill.com/sites/default/files/ICAP\_TheFutureoftheOTCMarkets\_0.pdf}
+
+
+\bibitem{Acumulada} 
+  Jay L. Devore:
+  \emph{Probabilidad y Estadística para Ingeniería y Ciencias - Séptima Edición},
+  144-148 (2008).
+
+
+\bibitem{Bisec} 
+  Ward Cheney y David Kincaid:
+  \emph{Métodos numéricos y computación - Sexta Edición},
+  76-82(2011)
+
+\bibitem{Secante} 
+  Ward Cheney y David Kincaid:
+  \emph{Métodos numéricos y computación - Sexta Edición},
+  111-112(2011)
+
+\bibitem{Brent}
+  William H. Press, Saul A. Teukolsky, William T. Vetterling, Brian P. Flannery:
+  \emph{NUMERICAL RECIPES The Art of Scientific Computing - Third Edition},
+  454-456(2007)
+
+
+\bibitem{Decay}
+  Jason Brownlee:
+  \emph{Deep Learning With Python},
+  109-112(2016)
+
+\bibitem{ActivationL} 
+  Wei Di, Anurag Bhardwaj, Jianing Wei:
+  \emph{Deep Learning Essentials},
+  61-62(2018)
+
+\bibitem{Exponential}
+  Wei Di, Anurag Bhardwaj, Jianing Wei:
+  \emph{Deep Learning Essentials},
+  219(2018)
+
+\bibitem{Smith}
+  Leslie N. Smith:
+  \emph{Cyclical Learning Rates for Training Neural Networks},
+  (2015) \url{https://arxiv.org/abs/1506.01186}
+
+\bibitem{Cross}
+  Payam Refaeilzadeh, Lei Tang, Huan Liu:
+  \emph{Cross-Validation}
+  (2008) \url{http://leitang.net/papers/ency-cross-validation.pdf}
+
+\bibitem{Perceptron}
+  Tom M. Mitchell:
+  \emph{Machine Learning}, 
+  86-88(1997)
+
+\bibitem{Feed}
+  John A. Hertz, Anders S. Krogh, Richard G. Palmer:
+  \emph{Introduction To The Theory Of Neural Computation}, 
+  90-92(1991)
+
+\bibitem{Modelos}
+  Prosper Lamothe Fernández, Miguel Pérez Somalo:
+  \emph{Opciones Financieras y Productos Estructurados},
+  319-336(2003)
+
+\bibitem{Estrategias}
+  Jay Kaeppel:
+  \emph{The Option Trader’s Guide to Probability, Volatility, And Timing},
+  (2002)
+
+\bibitem{Normal}
+  Distribución Normal Acumulada:
+  \url{https://docs.scipy.org/doc/scipy-0.16.0/reference/generated/scipy.stats.norm.html}
+
+\bibitem{Gencay}
+  Rene H Garcia, Ramazan Gencay:
+  \emph{Pricing and hedging derivative securities with neural networks and a homogeneity hint},
+  (2000)
+
+\bibitem{Activation}
+  Función de Activación:
+  \url{https://keras.io/activations/}
+
+\bibitem{Init}
+  Inicialización de Pesos:
+  \url{https://keras.io/initializers/}
+
+\bibitem{Opti}
+  Optimizadores del Descenso del Gradiente:
+  \url{https://keras.io/optimizers/}
+
+\bibitem{Loss}
+  Función de Error:
+  \url{https://keras.io/losses/}
+
+\bibitem{Keras}
+  Modelo Secuencial:
+  \url{https://keras.io/api/models/sequential/}
+
+\bibitem{Logaritmo}
+  Shuaiqiang Liu , Cornelis W. Oosterlee, Sander M.Bohte
+  \emph{Pricing options and computing implied volatilities using neural networks},
+  14-15(2018)
+
+\bibitem{Brentq}
+  Método de Brent:
+  \url{https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.brentq.html}
+  
+\bibitem{IEEE}
+  Densidad Punto Flotante:
+  \url{https://web.archive.org/web/20160806053349/http://www.csee.umbc.edu/~tsimo1/CMSC455/IEEE-754-2008.pdf}
+
+\end{thebibliography}
+
+
+
+%\bibliographystyle{Classes/CUEDbiblio}
+%\bibliographystyle{Classes/jmb}
+%\bibliographystyle{Classes/jmb} % bibliography style
+
+%\renewcommand{\bibname}{References} % changes default name Bibliography to References
+\bibdata{Thesis}
+
+\end{document}
+
+
+
+
+
+
+
+
+\vspace{5mm}
+\begin{enumerate}
+  \item \textbf{Introducción}  \hfill 4
+  \begin{enumerate}
+     \item [1.1] hola  \hfill 5
+     \item [1.2] level item
+  \end{enumerate}
+  \item \textbf{Nociones preliminares}  \hfill 6
+  \begin{enumerate}
+     \item [2.1] hola  \hfill 7
+     \item [2.2] level item
+  \end{enumerate}
+\end{enumerate}
+
+
+

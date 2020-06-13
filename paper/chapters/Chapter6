@@ -2,6 +2,7 @@
 \label{Resultados}
 \markboth{}{}
 
+
 En este capítulo vamos a analizar la efectividad de los modelos propuestos.
 El experimiento se realizó en CPU(Intel(R) Core(TM) i5-8265U CPU @ 1.60GHz)
  
@@ -208,9 +209,61 @@ Brent & $8.17e(-6)$ &  $ 9.18e(-5)$ & $0.35894$ & 0.99989551  \\ \hline
 \end{center}
 \end{table}
 
+\subsection{Peso de la Volatilidad sobre el precio de la opción}
+
+
+
+
+Observando el Cuadro 6.6, el error absoluto medio del método de bisección es $2.89e(-6)$ y de brent es
+$ 9.18e(-5)$, siendo la tolerancia $2e(-56)$, esto es por el problema de presición y el impacto que tiene la volatilidad
+sobre el precio de la opción utilizando la fórmuala de Black Scholes(definida en el sección 2.1.10). En la Figura 6.10, que compara el precio de la opción con respecto a la variación de volatilidad, utilizando diferentes ratios, se puede observar que mientras más diferencia hay entre
+$S_0$ y K la volatilidad tiene menos impacto sobre el precio en especial en los casos OTM y en las volatilidades cercanas a 0. Luego en la Figura 6.11, que compara el precio de la opción con respecto a la variación de volatilidad, utilizando diferentes tasas de interés, se observa practicamente un desplazamiento.
+Por último en la Figura 6.12, que compara el precio de la opción con respecto a la variación de volatilidad, utilizando diferentes tiempos de madurez, se puede observa que mientras los contratos sean más largos la volatilidad tiene un
+mayor impacto sobre el precio.
+
+\begin{figure}[t!]
+  \includegraphics[width=16cm, height=8cm]{imagenes/ratio_v_call}
+  \caption{Volatilidad implícita vs precio call con distiontos ratios}
+\end{figure}
+
+\begin{figure}[t!]
+  \includegraphics[width=16cm, height=6cm]{imagenes/interes_v_call}
+  \caption{Volatilidad implícita vs precio call con distiontas tasas de interés}
+\end{figure}
+
+\begin{figure}[t!]
+  \includegraphics[width=16cm, height=6cm]{imagenes/T_v_call}
+  \caption{Volatilidad implícita vs precio call con distiontos tiempos de madurez}
+\end{figure}
+
+
+
+
+\vspace{5mm}
+
+
+Ahora bien observando los gráficos podemos concluir que la volatilidad tiene menos impacto en los contratos cortos(en nuestro ambiente), en OTM y con volatilidades menores a 0.2, pero en la practica los casos con mas error son ITM
+con $\Phi_1(\sigma)$ y $\Phi_2(\sigma)$ cercanos a 1, esto se debe a la densidad de puntos flotates \cite{IEEE}. Esto es la cantidad de números representables en un rango. El formato se escribe con un significando que tiene un bit entero implícito de valor 1 (excepto para los números especiales). Con los 52 bits de la mantisa, la precisión total es por lo tanto de 53 bits (es decir de $53log_{10}(2) \approx 15.955$ que se redondea a 16 dígitos decimales). El exponente de este formato está sesgado o desplazado en 1023 unidades, ya que como el máximo valor representado por 11 bits es 
+$2^{11}-1=2047$, es la mitad de este rango la que representa exponentes positivos y la otra, exponentes negativos. Observar Figura 6.13.
+
+\begin{figure}[t!]
+  \includegraphics[width=16cm, height=3cm]{imagenes/precision}
+  \caption{Estructura de un número en formato de coma flotante de doble precisión}
+\end{figure}
+
+\vspace{5mm}
+
+Lo cual esto nos da que hay $2^{52}$ numeros entre $2^n$ y $2^{n+1}$ para todo n entero en [-1023, 1022].
+
+Luego como el ancho de 11 bits del exponente permite la representación de números en el rango comprendido entre 
+$2^{-1023}$ y $2^{1023}$ ($10^{-308}$ y $10^{308}$). Esto nos permite concluir q hay la misma cantidad de numeros representables entre $10^{-308}$ y $10^{-307}$ que en $0.1$ y $1$. Por lo tanto los $\Phi_1(\sigma)$ y $\Phi_2(\sigma)$
+cercanos a 0 en OTM van a tener mas precisión aunque el peso de la volatilidad sobre el precio de la opción sea menor.
 
 \section{Tiempo de Ejecución y Robustez}
 
+Una vez entrenada la red (la busqueda de hiperpámetros fue 10.08 horas, la busqueda del algoritmo de learning rate fue 11.72 horas y entrenamiento de la red 3000 epocas fue 8.83 horas), vamos a observar el tiempo ejecución de evaluación de la misma sobre una muestra de 10000. Ademas el tiempo de ejecución de los métodos de brent y bisección sobre la misma muestra en una CPU(Intel(R) Core(TM) i5-8265U CPU @ 1.60GHz).(CAMBIAR)
+
+Tambien analizaremos su robustez, esto sería, si para todo elemento de la muesta el modelo genera una salida.
 
 En el Cuadro 6.8 se observan el tiempo de ejecución y la Robustez. 
 
