@@ -2,7 +2,7 @@
 \label{Red Neuronal}
 \markboth{}{}
 
-En esta sección presentaremos el cálculo de la volatilidad implícita mediante redes neuronales.
+En este capítulo presentaremos el cálculo de la volatilidad implícita mediante redes neuronales.
 
 Todo cálculo realizado en este cápitulo es sobre GPU(GeForce GTX 1080/PCIe/SSE2), RAM(15.6 GiB).
 
@@ -143,23 +143,32 @@ Tamaño de batch & [256, 2048] \\
 
 Sea:
 
-ECM =  $\displaystyle\frac{1}{N} \sum_{i=1}^{N}(y_i - \hat{y_i})^2$
+\begin{equation}
+ECM =  \displaystyle\frac{1}{N} \sum_{i=1}^{N}(y_i - \hat{y_i})^2
+\end{equation}
 
-EAM = $\displaystyle\frac{1}{N} \sum_{i=1}^{N}|y_i - \hat{y_i}|$
+\begin{equation}
+EAM = \displaystyle\frac{1}{N} \sum_{i=1}^{N}|y_i - \hat{y_i}|
+\end{equation}
 
-EPAM = $100 \displaystyle\frac{1}{N} \sum_{i=1}^{N}\displaystyle\frac{|y_i - \hat{y_i}|}{y_i}$
+\begin{equation}
+EPAM = 100 \displaystyle\frac{1}{N} \sum_{i=1}^{N}\displaystyle\frac{|y_i - \hat{y_i}|}{y_i}
+\end{equation}
 
-$\overline{y} = \displaystyle\frac{1}{N}\sum_{i=1}^{N} y_i$
+\begin{equation}
+\overline{y} = \displaystyle\frac{1}{N}\sum_{i=1}^{N} y_i
+\end{equation}
 
-$SS_{tot} =\displaystyle\sum_{i=1}^{N} (y_i-\overline{y})^2$
+\begin{equation}
+SS_{tot} =\displaystyle\sum_{i=1}^{N} (y_i-\overline{y})^2
+\end{equation}
 
-$R^2 = 1 - \displaystyle\frac{ECM}{SS_{tot}}$
+\begin{equation}
+R^2 = 1 - \displaystyle\frac{ECM}{SS_{tot}}
+\end{equation}
 
-\vspace{5mm}
 
 Donde $y_i$ es el valor esperado de salida de la red, $\hat{y_i}$ es el valor que predice la red y N es el tamaño de muestra.
-
-\vspace{5mm}
 
 En el Cuadro 5.3 se observan los hiperparámetros que utilizaremos en el entrenamiento de la red.
 
@@ -241,8 +250,6 @@ epoch\_drop & 20 & - & -\\
 \end{center}
 \end{table}
 
-\vspace{5mm}
-
 
 Observando los parámetros del Cuadro 5.5 entrenaremos la red por 1000 épocas ulizando los algoritmos de decrecimiento del learning rate y los hiperpárametros del Cuadro 5.3 antes mencionados. Los vamos a comparar mediante su ECM, para obtener el mejor algoritmo de decrecimiento. Como se puede observar en la Figura 5.2 Step Decay es el algoritmo que mejor resultado obtuvo.
 
@@ -261,7 +268,7 @@ Figura 5.3, podemos concluir que Step Decay da un mejor resultado.
 
 
 \begin{figure}[t!]
-  \includegraphics[width=16cm, height=9cm]{imagenes/step_vs_cyclical}
+  \includegraphics[width=15cm, height=8cm]{imagenes/step_vs_cyclical}
   \caption{Cyclical LR vs Step Decay}
 \end{figure}
 

@@ -2,7 +2,7 @@
 \label{Conclusiones}
 \markboth{}{}
 
-En este trabajo se presentó la importancia del calculo de la volatilidad implícita. Ademas se propuso una manera diferente del cálculo que usualmente se utiliza, usando redes neuronales feedforward.
+En este trabajo se presentó la importancia del cálculo de la volatilidad implícita. Ademas se propuso una manera diferente del cálculo que usualmente se utiliza, usando redes neuronales feedforward.
 
 Si bien el método de bisección estima mejor la volatilidad implícita, no es una mejora significativa con respecto 
 a la red neuronal o al método de brent, sin embargo el tiempo de ejecución la red neuronal es 21.12 veces mas rápido

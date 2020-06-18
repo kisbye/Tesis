@@ -46,7 +46,7 @@ o alguna tasa a la cual el propio estado ofrece para la devolución del préstam
 \subsection{Productos básicos}
 
 Denominamos productos básicos a aquellos instrumentos financieros cuyo valor no depende de
-otro activo. Entre ellos están las acciones, los índices, las monedas, los commodities y lnos bonos.
+otro activo. Entre ellos están las acciones, los índices, las monedas, los commodities y los bonos.
 
 
 \subsection{Derivados}
@@ -120,7 +120,9 @@ El tamaño del segmento de mercados OTC es varias veces mayor que el de los merc
 \subsection{Movimiento Browniano}
 
 Sea ($\Omega, \mathcal{F}, \mathbb{P})$ un espacio de probabilidad. Si para cada $\omega \in  \Omega $ existe una función continua
-$W : \mathbb{R} \rightarrow \mathbb{R} $ que depende de $\omega$, entonces el proceso $\{W (t), t \geq 0\} $ se denomina Movimiento browniano con tendencia $\mu$ y volatilidad $\sigma$ si satisface:
+$W : \mathbb{R} \rightarrow \mathbb{R} $ que depende de $\omega$, entonces el proceso 
+
+$\{W (t), t \geq 0\} $ se denomina Movimiento browniano con tendencia $\mu$ y volatilidad $\sigma$ si satisface:
 
 
 \begin{itemize}
@@ -157,7 +159,7 @@ log$ \left( \displaystyle\frac{S(t)}{S(0)} \right)$, es un movimiento browniano 
 $\sigma$ \cite{Kisbye}
 
 
-\subsection{Valoración de una call europea con Black-Scholes Fómula}
+\subsection{Fórmula de Valoración de una call europea con Black-Scholes}
 
 
 Sea c la prima de una opción call europea, con strike K y madurez T , sobre un activo
@@ -166,11 +168,11 @@ volatilidad $\sigma$ bajo las probabilidades de riesgo neutral. Sea r la tasa li
 Entonces, bajo una hipótesis de no arbitraje se cumple que:
 
 
-\vspace{5mm}
 
-$c = S(0)\Phi(d_1) - Ke^{-rT}\Phi(d_2)$,
+\begin{equation}
+c = S(0)\Phi(d_1) - Ke^{-rT}\Phi(d_2)
+\end{equation}
 
-\vspace{5mm}
 
 donde:
 
@@ -195,7 +197,7 @@ con:
 
 \end{itemize} \cite{Kisbye}
 
-Para simplificar la notación vamos a utilizar $S_n$ en vez de $S(n)$, $\forall n > 0$
+Para simplificar la notación vamos a utilizar $S_n$ en vez de $S(n)$, $\forall n > 0$.
 
 \subsection{Volatilidad}
 
@@ -476,7 +478,9 @@ El Figura 2.2 muestra las funciones de activación que vamos a utilizar, en nues
 Como hemos mencionado anteriormente el objetivo de una red neuronal es estimar los parámetros óptimos para una función 
 $f(x,W,b)$. Una forma de estimar esos parámetros es reducir el error. Sea 
 
-$J(x,W,b,Y) = \displaystyle\frac{1}{n}\sum\limits_{i=1}^{n}(f(x_i,W,b) - y_i)^2$ 
+\begin{equation}
+J(x,W,b,Y) = \displaystyle\frac{1}{n}\sum\limits_{i=1}^{n}(f(x_i,W,b) - y_i)^2
+\end{equation}
 
 una función de costo.
 

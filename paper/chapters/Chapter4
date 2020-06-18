@@ -30,58 +30,9 @@ $d_1 = \displaystyle\frac{Log \left(\displaystyle\frac{S(0)}{K}\right)+ \left( r
 
 \section{g es monótona creciente con respecto a $\sigma$}
 
-Sea $B(\sigma) = S(0)\Phi(d_1) - Ke^{-rT}\Phi(d_2)$, donde $d_1$ y $d_2$ son definidas en la sección anterior. Luego veremos que B es una función monótona creciente respecto a $\sigma$. En primer lugar notemos que B es continua con respecto a $\sigma$, por lo cual restará analizar que su derivada respecto a $\sigma$ es positiva:
+Sea $B(\sigma) = S(0)\Phi(d_1) - Ke^{-rT}\Phi(d_2)$, donde $d_1$ y $d_2$ son definidas en la sección anterior.
 
-\begin{center} $B'(\sigma) = \displaystyle\frac{d}{d\sigma}B(\sigma) > 0$ \end{center}
-
-Tenemos que:
-
-\begin{center} $B'(\sigma) = S(0)\Phi'(d_1)d_1'(\sigma) - Ke^{-rT}\Phi'(d_2)d_2'(\sigma)$ \end{center}
-
-Ahora, dado que $d_2 = d_1 - \sigma T$ , entonces $d_2' = d_1' - T$. Luego:
-
-\vspace{5mm}
-
-$B'(\sigma) = S(0)\Phi'(d_1)d_1'(\sigma) - Ke^{-rT}\Phi'(d_2)d_2'(\sigma)$
-
-$\,\,\,\qquad = (S(0)\Phi'(d_1)(\sigma) - Ke^{-rT}\Phi'(d_2))d_1'(\sigma) + K\Phi'(d_2)e^{-rT}\sqrt{T}$
-
-\vspace{5mm}
-
-El primer término de la última expresión es 0. En efecto, dado que $\Phi$ es la densidad de la normal
-estándar, entonces
-
-
-\begin{equation} \label{eq1}
-\begin{split}
-S_0\Phi'(d_1) - Ke^{-rT}\Phi'(d_2) & = \displaystyle\frac{1}{\sqrt{2\pi}} \left(S_0^{-d_1^2/2} -Ke^{-rT- \displaystyle\frac{(d_1-\sigma\sqrt{T})^2}{2}} \right) \\
- & = \displaystyle\frac{1}{\sqrt{2\pi}} \left(S_0^{-d_1^2/2} -Ke^{-rT- \displaystyle\frac{d_1^2}{2} + d_1\sigma\sqrt{T}-
- \displaystyle\frac{\sigma^2T}{2}} \right) \\
- & = \displaystyle\frac{1}{\sqrt{2\pi}} e^{d_1^2/2}\left(S_0 - Ke^{-rT + d_1\sigma\sqrt{T}-\displaystyle\frac{\sigma^2T}{2}} \right) 
-\end{split}
-\end{equation}
-
-
-
-
-El exponente en la última expresión es:
-
-\vspace{5mm}
-
-$-rT + d_1\sigma\sqrt{T}-\displaystyle\frac{\sigma^2T}{2} = -rT + ln(\displaystyle\frac{S_0}{K}) + (r+\displaystyle\frac{\sigma^2}{2})T$
-$-\displaystyle\frac{\sigma^2T}{2} = ln(\displaystyle\frac{S_0}{K})$
-
-\vspace{5mm}
-
-Por lo tanto resulta:
-
-$S_0\Phi'(d_1)-Ke^{-rT}\Phi'(d_2) = \displaystyle\frac{1}{\sqrt{2\pi}}e^{-d_1^2/2}(S_0-Ke^{ln(S_0/k)}) = 0$
-
-\vspace{5mm}
-
-Volviendo al cálculo de $B'(\sigma)$ y usando que $\Phi'(x) > 0$ para cualquier x, tenemos entonces que
-
-\vspace{5mm}
+En \cite{Kisbye} se demuestra que:
 
 \begin{equation}
 B'(\sigma) = Ke^{-rT}\Phi'(d_2)\sqrt{T} > 0
@@ -90,7 +41,7 @@ B'(\sigma) = Ke^{-rT}\Phi'(d_2)\sqrt{T} > 0
 
 que es una expresión positiva para todo $ \sigma > 0$.
 
-Como sabemos que B es una función monótonamente creciente con respecto $\sigma$, entonces 
+Luego como B es una función monótonamente creciente con respecto $\sigma$, entonces 
 
 
 \begin{equation}
@@ -98,7 +49,7 @@ g(\sigma) = B(\sigma) - c
 \end{equation}
 
 
-tambien lo es. \cite{Kisbye}
+tambien lo es, ya que c es constante. 
 
 
 \section{Inicialización de intervalo para método de bisección y de brent}
@@ -150,14 +101,32 @@ $\varepsilon$ lo llamaremos tolerancia.
 En la muestra hay aproximado un 0.05\% de casos que no cumplen con la condición $g(a)g(b) < 0$, 
 para $a \to 0$ y $b \to \infty$, donde g es la función definida en la sección 4.1. Por lo tanto no se puede aplicar ninguno de los métodos vistos anteriormente.
 
-El problema radica en el cálculo de la fórmula de Black-Scholes definida en la sección 2.1.10, básicamente en $\Phi(d_1)$
+El problema radica en el cálculo de la fórmula de Black-Scholes definida en el capítulo 2.1 (ecuación 2.1), básicamente en $\Phi(d_1)$
 y $\Phi(d_2)$. Por definición $\Phi(n) < 1$, $\forall n \in \mathbb{R}$. Pero Python usa aritmética de punto flotante IEEE-754, donde su precisión es $2^{(-56)}$, dando asi una precisión aproximada de 15,95 dijitos decimales. Luego usando la función de Scipy para el cálculo de la distribución normal acumulada definida en \cite{Normal}, obtenemos $\Phi(n) = 1$, para $n > 8.3$.
 
 \vspace{5mm}
 
 Volviendo a la fórmula de Black-Scholes, sabemos que $\Phi(d_1) > \Phi(d_2)$, ya que $o,T > 0$, pero hay casos en que el extremo inferior, definido para aplicar el método de bisección(o brent), obtengo $\Phi(d_1) = \Phi(d_2)$ por el problema de precisión, ocasionando el error antes mencionado.
 
-Veamos un caso en particular. Sea:
+Esto es la cantidad de números representables en un rango. El formato se escribe con un significando que tiene un bit entero implícito de valor 1 (excepto para los números especiales). Con los 52 bits de la mantisa, la precisión total es por lo tanto de 53 bits (es decir de $53log_{10}(2) \approx 15.955$ que se redondea a 16 dígitos decimales). El exponente de este formato está sesgado o desplazado en 1023 unidades, ya que como el máximo valor representado por 11 bits es 
+$2^{11}-1=2047$, es la mitad de este rango la que representa exponentes positivos y la otra, exponentes negativos.
+\cite{IEEE}
+
+Observar Figura 4.1.
+
+\begin{figure}[t!]
+  \includegraphics[width=16cm, height=3cm]{imagenes/precision}
+  \caption{Estructura de un número en formato de coma flotante de doble precisión}
+\end{figure}
+
+\vspace{5mm}
+
+Lo cual esto nos da que hay $2^{52}$ numeros entre $2^n$ y $2^{n+1}$ para todo n entero en [-1023, 1022].
+
+
+\subsection{Caso en Particular}
+
+Sea:
 
 \begin{itemize}
   \item c : 5.983489610184446
@@ -167,7 +136,7 @@ Veamos un caso en particular. Sea:
   \item T : 0.2590760904347537 
 \end{itemize} 
 
-La Figura 4.1 muestra la comparación entre g(n), para $n \in [0.01, 1]$, y la volatilidad implícita (linea roja punteada). Se puede observar que no se puede hallar el intervalo [a,b] para aplicar el método de bisección(o brent), ya que para este caso g(n) es positivo $ \forall n < 0.01$.
+La Figura 4.2 muestra la comparación entre g(n), para $n \in [0.01, 1]$, y la volatilidad implícita (linea roja punteada). Se puede observar que no se puede hallar el intervalo [a,b] para aplicar el método de bisección(o brent), ya que para este caso g(n) es positivo $ \forall n < 0.01$.
 
 \vspace{5mm}
 

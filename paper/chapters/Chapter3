@@ -4,7 +4,7 @@
 
 En esta sección describiremos diferentes usos de la volatilidad implícita.
 
-El primer uso es en el calculo de superficies de volatilidad, que esta sirve para valorar
+El primer uso es en el cálculo de superficies de volatilidad, que esta sirve para valorar
 opciones.
 
 El segundo uso es utilizar la volatilidad implícita como indicador de riesgo de mercado, de esta 
@@ -54,11 +54,11 @@ La estrategia de comprar una Backspread involucra escribir opcines call o put, e
 \vspace{5mm}
 
 En el caso que tengamos expectativas de un movimiento alcista del subyacente entonces la estrategía será
-Call Backspread, que consiste en vender y comprar opciones call. El objetivo es que el precio del subyacente sube o baje drasticamente para obtener ganancia, con preferencia alcista como se puede observar en la imagen 3.1. 
+Call Backspread, que consiste en vender y comprar opciones call. El objetivo es que el precio del subyacente sube o baje drásticamente para obtener ganancia, con preferencia alcista como se puede observar en la imagen 3.1. 
 
 \vspace{5mm}
 
-En el caso que tengamos expectativas de un movimiento bajista del subyacente entonces la estrategía será
+En el caso que tengamos expectativas de un movimiento bajista del subyacente entonces la estrategia será
 Put Backspread, que consite en vender y comprar opciones put. El objetivo es el mismo que el Call Backspread, con preferencia bajista como se puede observar en la imagen 3.2.
 
 \begin{figure}[!tbp]
@@ -85,7 +85,7 @@ Las claves para aplicar la estrategia.
 	\item Tiempo adecuado antes de la expiración, tratar que no sean contratos cortos.
 \end{itemize}
 
-La estrategia de comprar una Straddle o Strangle consiste en comprar una opción call y una opción put al mismo tiempo, con el mismo tiempo de madurez, puede ser con el mismo strike(Straddle) o no(Strangle). Ideamente se busca que al momento de comprar las opciones, la volatilidad implícita sea baja(comprar opciones baratas), y que el precio del subayente tenga un abrupto cambio(Guerra comercial entre Estados Unidos y China, Pandemia(Precio Petroleo, entre otros)) sin importar su dirección, puede ser alcista o bajista. Por eso el tiempo de madurez es clave en este tipo de estrategias. La perdida en este tipo de estrategias es limitada, es el valor de las primas. En cambio la ganancia puede ser ilimitada. 
+La estrategia de comprar una Straddle o Strangle consiste en comprar una opción call y una opción put al mismo tiempo, con el mismo tiempo de madurez, puede ser con el mismo strike(Straddle) o no(Strangle). Ideamente se busca que al momento de comprar las opciones, la volatilidad implícita sea baja(comprar opciones baratas), y que el precio del subayente tenga un abrupto cambio(Guerra comercial entre Estados Unidos y China, Pandemia(Precio Petroleo, entre otros)) sin importar su dirección, puede ser alcista o bajista. Por eso el tiempo de madurez es clave en este tipo de estrategias. La pérdida en este tipo de estrategias es limitada, es el valor de las primas. En cambio la ganancia puede ser ilimitada. 
 
 La Figura 3.3 muestra la estrategia de Strangle, y la Figura 3.4 muestra la estrategia de Straddle.
 
