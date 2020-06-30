@@ -26,13 +26,14 @@ el valor la opción. A continuación listaremos una serie de modelos para calcul
   \item Margrabe (1978): Modelo para valorar opciones sobre el intercambio de dos activos.
 \end{itemize}
 
-Todos los modelos anteriormente mencionacionados para ser aplicados necesitan la volatilidad como parámetro,
-entre otros parámetros. Pero el mercado no nos brinda el valor de la volatilidad, una manera de estimarla es mediante la superficie de volatilidad, definida en el capítulo anterior.
+Todos los modelos anteriormente mencionacionados para ser aplicados necesitan la volatilidad 
+entre otros parámetros. Pero si el mercado no nos brinda el valor de la volatilidad, 
+una manera de estimarla es mediante la superficie de volatilidad, definida en el capítulo anterior.
 
 
 \section{Estrategias dependiendo de la volatilidad implícita}
 
-Entender el concepto de volatilidad es esencial para tener éxito en la comercialización de opciones. Un inversor que puede reconocer cuando una opción o series de opciones estan baratas o caras tiene una gran ventaja a la hora de invertir. Esto quiere decir que si la volatilidad implícita es baja, entonces el precio de la opción va a ser baja. En cambio si la volatilidad implícita es alta, el precio de la opción va a ser alta.
+Entender el concepto de volatilidad es esencial para tener éxito en la comercialización de opciones. Un inversor que puede reconocer cuando una opción o series de opciones estan baratas o caras tiene una gran ventaja a la hora de invertir. {\color{red} Esto quiere decir (no se entiende la implicancia)} que si la volatilidad implícita es baja, entonces el precio de la opción va a ser baja. En cambio si la volatilidad implícita es alta, el precio de la opción va a ser alta.
 
 Ahora bien, como reconocer cuando la volatilidad implícita es alta o baja. Una manera es comparar la volatilidad histórica con la volatilidad implícita de la opción. Esto sería calcular las volatilidades históricas diarias de la opción sobre 1 o 2 años, y compararlas con la volatilidad implícta. Por ejmplo si la volatilidad implícita es menor al 80\% de las volatilidades históricas de los ultimos 2 años, entonces la volatilidad implícita es baja.
 
@@ -49,17 +50,22 @@ Las claves para aplicar la estrategia.
 	\item Buscamos volatilidad implícita baja al momento de aplicar, con esperanza que suba en el futuro.
 \end{itemize}
 
-La estrategia de comprar una Backspread involucra escribir opcines call o put, en at-the-money o in-the-money(primas caras). Simultaneamente comprar un número mayor de opciones out-of-the-money(primas baratas). Idealmente se busca obtener que el valor de las opciones escritas sea mayor al valor de las opciones compradas. 
+La estrategia Backspread involucra suscribir opciones call o put, at-the-money o in-the-money (primas caras). 
+Simultaneamente comprar un número mayor de opciones out-of-the-money (primas baratas). 
+Idealmente se busca obtener que el valor {\color{red} prima? strike?) de las opciones suscritas sea mayor al valor de las opciones compradas. 
 
-\vspace{5mm}
+% \vspace{5mm} {\color{red} dejar que latex maneje el interlineado de forma automática}
 
 En el caso que tengamos expectativas de un movimiento alcista del subyacente entonces la estrategía será
-Call Backspread, que consiste en vender y comprar opciones call. El objetivo es que el precio del subyacente sube o baje drásticamente para obtener ganancia, con preferencia alcista como se puede observar en la imagen 3.1. 
+Call Backspread, que consiste en vender y comprar opciones call. El objetivo es que el precio del subyacente 
+sube o baje drásticamente para obtener ganancia, con preferencia alcista como se puede observar en la imagen 3.1. 
 
-\vspace{5mm}
+%\vspace{5mm}
 
 En el caso que tengamos expectativas de un movimiento bajista del subyacente entonces la estrategia será
 Put Backspread, que consite en vender y comprar opciones put. El objetivo es el mismo que el Call Backspread, con preferencia bajista como se puede observar en la imagen 3.2.
+
+{\color{red} me resulta confusa la explicación de la estratrgia. Poner bien en claro la relación entre las primas y los strikes de las opciones suscritas (posición short) y compradas (posición long). Escribir las ecuaciones para la ganancia en cada caso}
 
 \begin{figure}[!tbp]
   \centering
@@ -85,9 +91,9 @@ Las claves para aplicar la estrategia.
 	\item Tiempo adecuado antes de la expiración, tratar que no sean contratos cortos.
 \end{itemize}
 
-La estrategia de comprar una Straddle o Strangle consiste en comprar una opción call y una opción put al mismo tiempo, con el mismo tiempo de madurez, puede ser con el mismo strike(Straddle) o no(Strangle). Ideamente se busca que al momento de comprar las opciones, la volatilidad implícita sea baja(comprar opciones baratas), y que el precio del subayente tenga un abrupto cambio(Guerra comercial entre Estados Unidos y China, Pandemia(Precio Petroleo, entre otros)) sin importar su dirección, puede ser alcista o bajista. Por eso el tiempo de madurez es clave en este tipo de estrategias. La pérdida en este tipo de estrategias es limitada, es el valor de las primas. En cambio la ganancia puede ser ilimitada. 
+La estrategia de comprar una Straddle o Strangle consiste en comprar una opción call y una opción put al mismo tiempo, con el mismo tiempo de madurez, puede ser con el mismo strike (Straddle) o no (Strangle). Ideamente se busca que al momento de comprar las opciones, la volatilidad implícita sea baja(comprar opciones baratas), y que el precio del subayente tenga un abrupto cambio (Guerra comercial entre Estados Unidos y China, Pandemia, Precio Petroleo, entre otros) sin importar su dirección, puede ser alcista o bajista. Por eso el tiempo de madurez es clave en este tipo de estrategias. La pérdida en este tipo de estrategias es limitada, es el valor de las primas. En cambio la ganancia puede ser ilimitada. 
 
-La Figura 3.3 muestra la estrategia de Strangle, y la Figura 3.4 muestra la estrategia de Straddle.
+La Figura 3.3 muestra la ganancia de la estrategia de Strangle como función del precio del subyacente, mientras que la Figura 3.4 la muestra para la estrategia de Straddle.
 
 \begin{figure}[!tbp]
   \centering
