@@ -1,23 +1,30 @@
 \chapter{Implementaci\'on n\'umerica del m\'etodo de Bisecci\'on y de Brent}
 \label{Bisec-Brent}
 \markboth{}{}
-En esta sección vamos a implementar el método de Bisección y el método brent para aproximar la 
+En esta sección comentamos detalles de la implementación el método de Bisección y el método Brent para aproximar la 
 volatilidad implícita utilizando la fórmula de Black Scholes.
 
 \section{Introducción}
 
-Tanto el método de Bisección como el método de Brent son algoritmos de búsqueda de raíces de funciones. Luego
-como nuestro objetivo es encontrar el valor de la volatilidad implícita.
+Tanto el método de Bisección como el método de Brent son algoritmos de búsqueda de raíces de funciones, como lo es nuestro problema
+de encontrar el valor de la volatilidad implícita a partir de la fórmula de Black Scholes.
 
-La función 4.1 va a ser la función a la cual aplicaremos los métodos matemáticos.
+
+La función a la cual aplicaremos ambos métodos numéricos 
+
+\begin{equation}
+g(\hat{\sigma}) = S(0) \,\Phi(d_1) - K \,e^{-rT} \,\Phi(d_2) - c
+\label{function_g}
+\end{equation}
+
+donde usamos la notación definida en la Sec.~\ref{falta}.
+
+\color{red} 
+
 
 Sea c la prima de una opción call europea.
 
-\vspace{5mm}
 
-\begin{equation}
-g(\hat{\sigma}) = S(0)\Phi(d_1) - Ke^{-rT}\Phi(d_2) - c
-\end{equation}
 
 \vspace{5mm}
 
@@ -26,38 +33,34 @@ donde:
 $d_1 = \displaystyle\frac{Log \left(\displaystyle\frac{S(0)}{K}\right)+ \left( r + \displaystyle\frac{\hat{\sigma}^2}{2}\right)T}{\hat{\sigma}\sqrt{T}}$
 \qquad  $d_2 = d_1 - \hat{\sigma}\sqrt{T}$
 
-\vspace{5mm}
+Todo este párrafo ya fue escrito en la sección 2.1.10. $c$ faltó definir en ese momento. Hay que numerar todas las ecuaciones en 2.1.10 para poder citarlas acá sin repeticiones
+}
 
-\section{g es monótona creciente con respecto a $\sigma$}
+%%%%%%%%% \section{g es monótona creciente con respecto a $\sigma$}
 
-Sea $B(\sigma) = S(0)\Phi(d_1) - Ke^{-rT}\Phi(d_2)$, donde $d_1$ y $d_2$ son definidas en la sección anterior.
+Podemos ver que $g$ es monótona creciente con respecto a $\sigma$. Para esto si definimos 
+$B(\sigma) = S(0)\Phi(d_1) - Ke^{-rT}\Phi(d_2)$, donde $d_1$ y $d_2$ fueron definidas en la ecuación~\ref{falta}.
+En la referencia~\cite{Kisbye} se demuestra que la derivada de $B(\sigma)$, 
+$B'(\sigma) = Ke^{-rT}\Phi'(d_2)\sqrt{T} > 0$  para todo $ \sigma > 0$.
 
-En \cite{Kisbye} se demuestra que:
+%%% que es una expresión positiva para todo $ \sigma > 0$.
 
-\begin{equation}
-B'(\sigma) = Ke^{-rT}\Phi'(d_2)\sqrt{T} > 0
-\end{equation}
-
-
-que es una expresión positiva para todo $ \sigma > 0$.
-
-Luego como B es una función monótonamente creciente con respecto $\sigma$, entonces 
-
-
+Luego como B es una función monótonamente creciente con respecto $\sigma$ se tiene que
+%
 \begin{equation}
 g(\sigma) = B(\sigma) - c
 \end{equation}
-
-
+%
 tambien lo es, ya que c es constante. 
 
+\section{Implementaciób de los métodos numéricos}
 
-\section{Inicialización de intervalo para método de bisección y de brent}
+\subsection{Intervalo inicial para el método de bisección y de Brent}
 
-Como sabemos de la sección anterior, $g:(0,\infty) \to {\rm I\!R}$ es una función monótona creciente. Podemos postular
+Como mostramos de la sección anterior, $g:(0,\infty) \to {\rm I\!R}$ es una función monótona creciente. Podemos tomar
 $a = \epsilon$, con $\epsilon \to 0$, entonces $g(a) < 0$. 
 
-Ahora para postular b utilizaremos el siguiente algoritmo:
+Ahora para elegir $b$ utilizaremos el siguiente algoritmo:
 
 \vspace{5mm}
 
@@ -77,57 +80,58 @@ Ahora para postular b utilizaremos el siguiente algoritmo:
 \end{algorithm}
 
 
-\section{Aplicación del Método de Bisección}
+\subsection{Aplicación del Método de Bisección}
 
-Sea g la función definida en la sección 4.1.
+%%%%%%%%%%% Sea g la función definida en la sección 4.1.
 
-Inicializamos el intervalo [a,b] para aplicar el método de bisección, con $a < b$ y $g(a) < 0 < g(b)$.
-
-Luego aplicar el algoritmo de bisección hasta hallar un $\xi$, tal que $g(\xi) = 0$ ó $|b-a|<\varepsilon$, a
-$\varepsilon$ lo llamaremos tolerancia.
+Inicializamos el intervalo $[a,b]$ para aplicar el método de bisección, de manera que $a < b$ y $g(a) < 0 < g(b)$.
+Luego aplicamos el algoritmo de bisección~\ref{falta} hasta hallar un $\xi$, tal que $g(\xi) = 0$ ó $|b-a|<\varepsilon$. 
+A $\varepsilon$ lo llamaremos tolerancia.
 
 \section{Aplicación del Método de Brent}
 
-Sea g la función definida en la sección 4.1.
+%%%%%%%%%%%%%%% Sea g la función definida en la sección 4.1.
 
-Inicializamos el intervalo [a,b] para aplicar el método de brent, con $a < b$ y $g(a) < 0 < g(b)$.
-
-Luego aplicar el algoritmo de brent hasta hallar un $\xi$, tal que $g(\xi) = 0$ ó $|b-a|<\varepsilon$, a
-$\varepsilon$ lo llamaremos tolerancia.
+Inicializamos el intervalo $[a,b]$ para aplicar el método de Brent, con $a < b$ y $g(a) < 0 < g(b)$.
+Luego aplicamos el algoritmo de Brent~\ref{falta} hasta hallar un $\xi$, tal que $g(\xi) = 0$ ó $|b-a|<\varepsilon$.
+Nuevamente, a $\varepsilon$ lo llamaremos tolerancia.
 
 \section{Problemas Númericos}
 
+En la {\color{red} muestra (NO se entiende porque no fue definida la muestra. Tal vez conviene llevar este capítulo después del siguiente o adelantar la definición de muestra)} hay aproximado un 0.05\% de casos que no cumplen con la condición $g(a)g(b) < 0$, 
+para $a \to 0$ y $b \to \infty$, donde g es la función definida en la sección 4.1. Por lo tanto, no se puede aplicar ninguno de los métodos vistos anteriormente.
 
-En la muestra hay aproximado un 0.05\% de casos que no cumplen con la condición $g(a)g(b) < 0$, 
-para $a \to 0$ y $b \to \infty$, donde g es la función definida en la sección 4.1. Por lo tanto no se puede aplicar ninguno de los métodos vistos anteriormente.
+El problema radica en el cálculo de la fórmula de Black-Scholes definida en la ecuación~\ref{falta} {\color{red} NO --> el capítulo 2.1 (ecuación 2.1). Usar las referencias de latex}, 
+básicamente en las distribución de pronbabilidad acumulada $\Phi(d)$. Por definición $\Phi(d) < 1$, $\forall d \in \mathbb{R}$. 
+Pero Python usa aritmética de punto flotante IEEE-754, donde su precisión es $2^{(-56)}$ {\color{red} falta referencia} , 
+dando asi una precisión aproximada de 15,95 digitos decimales. 
+Luego usando la función de Scipy para el cálculo de la distribución normal acumulada definida en la referncia~\cite{Normal}, 
+obtenemos $\Phi(n) = 1$, para $n > 8.3$.
+%
+Volviendo a la fórmula de Black-Scholes, si bien sabemos que $\Phi(d_1) > \Phi(d_2)$, ya que ${\color{red} o ??, T > 0$, 
+pero hay casos en que para el extremo inferior definido para aplicar el método de bisección (o Brent), se obtiene 
+$\Phi(d_1) = \Phi(d_2)$ por el problema de precisión, ocasionando el error antes mencionado.
 
-El problema radica en el cálculo de la fórmula de Black-Scholes definida en el capítulo 2.1 (ecuación 2.1), básicamente en $\Phi(d_1)$
-y $\Phi(d_2)$. Por definición $\Phi(n) < 1$, $\forall n \in \mathbb{R}$. Pero Python usa aritmética de punto flotante IEEE-754, donde su precisión es $2^{(-56)}$, dando asi una precisión aproximada de 15,95 dijitos decimales. Luego usando la función de Scipy para el cálculo de la distribución normal acumulada definida en \cite{Normal}, obtenemos $\Phi(n) = 1$, para $n > 8.3$.
-
-\vspace{5mm}
-
-Volviendo a la fórmula de Black-Scholes, sabemos que $\Phi(d_1) > \Phi(d_2)$, ya que $o,T > 0$, pero hay casos en que el extremo inferior, definido para aplicar el método de bisección(o brent), obtengo $\Phi(d_1) = \Phi(d_2)$ por el problema de precisión, ocasionando el error antes mencionado.
-
-Esto es la cantidad de números representables en un rango. El formato se escribe con un significando que tiene un bit entero implícito de valor 1 (excepto para los números especiales). Con los 52 bits de la mantisa, la precisión total es por lo tanto de 53 bits (es decir de $53log_{10}(2) \approx 15.955$ que se redondea a 16 dígitos decimales). El exponente de este formato está sesgado o desplazado en 1023 unidades, ya que como el máximo valor representado por 11 bits es 
-$2^{11}-1=2047$, es la mitad de este rango la que representa exponentes positivos y la otra, exponentes negativos.
-\cite{IEEE}
-
-Observar Figura 4.1.
+El origen de todo el problema radica en la cantidad de posibles números representables en un dado rango. 
+El formato se escribe con un significando que tiene un bit entero implícito de valor 1 (excepto para los números especiales). 
+Con los 52 bits de la mantisa, la precisión total es por lo tanto de 53 bits (es decir de $53 \,\log_{10}(2) \approx 15.955$ 
+que se redondea a 16 dígitos decimales). El exponente de este formato está sesgado o desplazado en 1023 unidades, 
+ya que como el máximo valor representado por 11 bits es  $2^{11}-1 = 2047$, es la mitad de este rango la que representa 
+exponentes positivos y la otra, exponentes negativos~\cite{IEEE}. Podemos observar esto en la Figura~\ref{reprebinaria}.
+Lo expuesto permite ver que hay $2^{52}$ números entre $2^n$ y $2^{n+1}$ para todo $n$ entero en [-1023, 1022].
 
 \begin{figure}[t!]
-  \includegraphics[width=16cm, height=3cm]{imagenes/precision}
+  \includegraphics[clip,width=0.95\textwidth]{imagenes/precision}
   \caption{Estructura de un número en formato de coma flotante de doble precisión}
+  \label{reprebinaria}
 \end{figure}
-
-\vspace{5mm}
-
-Lo cual esto nos da que hay $2^{52}$ numeros entre $2^n$ y $2^{n+1}$ para todo n entero en [-1023, 1022].
 
 
 \subsection{Caso en Particular}
 
-Sea:
+Consideremos los valores de la tabla~\ref{falta}
 
+{\color{red} llevar esto a una tabla con label y caption
 \begin{itemize}
   \item c : 5.983489610184446
   \item S : 15.752756180327959
@@ -135,43 +139,45 @@ Sea:
   \item r : 0.09010364215460305
   \item T : 0.2590760904347537 
 \end{itemize} 
+}
 
-La Figura 4.2 muestra la comparación entre g(n), para $n \in [0.01, 1]$, y la volatilidad implícita (linea roja punteada). Se puede observar que no se puede hallar el intervalo [a,b] para aplicar el método de bisección(o brent), ya que para este caso g(n) es positivo $ \forall n < 0.01$.
-
-\vspace{5mm}
-
-Si tomo $o = 0.01$(extremo inferior del intervalo), obtengo:
-
-\begin{itemize}  
-  \item $\Phi(d_1) = 1$, $\Phi(d_2) = 1$
-\end{itemize}
-
-$g(0.01) = 1.7763568394002505e-15$
+La Figura 4.2 muestra la comparación entre g(n) para $n \in \[0.01, 1 \]$ y la volatilidad implícita (linea roja punteada). 
+Se puede observar que no se puede hallar el intervalo $[a,b]$ para aplicar el método de bisección (o Brent), 
+ya que para este caso $g(\sigma)$ es positivo $ \forall 0 < sigma < 0.01$.
 
 \vspace{5mm}
 
-Pero si aplico la normal con la volatilidad implícita $o = 0.11928197090875538$, obtengo:
-
-\begin{itemize}  
-  \item $\Phi(d_1) = 0.9999999999999986$, $\Phi(d_2) = 0.9999999999999982$ 
-\end{itemize}
-
-$g(0.11928197091) = 0$, contradiciendo la propiedad de monótona creciente. 
+Tomando $\sigma = 0.01$ (extremo inferior del intervalo), se obtiene,
+%
+$\Phi(d_1) = 1$, $\Phi(d_2) = 1$
+%
+y $g(0.01) = 1.7763568394002505e-15$.
+%
+Pero si se evalúa la normal con la volatilidad implícita $\sigma = 0.11928197090875538$, se obtiene 
+%
+$\Phi(d_1) = 0.9999999999999986$, $\Phi(d_2) = 0.9999999999999982$ 
+y
+$g(0.11928197091) = 0$, contradiciendo la propiedad de monotonía creciente. 
 
 \begin{figure}
-  \includegraphics[width=10cm, height=6cm]{g}
-  \caption{Función g}
+  \includegraphics[width=0.95\textwidth]{g}
+  \caption{Función g {\color{red} aumentar el tamaño de font y ancho de la línea)}
 \end{figure}
 
 \begin{figure}[]
-  \centering
-  \begin{minipage}[b]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{norm1.png}
-    \caption{$\Phi(d_1)$.}
-  \end{minipage}
-  \hfill
-  \begin{minipage}[b]{0.45\textwidth}
-    \includegraphics[width=\textwidth]{norm1_c.png}
-    \caption{$\Phi(d_1)$.}
-  \end{minipage}
+  %% \centering
+  %% \begin{minipage}[b]{0.45\textwidth}
+    \includegraphics[width=0.95\textwidth]{norm1.png}
+    \caption{$\Phi(d_1)$. {\color{red} aumentar el tamaño de font y ancho de la línea)}
+  %% \end{minipage}
+  %% \hfill
+  %% \begin{minipage}[b]{0.45\textwidth}
+    \includegraphicswidth=0.95\textwidth[]{norm1_c.png}
+    \caption{$\Phi(d_1)$. {\color{red} aumentar el tamaño de font y ancho de la línea)}
+  %%\end{minipage}
 \end{figure}
+
+{\color{red}  Falta describir en detalle las dos últimas figuras en el texto y citarlas
+
+En esta sección también falta la discusión que tuvimos con las gráficas de la prima en función de la volatilidad y el efecto de la vega. La discusión que está en los correos de comienzos de junio. 
+}
