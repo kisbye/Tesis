@@ -3,7 +3,7 @@
 
 \markboth{}{} % encabezado
 
-Para el desarrollo del trabajo que presentamos en este informe {\color{red} Patricia: no lo llamaría "informe". En todo caso, "Para el desarrollo del presente trabajo es necesario ..."}, es necesario estudiar y comprender varias herramientas y t\'ecnicas que usaremos a lo largo del proyecto. A continuaci\'on presentamos un resumen de los temas que abordaremos.
+Para el desarrollo del presente trabajo es necesario estudiar y comprender varias herramientas y t\'ecnicas que usaremos a lo largo del proyecto. A continuaci\'on presentamos un resumen de los temas que abordaremos.
 
 \section{Motivación}
 
@@ -24,15 +24,4 @@ El objetivo del trabajo es determinar la volatilidad implícita sobre call europ
 
 \section{Estructura de la Tesis}
 
-La tesis esta estructurada de la siguiente manera:
-{\color{red} Patricia: Yo aquí sería más descriptiva y con menos itemizaciones. Por ejemplo: "La tesis está estructurada de la siguiente manera. En el capítulo 1 se presentan los conceptos ..... En el capítulo 2 ...... Los capítulos 3 y 4 refieren a la implementación .... etc}
-
-\begin{itemize}
-    \item Nociones Preliminares: Se presentan los conceptos básicos {\color{red} Patricia: conceptos matemáticos, financieros y técnicos utilizados ....) utilizados a lo largo del trabajo.
-    \item Implicancias de la volatilidad implícita: Se muestra la importancia de su cálculo mediante aplicaciones de
-    la misma.
-    \item Implementación númerica del método de Bisección y de Brent: Se implementa el método de Bisección y del método Brent para aproximar la volatilidad ímplicita utilizando la fórmula de Black Scholes.
-    \item Implementación con Red Neuronal Feed-Forward: Se implementa una red neuronal para aproximar la volatilidad implícita utilizando la fórmula de Balck Scholes.
-    \item Resultados: Se presentan los resultados obtenidos comparando los métodos numéricos con la red nueronal.
-    \item Conclusiones: Se presentan conclusiones del trabajo y posibles mejoras.
-\end{itemize}
+La tesis está estructurada de la siguiente manera. En el capítulo 2 se prensentan los conceptos matemáticos, financieros y técnicos utilizados a lo largo del trabajo. En el capítulo 3 se muestra las implicancias de la volatilidad implícita, y la importancia de su cálculo. Los capítulos 4 y 5 refieren a la implementación de métodos para el calculo de la volatilidad implícita, tanto métodos numéricos (Bisección y Brent), como redes neuronales. En el capítulo 6 se presentan los resultados obtenidos comparando los métodos numéricos con la red nueronal. Y por último en el capítulo 7 se presenta una breve conclusión y posibles mejoras.
