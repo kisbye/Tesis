@@ -12,7 +12,7 @@ manera poder ejercer estrategias, ya sean de cobertura o de especulación.
 
 \section{Superficie de Volatilidad para valorar opciones}
 
-Para valorar las opciones europeas, lookback, asiaticas, entre otras. Existen modelos matemáticos para calcular
+Para valorar las opciones europeas, lookback, asiaticas, entre otras. Existen modelos matemáticos para calcular \textcolor{no están explicadas las opciones exóticas}
 el valor la opción. A continuación listaremos una serie de modelos para calcular las distintas tipos de opciones.
 \cite{Modelos}
 
