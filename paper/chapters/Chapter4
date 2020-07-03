@@ -1,23 +1,23 @@
 \chapter{Implementaci\'on n\'umerica del m\'etodo de Bisecci\'on y de Brent}
 \label{Bisec-Brent}
 \markboth{}{}
-En esta sección comentamos detalles de la implementación el método de Bisección y el método Brent para aproximar la 
-volatilidad implícita utilizando la fórmula de Black Scholes.
+En esta sección comentaremos detalles de la implementación del método de Bisección y del método Brent para aproximar la 
+volatilidad implícita a partir de la fórmula de Black Scholes.
 
 \section{Introducción}
 
 Tanto el método de Bisección como el método de Brent son algoritmos de búsqueda de raíces de funciones, como lo es nuestro problema
 de encontrar el valor de la volatilidad implícita a partir de la fórmula de Black Scholes.
 
-
-La función a la cual aplicaremos ambos métodos numéricos 
+Sea $c $ la prima de una opción call europea con madurez $T$ y strike $K$ sobre una acción cuyo precio actual es $S(0)$, siendo $r$ la tasa de interés libre de riesgo. 
+La función a la cual aplicaremos ambos métodos numéricos está dada por la fórmula (\ref{funcion_g}):
 
 \begin{equation}
-g(\hat{\sigma}) = S(0) \,\Phi(d_1) - K \,e^{-rT} \,\Phi(d_2) - c
+g(\hat{\sigma}) = S(0) \,\Phi(d_1(\hat\sigma)) - K \,e^{-rT} \,\Phi(d_2(\hat\sigma)) - c
 \label{function_g}
 \end{equation}
 
-donde usamos la notación definida en la Sec.~\ref{falta}.
+\textcolor{blue}{donde $d_1$, $d_2$ y $\Phi$ están dadas por las fórmulas \ldots }usamos la notación definida en la Sec.~\ref{falta}.
 
 \color{red} 
 
@@ -39,13 +39,13 @@ Todo este párrafo ya fue escrito en la sección 2.1.10. $c$ faltó definir en e
 %%%%%%%%% \section{g es monótona creciente con respecto a $\sigma$}
 
 Podemos ver que $g$ es monótona creciente con respecto a $\sigma$. Para esto si definimos 
-$B(\sigma) = S(0)\Phi(d_1) - Ke^{-rT}\Phi(d_2)$, donde $d_1$ y $d_2$ fueron definidas en la ecuación~\ref{falta}.
+$B(\sigma) = S(0)\Phi(d_1(\sigma)) - Ke^{-rT}\Phi(d_2(\sigma))$, donde $d_1$ y $d_2$ fueron definidas en la ecuación~\ref{falta}.
 En la referencia~\cite{Kisbye} se demuestra que la derivada de $B(\sigma)$, 
-$B'(\sigma) = Ke^{-rT}\Phi'(d_2)\sqrt{T} > 0$  para todo $ \sigma > 0$.
+$B'(\sigma) = Ke^{-rT}\Phi'(d_2(\sigma))\sqrt{T} > 0$  para todo $ \sigma > 0$.
 
 %%% que es una expresión positiva para todo $ \sigma > 0$.
 
-Luego como B es una función monótonamente creciente con respecto $\sigma$ se tiene que
+Luego como $B$ es una función monótona creciente con respecto $\sigma$ se tiene que
 %
 \begin{equation}
 g(\sigma) = B(\sigma) - c
@@ -53,12 +53,12 @@ g(\sigma) = B(\sigma) - c
 %
 tambien lo es, ya que c es constante. 
 
-\section{Implementaciób de los métodos numéricos}
+\section{Implementación de los métodos numéricos}
 
 \subsection{Intervalo inicial para el método de bisección y de Brent}
 
 Como mostramos de la sección anterior, $g:(0,\infty) \to {\rm I\!R}$ es una función monótona creciente. Podemos tomar
-$a = \epsilon$, con $\epsilon \to 0$, entonces $g(a) < 0$. 
+$a = \epsilon$, con $\epsilon \to 0$, entonces $g(a) < 0$. \textcolor{red}{Esto el lector no lo deduce fácilmente}
 
 Ahora para elegir $b$ utilizaremos el siguiente algoritmo:
 
@@ -88,6 +88,8 @@ Inicializamos el intervalo $[a,b]$ para aplicar el método de bisección, de man
 Luego aplicamos el algoritmo de bisección~\ref{falta} hasta hallar un $\xi$, tal que $g(\xi) = 0$ ó $|b-a|<\varepsilon$. 
 A $\varepsilon$ lo llamaremos tolerancia.
 
+\textcolor{red}{Cuando esté corregido el capítulo 2 veré si esto queda claro. Yo creo que uno debe decir que va construyendo intervalos $I_j$ \dots, pero vemos después.}
+
 \section{Aplicación del Método de Brent}
 
 %%%%%%%%%%%%%%% Sea g la función definida en la sección 4.1.
@@ -98,13 +100,14 @@ Nuevamente, a $\varepsilon$ lo llamaremos tolerancia.
 
 \section{Problemas Númericos}
 
+
 En la {\color{red} muestra (NO se entiende porque no fue definida la muestra. Tal vez conviene llevar este capítulo después del siguiente o adelantar la definición de muestra)} hay aproximado un 0.05\% de casos que no cumplen con la condición $g(a)g(b) < 0$, 
-para $a \to 0$ y $b \to \infty$, donde g es la función definida en la sección 4.1. Por lo tanto, no se puede aplicar ninguno de los métodos vistos anteriormente.
+para $a \to 0$ y $b \to \infty$, donde g es la función definida en la sección 4.1. \textcolor{red}{Usar siempre label y ref} Por lo tanto, no se puede aplicar ninguno de los métodos vistos anteriormente.
 
 El problema radica en el cálculo de la fórmula de Black-Scholes definida en la ecuación~\ref{falta} {\color{red} NO --> el capítulo 2.1 (ecuación 2.1). Usar las referencias de latex}, 
-básicamente en las distribución de pronbabilidad acumulada $\Phi(d)$. Por definición $\Phi(d) < 1$, $\forall d \in \mathbb{R}$. 
+básicamente en la distribución de probabilidad acumulada $\Phi(d)$. Por definición $\Phi(d) < 1$, $\forall d \in \mathbb{R}$. 
 Pero Python usa aritmética de punto flotante IEEE-754, donde su precisión es $2^{(-56)}$ {\color{red} falta referencia} , 
-dando asi una precisión aproximada de 15,95 digitos decimales. 
+dando asi una precisión aproximada de 15,95 dígitos decimales. 
 Luego usando la función de Scipy para el cálculo de la distribución normal acumulada definida en la referncia~\cite{Normal}, 
 obtenemos $\Phi(n) = 1$, para $n > 8.3$.
 %
@@ -116,9 +119,9 @@ El origen de todo el problema radica en la cantidad de posibles números represe
 El formato se escribe con un significando que tiene un bit entero implícito de valor 1 (excepto para los números especiales). 
 Con los 52 bits de la mantisa, la precisión total es por lo tanto de 53 bits (es decir de $53 \,\log_{10}(2) \approx 15.955$ 
 que se redondea a 16 dígitos decimales). El exponente de este formato está sesgado o desplazado en 1023 unidades, 
-ya que como el máximo valor representado por 11 bits es  $2^{11}-1 = 2047$, es la mitad de este rango la que representa 
+ya que como el máximo valor representado por $11$ bits es  $2^{11}-1 = 2047$, es la mitad de este rango la que representa 
 exponentes positivos y la otra, exponentes negativos~\cite{IEEE}. Podemos observar esto en la Figura~\ref{reprebinaria}.
-Lo expuesto permite ver que hay $2^{52}$ números entre $2^n$ y $2^{n+1}$ para todo $n$ entero en [-1023, 1022].
+Lo expuesto permite ver que hay $2^{52}$ números de punto flotante entre $2^n$ y $2^{n+1}$ para todo $n$ entero en $[-1023, 1022]$.
 
 \begin{figure}[t!]
   \includegraphics[clip,width=0.95\textwidth]{imagenes/precision}
@@ -141,7 +144,8 @@ Consideremos los valores de la tabla~\ref{falta}
 \end{itemize} 
 }
 
-La Figura 4.2 muestra la comparación entre g(n) para $n \in \[0.01, 1 \]$ y la volatilidad implícita (linea roja punteada). 
+La Figura 4.2 muestra la comparación entre $g(n)$ para $n \in [ 0.01, 1 ]$ 
+y la volatilidad implícita (linea roja punteada). 
 Se puede observar que no se puede hallar el intervalo $[a,b]$ para aplicar el método de bisección (o Brent), 
 ya que para este caso $g(\sigma)$ es positivo $ \forall 0 < sigma < 0.01$.
 
@@ -153,11 +157,11 @@ $\Phi(d_1) = 1$, $\Phi(d_2) = 1$
 %
 y $g(0.01) = 1.7763568394002505e-15$.
 %
-Pero si se evalúa la normal con la volatilidad implícita $\sigma = 0.11928197090875538$, se obtiene 
+Pero si se evalúa la función de distribución acumulada de la normal estándar utilizando la volatilidad implícita $\sigma = 0.11928197090875538$, se obtiene 
 %
 $\Phi(d_1) = 0.9999999999999986$, $\Phi(d_2) = 0.9999999999999982$ 
 y
-$g(0.11928197091) = 0$, contradiciendo la propiedad de monotonía creciente. 
+$g(0.11928197091) = 0$, se contradice la propiedad de monotonía creciente. 
 
 \begin{figure}
   \includegraphics[width=0.95\textwidth]{g}
