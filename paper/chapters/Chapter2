@@ -586,7 +586,7 @@ Donde $f_k=f(x_k)$. El algoritmo~\ref{Abrent} aplica el metodo de Brent.
 
 \section{Redes neuronales}
 
-\textcolor{blue}{Patricia: Introducir más el tema acá(NO ENTIENDO).  El lector no tiene por qué saber qué es una red neuronal}
+\textcolor{blue}{Patricia: Introducir más el tema acá.  El lector no tiene por qué saber qué es una red neuronal}
 
 \textcolor{red}{..La red neuronal se entrena para estimar}
 

@@ -297,11 +297,11 @@ de $5 \times 10^{-3}$ y un mínimo de $5 \times 10^{-6}$, con un paso cada 8 epo
 \section{Optimización}
 
 El objetivo aquí es aprender la relación implícita entre las volatilidades implícitas y los precios de las opciones. Entonces Vega~\cite{Vega} puede volverse arbitrariamente pequeña, lo que puede dar lugar a
-un problema de gradiente pronunciado en el contexto ANN. Es bien sabido que un ANN puede generar importantes
-Errores de predicción en regiones con grandes gradientes. Por lo tanto, proponemos un enfoque de aplanamiento del gradiente para manejar este problema
+un problema de gradiente pronunciado. Ahora bien se pueden generar importantes
+errores de predicción en regiones con grandes gradientes. Por lo tanto, proponemos un enfoque de aplanamiento del gradiente para manejar este problema.
 
 
-\textcolor{red}{..no se entiende, explicar o mostrar figura (PREGUNTAR)}
+\textcolor{red}{..no se entiende, explicar o mostrar figura}
 
 
 Primero, cada opción puede ser dividida entre el valor intrínseco y un valor de tiempo, luego sustraemos el valor intrínseco de la siguiente manera:
