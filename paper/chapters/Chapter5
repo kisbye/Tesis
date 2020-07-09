@@ -4,38 +4,39 @@
 
 En este capítulo presentamos el cálculo de la volatilidad implícita mediante el diseño y uso de redes neuronales.
 
-{\color{red} Esto va en el capítulo sguiente: Todo cálculo realizado en este cápitulo es sobre GPU(GeForce GTX 1080/PCIe/SSE2), RAM(15.6 GiB).}
+\textcolor{red}{.. Esto va en el capítulo sguiente: Todo cálculo realizado en este cápitulo es sobre GPU(GeForce GTX 1080/PCIe/SSE2), RAM(15.6 GiB).}
 
 
 \section{Cálculo de prima de opción call usando $S/K$}
 
 Rene Garcia y Ramazan Gen\c{c}ay~\cite{Gencay} invocando la homogeneidad de la fórmuma de Black Scholes,
 demostraron que las redes neuronales estiman mejor el precio de una opción usando el cociente $S/K$. 
-Así podelos reescribir la ecuación~\ref{2.1}
+Así podelos reescribir la ecuación~\ref{c2}.
 %
 \begin{equation}
 \displaystyle\frac{c}{K} = \displaystyle\frac{S(0)}{K}\Phi(d_1) - e^{-rT}\Phi(d_2) = B'(S(0)/K, T, r, \sigma)
 \label{c2}
 \end{equation}
 %
-donde $d_1$ y $d_2$ dueron definidas en la ecuación~\ref{falta}
+donde $d_1$ es la ecuación~\ref{d1eq} y $d_2$ es la ecuación~\ref{d2eq}.
 
 %%% $d_1 = \displaystyle\frac{Log \left(\displaystyle\frac{S(0)}{K}\right)+ \left( r + \displaystyle\frac{\sigma^2}{2}\right)T}{\sigma\sqrt{T}}$
 %%% \qquad  $d_2 = d_1 - \sigma\sqrt{T}$.
 
 \section{Generación de muestra}
 
-{\color{red} Falta una breve introducción a qué y para qué es la muetra}
+\textcolor{red}{..Falta una breve introducción a qué y para qué es la muetra}
 
 Como hemos visto en la sección anterior, el nuevo cálculo de de prima a través de la ecuación~\ref{c2}
 nos dará un valor para $\displaystyle\frac{c}{K}$.
 En nuestro caso buscamos estimar la volatilidad implícita, pero usaremos el cociente para generar la muestra ya
 que en la práctica la red estima mejor.
 
-Luego vamos a generar 2 muestras, una muestra amplia y una muestra estrecha. {\color{red} Por qué? Para qué}%
+Luego vamos a generar 2 muestras, una muestra amplia y una muestra estrecha. La muestra amplia va a ser para el entrenamiento de la red, y la muestra angosta para la evaluación de la red.
+\textcolor{red}{..Por qué? Para qué}%
 
-Las variables de la muestra ya sea amplia o estrecha, pertenecerán a un ambiente previamente definido, pero las variables de la muestra estrecha sera un subconjunto de la amplia,
-como puede verse en la tabla~\ref{ambiente}
+Las variables de la muestra ya sea amplia o estrecha, pertenecerán a un ambiente previamente definido, pero las variables de la muestra estrecha sera un subconjunto de la amplia, ya que la red estima peor en los extremos.
+como puede verse en la Cuadro~\ref{ambiente}.
 
 \begin{table}[!htbp]
 \begin{tabular}{|l|l|l|c|c|}
@@ -48,13 +49,12 @@ como puede verse en la tabla~\ref{ambiente}
  Salida & Precio de Call(c/K) &  $(O^1,L^1)$ & ($O^2,L^2$) \\ \hline
 \end{tabular}
 \label{ambiente}
-\caption{Rangode los parámetros para la generación de las muestras\\
-$A^i+C^i_1 < B^i-C^i_2$, \quad $C^i_j > 0$, \quad  $O^j < L^j$, para $i = 1,2,3,4$, $j = 1,2$}
+\caption{Rango de los parámetros para la generación de las muestras $A^i+C^i_1 < B^i-C^i_2$, \quad $C^i_j > 0$, \quad  $O^j < L^j$, para $i = 1,2,3,4$, $j = 1,2$}
 \end{table}
 
 %%% donde \quad $A^i+C^i_1 < B^i-C^i_2$, \quad $C^i_j > 0$, \quad  $O^j < L^j$, para $i = 1,2,3,4$, $j = 1,2$.
 
-Luego para generar una muestra de tamaño $N$, aplicaremos $N$ veces el algoritmo~ref{muestras}, donde:
+Luego para generar una muestra de tamaño $N$, aplicaremos $N$ veces el algoritmo~\ref{muestras}, donde:
 
 \begin{itemize}
   \item \textbf{número\_aleatorio} Es una función que dado un rango genera un número aleatorio perteneciente a dicho rango.
@@ -89,8 +89,10 @@ Luego para generar una muestra de tamaño $N$, aplicaremos $N$ veces el algoritm
 
 \section{k-fold cross validation}
 
-En nuestro caso utilizaremos 8-fold cross validation {\color{red} dar una explicación} para estimar 
-los hiperparámetros que definen la red neuronal que queremos construir. 
+En nuestro caso utilizaremos 8-fold cross validation porque nos garantizará alta varianza y bajo sesgo
+\textcolor{red}{..dar una explicación}
+ para estimar 
+los hiperparámetros que definen la red neuronal que queremos construir.
 Los hiperparámetros propuesto para aplicar 8-fold cross validation están definidos en la Tabla~\ref{hyper}.
 %
 A tales fines, primero definiremos la estructura de la red neuronal entre 1 y 10 capas ocultas, 
@@ -134,7 +136,7 @@ epocas & 200 \\
 \begin{table}[h!]
 \begin{center}
 \caption{Estimación de hiperparametros}
-\label{hyper)
+\label{hyper}
 
 \begin{tabular}{c|c}
 \hline
@@ -154,43 +156,33 @@ Tamaño de batch & [256, 2048] \\
 \end{table}
 
 %% Sea:
-{\color{red} motivar lamintroducción de estas definiciones y su uso}
+\textcolor{red}{..motivar la introducción de estas definiciones y su uso}
+
+Las siguientes ecuaciones corresponden a métricas que miden el error de modelos. En nuestro caso se utilizará para 
+medir la efectividad o el error de los modelos propuestos, ya sea modelos matemáticos o redes neuronales.
 
 \begin{eqnarray}
-
-%%\begin{equation}
-\mbox{ECM} =  \displaystyle\frac{1}{N} \sum_{i=1}^{N}(y_i - \hat{y_i})^2
-%%\end{equation}
-\\
-%%\begin{equation}
-\mbox{EAM} = \displaystyle\frac{1}{N} \sum_{i=1}^{N}|y_i - \hat{y_i}|
-%%\end{equation}
-\\
-%%\begin{equation}
-\mbox{EPAM} = 100 \displaystyle\frac{1}{N} \sum_{i=1}^{N}\displaystyle\frac{|y_i - \hat{y_i}|}{y_i}
-%%\end{equation}
-\\
-%%\begin{equation}
-\overline{y} = \displaystyle\frac{1}{N}\sum_{i=1}^{N} y_i
-%%\end{equation}
-\\
-%%\begin{equation}
-SS_{tot} =\displaystyle\sum_{i=1}^{N} (y_i-\overline{y})^2
-%%\end{equation}
-\\
-%%\begin{equation}
-R^2 = 1 - \displaystyle\frac{\mbox{ECM}}{SS_{tot}}
-%%\end{equation}
-
+  \mbox{ECM} =  \displaystyle\frac{1}{N} \sum_{i=1}^{N}(y_i - \hat{y_i})^2 
+  \\
+  \mbox{EAM} = \displaystyle\frac{1}{N} \sum_{i=1}^{N}|y_i - \hat{y_i}| 
+  \\
+  \mbox{EPAM} = 100 \displaystyle\frac{1}{N} \sum_{i=1}^{N}\displaystyle\frac{|y_i - \hat{y_i}|}{y_i} 
+  \\
+  \overline{y} = \displaystyle\frac{1}{N}\sum_{i=1}^{N} y_i 
+  \\
+  SS_{tot} = \displaystyle\sum_{i=1}^{N} (y_i-\overline{y})^2 
+  \\
+  R^2 = 1 - \displaystyle\frac{\mbox{ECM}}{SS_{tot}}
 \end{eqnarray}
 %
 donde $y_i$ es el valor esperado de salida de la red, $\hat{y_i}$ es el valor que predice la red y N es el tamaño de muestra.
 
-En la tabla~\ref{Halgo} se observan los hiperparámetros {\color{red} resultantes de la optimización??? cross validation??} que utilizaremos en el entrenamiento de la red.
+En Cuadro~\ref{Halgo} se observan los hiperparámetros obtenidos al aplicar 8-fold cross validation,
+\textcolor{red}{..resultantes de la optimización??? cross validation??} que se utilizará en el entrenamiento de la red.
 
 \begin{table}[]
 \begin{center}
-\caption{Hiperparametros {\color{red} algo}}
+\caption{Hiperparametros óptimos\textcolor{red}{..algo}}
 \label{Halgo}
 \begin{tabular}{c|c}
 \hline
@@ -214,12 +206,14 @@ Tamaño de batch &  1024 \\
 \textbf{\large Learning Rate}
 
 
-Anteriormente {\color{red} cuándo? no se entiende} hemos usado un \textbf{learning rate} fijo($10^{-3}$). 
+En la busqueda de los hiperparámetros \textcolor{red}{..cuándo? no se entiende} hemos utilizado un \textbf{learning rate} fijo($10^{-3}$). 
 
-Tomando los hiperparámetros de la tabla~\ref{Halgo} utilizaremos un método similiar al de Smith \cite{Smith} para determinar el learning rate, a diferencia del método de Smith, iremos subiendo el learning rate exponencialmente por cada batch.
+Tomando los hiperparámetros del Cuadro~\ref{Halgo}
+ utilizaremos un método similiar al de Smith \cite{Smith} para determinar el learning rate, a diferencia del método de Smith, iremos subiendo el learning rate exponencialmente por cada batch.
 Empezaremos con un learning rate de $10^{-10}$ hasta llegar a 1, comparando ECM contra el learning rate.
 
-Como se puede observar en la Figura~\ref{Smith}, el rango de learning rate óptimo
+Como se puede observar en la Figura~\ref{Smith},
+ el rango de learning rate óptimo
  se encuentra entre $5 \times 10^{-6}$ y $5 \times 10^{-3}$.
 
 \begin{figure}
@@ -232,16 +226,17 @@ Como se puede observar en la Figura~\ref{Smith}, el rango de learning rate ópti
 
 
 Ahora proponemos tres métodos de decrecimiento del learning rate. 
-Utilizaremos grid-search {\color{red} falta referencia} para encontrar los parámetros óptimos 
-de los algoritmos de decrecimiento del learning rate. Tomando los hiperparámetros del Cuadro 5.3. 
-En el Cuadro 5.4 se definen los intervalos sobre los cuales aplicaremos grid-search, 
-usando como referencia el método de Smith. Dando como resultado el Cuadro 5.5.
+Utilizaremos grid-search~\cite{Grid} \textcolor{red}{..falta referencia} para encontrar los parámetros óptimos 
+de los algoritmos de decrecimiento del learning rate. Tomando los hiperparámetros del Cuadro~\ref{Halgo}. 
+En el Cuadro~\ref{GridT} se definen los intervalos sobre los cuales aplicaremos grid-search, 
+usando como referencia el método de Smith. Dando como resultado el Cuadro~\ref{OptioD}.
 
 
 
 \begin{table}[h!]
 \begin{center}
 \caption{Grid-Search}
+\label{GridT}
 \begin{tabular}{c|c|c|c}
 \hline
 
@@ -260,6 +255,7 @@ epoch\_drop & 5, 10, 20, 40, 50 & - & -\\
 \begin{table}[h!]
 \begin{center}
 \caption{Parametros de los Algoritmos de Decrecimiento}
+\label{OptioD}
 \begin{tabular}{c|c|c|c}
 \hline
 
@@ -273,11 +269,12 @@ epoch\_drop & 20 & - & -\\
 \end{table}
 
 
-Observando los parámetros del Cuadro 5.5 entrenaremos la red por 1000 épocas ulizando los algoritmos de decrecimiento del learning rate y los hiperpárametros del Cuadro 5.3 antes mencionados. Los vamos a comparar mediante su ECM, para obtener el mejor algoritmo de decrecimiento. Como se puede observar en la Figura 5.2 Step Decay es el algoritmo que mejor resultado obtuvo.
+Observando los parámetros del Cuadro~\ref{OptioD} entrenaremos la red por 1000 épocas ulizando los algoritmos de decrecimiento del learning rate y los hiperpárametros del Cuadro~\ref{Halgo} antes mencionados. Los vamos a comparar mediante su ECM, para obtener el mejor algoritmo de decrecimiento. Como se puede observar en la Figura~\ref{comparacion} Step Decay es el algoritmo que mejor resultado obtuvo.
 
 \begin{figure}[t!]
   \includegraphics[width=16cm, height=9cm]{imagenes/comparacion_post}
   \caption{Learning Rate Decay}
+  \label{comparacion}
 \end{figure}
 
 \vspace{5mm}
@@ -285,34 +282,39 @@ Observando los parámetros del Cuadro 5.5 entrenaremos la red por 1000 épocas u
 
 Luego comparamos Step Decay con Cyclical Decay \cite{Smith}, donde el learning rate varia entre un máximo 
 de $5 \times 10^{-3}$ y un mínimo de $5 \times 10^{-6}$, con un paso cada 8 epocas aproximadamente 
-(ver Figura 2.6). Observando la Figura 5.3, podemos concluir que Step Decay da un mejor resultado. 
+(ver Figura~\ref{Cyclicallr}). Observando la Figura~\ref{SDVCD}, podemos concluir que Step Decay da un mejor resultado. 
 
 
 
 \begin{figure}[t!]
   \includegraphics[width=15cm, height=8cm]{imagenes/step_vs_cyclical}
   \caption{Cyclical LR vs Step Decay}
+  \label{SDVCD}
 \end{figure}
 
 
 
 \section{Optimización}
 
-Notar que si $\sigma$ es grande, la derivada de la call respecto de $\sigma$ es muy pequeña, 
-{\color{red}  no se entiende, explicar o mostrar figura}
-esto puedo ocasionar un problema de gradiente pronunciado. Por lo tanto se propone un aplanamiento del gradiente para manejar este problema.
+El objetivo aquí es aprender la relación implícita entre las volatilidades implícitas y los precios de las opciones. Entonces Vega~\cite{Vega} puede volverse arbitrariamente pequeña, lo que puede dar lugar a
+un problema de gradiente pronunciado en el contexto ANN. Es bien sabido que un ANN puede generar importantes
+Errores de predicción en regiones con grandes gradientes. Por lo tanto, proponemos un enfoque de aplanamiento del gradiente para manejar este problema
+
+
+\textcolor{red}{..no se entiende, explicar o mostrar figura (PREGUNTAR)}
+
 
 Primero, cada opción puede ser dividida entre el valor intrínseco y un valor de tiempo, luego sustraemos el valor intrínseco de la siguiente manera:
 
-{\color{red}  por qué se cambia a $C$?, antes se usaba $c$}
+\textcolor{red}{..por qué se cambia a $C$?, antes se usaba $c$}
 
-$\tilde{C} = C - max(S_0 - Ke^{-r\tau}, 0) $
+$\tilde{c} = c - max(S_0 - Ke^{-r\tau}, 0) $
 
 El nuevo cálculo propone superar el problema, logrando reducir el gradiente pronunciado aplicando una transformación logarítmica sobre el valor de la opción \cite{Logaritmo}. En nuestro caso sería:
 
 
 \begin{equation}
- \displaystyle\frac{\tilde{C}}{K} = \displaystyle\frac{C}{K} - \max(ratio - e^{-r\tau}, 0)
+ \displaystyle\frac{\tilde{c}}{K} = \displaystyle\frac{c}{K} - \max(S/K - e^{-r\tau}, 0)
 \end{equation}
 
-{\color{red} ratio??}
+\textcolor{red}{..ratio??}

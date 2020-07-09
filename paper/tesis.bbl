@@ -18,10 +18,20 @@ Jay~L. Devore.
   144--148.
 \newblock Cengage Learning, séptima edición, 2009.
 
+\bibitem{Smile}
+John~C. Hull.
+\newblock {\em Options, Futures, and Other Derivatives}, páginas 381--387.
+\newblock Pearson Prentice Hall, séptima edición, 2009.
+
 \bibitem{Surface}
 John~C. Hull.
-\newblock {\em Options, Futures, and Other Derivatives}, páginas 381--389.
+\newblock {\em Options, Futures, and Other Derivatives}, páginas 387--389.
 \newblock Pearson Prentice Hall, séptima edición, 2009.
+
+\bibitem{Intermedio}
+Ward~Cheney y~David~Kincaid.
+\newblock {\em Métodos numéricos y computación}, páginas 78.
+\newblock Cengage Learning, sexta edición, 2011.
 
 \bibitem{Bisec}
 Ward~Cheney y~David~Kincaid.
@@ -122,11 +132,21 @@ Ramazan~Gençay René~Garcia.
   \newblock
     \url{https://keras.io/api/models/sequential/}
 
+\bibitem{Grid}
+  Grid Search.
+  \newblock
+    \url{https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV}
+
+\bibitem{Vega}
+John~C. Hull.
+\newblock {\em Options, Futures, and Other Derivatives}, páginas 365--367.
+\newblock Pearson Prentice Hall, séptima edición, 2009.
+
 \bibitem{Logaritmo}
 Shuaiqiang Liu, Cornelis Oosterlee, and Sander Bohte.
 \newblock Pricing options and computing implied volatilities using neural
   networks.
-\newblock {\em journal of Risks}, 7(1):16, Feb 2019.
+\newblock {\em Risks}, 7(1):16, Feb 2019.
 
 \bibitem{Brentq}
   Método de Brent.
