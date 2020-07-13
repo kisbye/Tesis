@@ -3,11 +3,12 @@
 
 \setlength{\parindent}{0cm}
 \usepackage[utf8]{inputenc}
+\usepackage{amsthm}
 \usepackage[spanish]{babel}
-\usepackage{amsmath}
 \usepackage{mathrsfs}
 \usepackage{mathtools}
 \usepackage{amsthm,amssymb}
+\usepackage{hhline}
 \usepackage{graphics, graphicx}
 \usepackage[hidelinks]{hyperref}
 \graphicspath{ {./imagenes/} }
@@ -19,6 +20,7 @@
 \usepackage{xcolor}
 
 \usepackage{wrapfig}
+
 
 
 \begin{document}
@@ -108,8 +110,6 @@ Este trabajo incluye la exploración bibliográfica referida al concepto de vola
 
 \tableofcontents
 
-
-
 \input{chapters/Chapter1}
 
 \input{chapters/Chapter2}
@@ -124,7 +124,8 @@ Este trabajo incluye la exploración bibliográfica referida al concepto de vola
 
 \input{chapters/Chapter7}
 
-%{\color{red} La bibliografía hay que normalizarla con alguno de los estándar en uso. El más próximo a lo que tenés es numeric (ver: https://www.overleaf.com/learn/latex/biblatex_bibliography_styles) y completar todos los campos. El los artículos simpre usar nombre de journal, {\bf vol}, pag (año). En los libros siempre debe ponerse la editorial. Cuidar que el orden sea el de cita en el texto.}
+\textcolor{red}{La bibliografía hay que normalizarla con alguno de los estándar en uso. El más próximo a lo que tenés es numeric (ver: https://www.overleaf.com/learn/latex/biblatex\_bibliography\_styles) y completar todos los campos. 
+El los artículos simpre usar nombre de journal, vol, pag (año). En los libros siempre debe ponerse la editorial. Cuidar que el orden sea el de cita en el texto.}
 
 \bibliography{bibliografia}{}
 \bibliographystyle{plain}

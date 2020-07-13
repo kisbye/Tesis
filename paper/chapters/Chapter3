@@ -1,4 +1,4 @@
-\chapter{Implicancias de la volatilidad implícita}
+\chapter{Implicancias de la volatilidad impl\'icita}
 \label{Volatilidad}
 \markboth{}{}
 
@@ -12,7 +12,8 @@ manera poder ejercer estrategias, ya sean de cobertura o de especulación.
 
 \section{Superficie de Volatilidad para valorar opciones}
 
-Para valorar las opciones europeas, lookback, asiáticas, entre otras, existen modelos matemáticos para calcular \textcolor{no están explicadas las opciones exóticas}
+Para valorar las opciones europeas, lookback, asiáticas, entre otras, existen modelos matemáticos para calcular 
+\textcolor{red}{Cap\'itulo anterior..no est\'an explicadas las opciones ex\'oticas}
 el valor la opción. A continuación listaremos una serie de modelos desarrollados para valorar distintos tipos de opciones vainilla y exóticas.
 \cite{Modelos}
 
@@ -28,18 +29,36 @@ el valor la opción. A continuación listaremos una serie de modelos desarrollad
 
 Todos los modelos anteriormente mencionados para ser aplicados necesitan la volatilidad 
 entre otros parámetros. Pero si el mercado no nos brinda el valor de la volatilidad, 
-una manera de estimarla es mediante la superficie de volatilidad, definida en el capítulo anterior. \textcolor{Revisar esto. Para definir la superficie de volatilidad se necesita del cálculo de la volatilidad implícita. Entonces no se entiende cómo es que se estima la volatilidad a partir de la superficie de volatilidad}.
+una manera de estimarla es mediante la superficie de volatilidad, definida en el capítulo anterior. 
+\textcolor{red}{Capítulo anterior..Revisar esto. Para definir la superficie de volatilidad se necesita del cálculo de la volatilidad implícita. Entonces no se entiende cómo es que se estima la volatilidad a partir de la superficie de volatilidad}.
 
 
 \section{Estrategias dependiendo de la volatilidad implícita}
 
-Entender el concepto de volatilidad es esencial para tener éxito en la comercialización de opciones. Un inversor que puede reconocer cuándo una opción o series de opciones están baratas o caras tiene una gran ventaja a la hora de invertir. {\color{red} Esto quiere decir (no se entiende la implicancia)} que si la volatilidad implícita es baja, entonces el precio de la opción va a ser baja. En cambio si la volatilidad implícita es alta, el precio de la opción va a ser alta. \textcolor{¿Esto tiene que ver con que la prima de una call es una función creciente con respecto a la volatilidad?)
+Entender el concepto de volatilidad es esencial para tener éxito en la comercialización de opciones. Un inversor que puede reconocer cuándo una opción o series de opciones están baratas o caras tiene una gran ventaja a la hora de invertir.
+\textcolor{red}{..Esto quiere decir (no se entiende la implicancia)}
+Esto quiere decir que si la volatilidad implícita es baja, entonces el prima de la opción va a ser baja. En cambio si la volatilidad implícita es alta, el prima de la opción va a ser alta. Ya que el prima de la opción es creciente con respecto a la volatilidad.~\cite{Kisbye}
+ \textcolor{red}{..¿Esto tiene que ver con que la prima de una call(la put tambien por paridad de put-call) es una función creciente con respecto a la volatilidad?)}
 
-Ahora bien, ¿cómo reconocer cuándo la volatilidad implícita es alta o baja?. Una manera es comparar la volatilidad histórica con la volatilidad implícita de la opción. Esto sería calcular las volatilidades históricas diarias  de la opción sobre 1 o 2 años \textcolor{en todo caso se calcula la volatilidad histórica en dos años, no se entiende lo de la 'volatilidad diaria'.}, y compararlas con la volatilidad implícita. Por ejimplo si la volatilidad implícita es menor al 80\% de la volatilidad histórica de los últimos 2 años, entonces la volatilidad implícita es baja.
+
+Ahora bien, ¿cómo reconocer cuándo la volatilidad implícita es alta o baja?. Una manera es comparar la volatilidad histórica de los ultimos 2 años con la volatilidad implícita de la opción.
+\textcolor{red}{..en todo caso se calcula la volatilidad histórica en dos años, no se entiende lo de la 'volatilidad diaria'.}
+Por ejemplo si la volatilidad implícita es considerablemente menor a su volatilidad histórica de los últimos 2 años, entonces la volatilidad implícita es baja.
+
+
+Ahora nombraremos algunas estrategias en las cuales se hace uso de la volatilidad implícita.\cite{Estrategias}
 
 \vspace{5mm}
 
-Ahora nombraremos algunas estrategias en las cuales se hace uso de la volatilidad implícita.\cite{Estrategias}
+Terminología que usaremos en esta sección:
+
+\begin{itemize}
+  \item ATM(at-the-money): Una opción está ATM cuando $S(0)=K$ tanto en opciones put como call.
+  \item OTM(out-of-the-money): Una opción call está OTM cuando $S(0) < K$ y una opción put cuando $S(0) > K$.
+  \item ITM(at-the-money): Una opción call está ITM cuando $S(0) > K$ y en una opción put cuando $S(0) < K$.
+\end{itemize}
+
+Donde $S(0)$ es el precio del subyacente al momento de entrar a la opción y K es el strike de la opción.
 
 \subsection{Backspread}
 
@@ -50,34 +69,42 @@ Las claves para aplicar la estrategia Backspread son las siguientes:
 	\item Busca volatilidad implícita baja al momento de aplicar la estrategia, con esperanza que suba en el futuro.
 \end{itemize}
 
-La estrategia Backspread involucra suscribir opciones call o put, at-the-money o in-the-money (primas caras), \textcolor{red}{No has definido qué significa ATM, ITM y OTM, ni por qué esto que decís implica primas caras. }
-y simultaneamente comprar un número mayor de opciones out-of-the-money (primas baratas). 
-Idealmente se busca obtener que el valor {\color{red} prima? strike?) de las opciones suscritas sea mayor al valor de las opciones compradas. 
+La estrategia Backspread involucra suscribir opciones call o put, ATM o ITM (primas caras), 
+\textcolor{red}{..No has definido qué significa ATM, ITM y OTM, (ni por qué esto que decís implica primas caras.) }
+y simultaneamente comprar un número mayor de opciones OTM (primas baratas), por principio de no arbitraje.
+Idealmente se busca obtener que la prima de las opciones suscritas sea mayor al valor de las opciones compradas. 
+
+\textcolor{red}{..prima? strike?)} 
 
 % \vspace{5mm} {\color{red} dejar que latex maneje el interlineado de forma automática}
 
 En el caso que tengamos expectativas de un movimiento alcista del subyacente entonces la estrategía será
 Call Backspread, que consiste en vender y comprar opciones call. El objetivo es que el precio del subyacente 
-suba o baje drásticamente para obtener ganancia, con preferencia alcista como se puede observar en la Figura 3.1.\textcolor{ponerle label a las figuras y citarlas con ref} 
+suba o baje drásticamente para obtener ganancia, con preferencia alcista como se puede observar en la 
+Figura~\ref{CBackspread}.
+\textcolor{red}{..ponerle label a las figuras y citarlas con ref} 
 
 %\vspace{5mm}
 
 En el caso que tengamos expectativas de un movimiento bajista del subyacente entonces la estrategia será
-Put Backspread, que consite en vender y comprar opciones put. El objetivo es el mismo que el Call Backspread, con preferencia bajista como se puede observar en la Figura 3.2. \textcolor{red}{(usar label y ref)}
+Put Backspread, que consite en vender y comprar opciones put. El objetivo es el mismo que el Call Backspread, con preferencia bajista como se puede observar en la Figura~\ref{PBackspread}.
+\textcolor{red}{..(usar label y ref)}
 
-{\color{red} me resulta confusa la explicación de la estratrgia. Poner bien en claro la relación entre las primas y los strikes de las opciones suscritas (posición short) y compradas (posición long). Escribir las ecuaciones para la ganancia en cada caso}
+\textcolor{red}{..me resulta confusa la explicación de la estratrgia. Poner bien en claro la relación entre las primas y los strikes de las opciones suscritas (posición short) y compradas (posición long). Escribir las ecuaciones para la ganancia en cada caso}
 
 \begin{figure}[!tbp]
-  \centering
-  \begin{minipage}[b]{0.45\textwidth}
+  %\centering
+  %\begin{minipage}[b]{0.45\textwidth}
     \includegraphics[width=\textwidth]{backspread.png}
     \caption{Call Backspread.}
-  \end{minipage}
-  \hfill
-  \begin{minipage}[b]{0.45\textwidth}
+    \label{CBackspread}
+  %\end{minipage}
+  %\hfill
+  %\begin{minipage}[b]{0.45\textwidth}
     \includegraphics[width=\textwidth]{backspreadput.png}
     \caption{Put Backspread.}
-  \end{minipage}
+    \label{PBackspread}
+  %\end{minipage}
 \end{figure}
 
 \subsection{Long Straddle y Long Strangle}
@@ -88,50 +115,53 @@ Las claves para aplicar estas estrategias son las siguientes:
 \begin{itemize}
 	\item Se espera a que el valor del subyacente tenga un gran cambio, sin importar si el precio sube o baja.
 	\item Se busca volatilidad implícita baja al momento de aplicar la estrategia.
-	\item Idealmente opciones out-of-the-money. \textcolor{red}{Ponerle verbo a esta oración}
-	\item Tiempo adecuado antes de la expiración, tratar que no sean contratos cortos. \textcolor{red}{reescribir esta oración con un verbo}
+	\item Idealmente se busca opciones out-of-the-money. \textcolor{red}{..Ponerle verbo a esta oración}
+	\item Se busca tiempo adecuado antes de la expiración, tratar que no sean contratos cortos. \textcolor{red}{..reescribir esta oración con un verbo}
 \end{itemize}
 
 La estrategia de comprar una Straddle o una Strangle consiste en comprar una opción call y una opción put al mismo tiempo, con el mismo tiempo de madurez, ambas con el igual strike (Straddle) o diferente strike (Strangle). Ideamente se busca que al momento de comprar las opciones, la volatilidad implícita sea baja (comprar opciones baratas), y que el precio del subyacente tenga un abrupto cambio (Guerra comercial entre Estados Unidos y China, Pandemia, Precio Petróleo, entre otros) sin importar su dirección, puede ser alcista o bajista. Por eso el tiempo de madurez es clave en este tipo de estrategias. La pérdida en este tipo de estrategias es limitada, es el valor de las primas. En cambio la ganancia puede ser ilimitada. 
 
-La Figura 3.3 \textcolor{usar label y ref para las figuras} muestra la ganancia de la estrategia de Strangle como función del precio del subyacente, mientras que la Figura 3.4 la muestra para la estrategia de Straddle.
+La Figura~\ref{fig:Strangle} 
+\textcolor{red}{usar label y ref para las figuras} muestra la ganancia de la estrategia de Strangle como función del precio del subyacente, mientras que la Figura~\ref{fig:Straddle} la muestra para la estrategia de Straddle.
 
 \begin{figure}[!tbp]
   \centering
   \begin{minipage}[b]{0.5\textwidth}
     \includegraphics[width=\textwidth]{strangle.png}
     \caption{Long Strangle.}
+    \label{fig:Strangle}
   \end{minipage}
   \hfill
   \begin{minipage}[b]{0.45\textwidth}
     \includegraphics[width=\textwidth]{straddle.png}
     \caption{Long Straddle.}
+    \label{fig:Straddle}
   \end{minipage}
 \end{figure}
 
-\textcolor{red}{Los gráficos de payoff y de ganancia deberían estar explicados en los capítulos anteriores}
+\textcolor{red}{..Los gráficos de payoff y de ganancia deberían estar explicados en los capítulos anteriores}
 
 \subsection{Long Butterfly Spread}
 
 Las claves para aplicar la estrategia son los siguientes:
 
 \begin{itemize}
-	\item Se espera que el valor del subyacente no varíe mucho \textcolor{red}{¿en qué período?}.
+	\item Se espera que el valor del subyacente no varíe mucho hasta su vencimiento. \textcolor{red}{..¿en qué período?}.
 	\item Se busca volatilidad implícita alta al momento de aplicar la estrategia, cuánto más alta mejor.
 	\item Se invierte en opciones cortas, con un tiempo de expiración menor a 60 dias.
 \end{itemize}
 
 La estrategia Long Butterfly Spread puede utilizarse tanto con opciones call, como con opciones put.
 
-En caso que se utilicen opciones call, la estrategia consiste en comprar una opción call con un determinado strike $K_1$, vender dos call con un strike mayor al strike de la opción nombrada anteriormente,$K_2$,  y comprar otra opción call con un strike mayor a todos los anteriores, $K_3$. Esto es, $K_1<K_2<K_3$.
+En caso que se utilicen opciones call, la estrategia consiste en comprar una opción call con un determinado strike $K_1$, vender dos call con un strike mayor al strike de la opción nombrada anteriormente,$K_2$, y comprar otra opción call con un strike mayor a todos los anteriores, $K_3$. Esto es, $K_1<K_2<K_3$.
 
 En caso que nuestra estrategia utilice opciones put, la estrategia consiste en comprar una opción put a un determinado 
 strike, vender dos put con un strike menor al strike de la opción nombrada anteriormente, y comprar otra opción put con un strike menor a todos los anteriores.
 
 En esta estrategia la mayor ganancia se obtiene cuando el precio del subyacente se encuentre próximo al strike del 
-medio(opciones vendidas). Pero al ser la volatilidad alta, el precio del subyacente es muy variable, siendo así esta estrategia riesgosa. Una buena medida es abandonar la estrategia cuando se haya obtenido una buena ganancia, sin esperar que el precio del subyacente llegue al pico, como se observa en la Figura \ref{fig:LongButterflySpread} 3.5.
+medio(opciones vendidas). Pero al ser la volatilidad alta, el precio del subyacente es muy variable, siendo así esta estrategia riesgosa. Una buena medida es abandonar la estrategia cuando se haya obtenido una buena ganancia, sin esperar que el precio del subyacente llegue al pico, como se observa en la Figura~\ref{fig:LongButterflySpread}.
 
-\textcolor{red}{El gráfico muestra un $K_2 = (K_1+K_3)/2$. Sería importante marcar estos valores de primas y strikes en los gráficos}
+\textcolor{red}{..El gráfico muestra un $K_2 = (K_1+K_3)/2$. Sería importante marcar estos valores de primas y strikes en los gráficos}
 
 \begin{figure}[]
   \includegraphics[width=12cm, height=7cm]{butterfly}
