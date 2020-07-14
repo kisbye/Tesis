@@ -17,6 +17,6 @@ En caso que la precisión sea imprescindible, entonces se utilizará el método 
 \vspace{5mm}
 
 Dentro de las posibilidades de continuar con el trabajo tenemos, uso de GPU en la implementación de los
-modelos numéricos propuestos, presentar soluciones para el problema numérico del capítulo 4.
+modelos numéricos propuestos, presentar soluciones para el problema numérico del capítulo 6.
 
 En este trabajo se planteó el cálculo de la volatilidad implícita mediante opciones call europeas, ademas se podrían proponer otros modelos obtener la volatilidad implícita mediante puts europeas. 
