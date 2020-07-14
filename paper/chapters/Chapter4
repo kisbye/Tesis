@@ -1,13 +1,13 @@
 \chapter{Implementaci\'on n\'umerica del m\'etodo de Bisecci\'on y de Brent}
 \label{Bisec-Brent}
 \markboth{}{}
-En esta sección comentaremos detalles de la implementación del método de Bisección y del método Brent para aproximar la 
+En este capítulo comentaremos detalles de la implementación del método de Bisección y del método Brent para aproximar la 
 volatilidad implícita a partir de la fórmula de Black Scholes.
 
 \section{Introducción}
 
 Tanto el método de Bisección como el método de Brent son algoritmos de búsqueda de raíces de funciones, como lo es nuestro problema
-de encontrar el valor de la volatilidad implícita a partir de la fórmula de Black Scholes.
+de encontrar el valor de la volatilidad implícita a partir de la fórmula de Black Scholes~\ref{eq:black}.
 
 Sea $c $ la prima de una opción call europea con madurez $T$ y strike $K$ sobre una acción cuyo precio actual es $S(0)$, siendo $r$ la tasa de interés libre de riesgo. 
 La función a la cual aplicaremos ambos métodos numéricos está dada por la fórmula~\ref{funciong}. %(\ref{funcion_g}):
@@ -19,39 +19,45 @@ g(\hat{\sigma}) = S(0) \,\Phi(d_1(\hat\sigma)) - K \,e^{-rT} \,\Phi(d_2(\hat\sig
 
 donde $d_1$ es la función~\ref{d1eq}, $d_2$ es la función~\ref{d2eq}, $\Phi$ es la distribución normal estándar acumulada~\cite{Acumulada} y c es la prima de una opción call europea.
 
-\textcolor{red}{..donde $d_1$, $d_2$ y $\Phi$ están dadas por las fórmulas \ldots }usamos la notación definida en la Sec.
-\textcolor{red}{..~referencia{falta}.}
+Podemos ver que $g$ es monótona creciente con respecto a $\sigma$. Para esto si definimos
 
+\begin{equation}
+B(\sigma) = S(0)\Phi(d_1(\sigma)) - Ke^{-rT}\Phi(d_2(\sigma))
+\end{equation}
 
-\textcolor{red}{..Todo este párrafo ya fue escrito en la sección 2.1.10. $c$ faltó definir en ese momento. Hay que numerar todas las ecuaciones en 2.1.10 para poder citarlas acá sin repeticiones
-}
+Donde $d_1$ es la función~\ref{d1eq} y $d_2$ es la función~\ref{d2eq}.
 
-%%%%%%%%% \section{g es monótona creciente con respecto a $\sigma$}
-
-Podemos ver que $g$ es monótona creciente con respecto a $\sigma$. Para esto si definimos 
-$B(\sigma) = S(0)\Phi(d_1(\sigma)) - Ke^{-rT}\Phi(d_2(\sigma))$, $d_1$ es la función~\ref{d1eq} y $d_2$ es la función~\ref{d2eq}.
-En la referencia~\cite{Kisbye} se demuestra que la derivada de $B(\sigma)$, 
-$B'(\sigma) = Ke^{-rT}\Phi'(d_2(\sigma))\sqrt{T} > 0$  para todo $ \sigma > 0$.
-
-%%% que es una expresión positiva para todo $ \sigma > 0$.
-
-Luego como $B$ es una función monótona creciente con respecto $\sigma$ se tiene que
+En la referencia~\cite{Kisbye} se demuestra que la derivada de $B(\sigma)$ sobre $\sigma$ es:
+%
+\begin{equation}
+B'(\sigma) = Ke^{-rT}\Phi'(d_2(\sigma))\sqrt{T}
+\label{eq:derivadaB}
+\end{equation}
+%
+la cual es mayor a $0$ para todo $ \sigma > 0$.
+Luego como $B$ es una función monótona creciente con respecto $\sigma$, ademas se tiene que
 %
 \begin{equation}
 g(\sigma) = B(\sigma) - c
 \end{equation}
 %
-tambien lo es, ya que c es constante. 
+por lo tanto g también creciente con respecto a $\sigma$, ya que c es constante. 
 
 \section{Implementación de los métodos numéricos}
+
+En esta sección se implementará el método de bisección y de Brent para el cálculo de la volatilidad implícita utilizando la fórmula de Black Scholes. \textcolor{blue}{En esta sección se denotará 
+ $a_0$ como el extremo inferior del intervalo al cual se le aplicará el método numérico,
+ $b_0$ como el extremo superior del intervalo al cual se le aplicará el método numérico,
+ $a_n$ y $b_n$ como los extremos del intervalo en la \textit{n-ésima} iteración del método numérico,
+ y $\varepsilon$ como la tolerancia del método numérico.}
+
 
 \subsection{Intervalo inicial para el método de bisección y de Brent}
 
 Como mostramos de la sección anterior, $g:(0,\infty) \to {\rm I\!R}$ es una función monótona creciente. Podemos tomar
-$a = \epsilon$, con $\epsilon \to 0$, como sabemos que la volatilidad implícita ($\hat{\sigma}$) es mayor a 0, entonces 
-$a < \hat{\sigma}$ , por lo tanto $g(a) < 0$, ya que $g(\hat{\sigma})=0$. \textcolor{red}{..Esto el lector no lo deduce fácilmente}
+$a_0 = \epsilon$, con $\epsilon$ positivo cercano a $0$, como sabemos que la volatilidad implícita ($\hat{\sigma}$) es mayor a 0 y $g(\hat{\sigma})=0$, entonces entonces $g(a_0) < 0$ ya que $a_0 < \hat{\sigma}$.
 
-Ahora para elegir $b$ utilizaremos el siguiente algoritmo:
+Ahora para elegir $b_0$ utilizaremos el siguiente algoritmo:
 
 \vspace{5mm}
 
@@ -73,20 +79,17 @@ Ahora para elegir $b$ utilizaremos el siguiente algoritmo:
 
 \subsection{Aplicación del Método de Bisección}
 
-%%%%%%%%%%% Sea g la función definida en la sección 4.1.
+%\textcolor{red}{PONER COMO PUSO EL PROFE DE NUMERICO, QUE VAN DECRECIENDO LOS INTERVALOS, SI NO PARECE CONSTANTE LLOS a y b}
 
-Inicializamos el intervalo $[a,b]$ para aplicar el método de bisección, de manera que $a < b$ y $g(a) < 0 < g(b)$.
-Luego aplicamos el algoritmo de bisección~\ref{Abisec} hasta hallar un $\xi$, tal que $g(\xi) = 0$ ó 
-$|b-a|<\varepsilon$. 
-A $\varepsilon$ lo llamaremos tolerancia.
+Inicializamos el intervalo $[a_0,b_0]$ para aplicar el método de bisección, de manera que $a_0 < b_0$ y $g(a_0) < 0 < g(b_0)$. Luego aplicamos el algoritmo de bisección~\ref{Abisec} hasta hallar un $\xi$, tal que $g(\xi) = 0$ ó 
+$|b_n-a_n|<\varepsilon$, con $n > 0$.
 
-\textcolor{red}{Cuando esté corregido el capítulo 2 veré si esto queda claro. Yo creo que uno debe decir que va construyendo intervalos $I_j$ \dots, pero vemos después.}
 
 \section{Aplicación del Método de Brent}
 
 %%%%%%%%%%%%%%% Sea g la función definida en la sección 4.1.
 
-Inicializamos el intervalo $[a,b]$ para aplicar el método de Brent, con $a < b$ y $g(a) < 0 < g(b)$.
-Luego aplicamos el algoritmo de Brent~\ref{Abrent} hasta hallar un $\xi$, tal que $g(\xi) = 0$ ó $|b-a|<\varepsilon$.
-Nuevamente, a $\varepsilon$ lo llamaremos tolerancia.
+Inicializamos el intervalo $[a_0,b_0]$ para aplicar el método de Brent, de manera que $a_0 < b_0$ y $g(a_0) < 0 < g(b_0)$.
+Luego aplicamos el algoritmo de Brent~\ref{Abrent} hasta hallar un $\xi$, tal que $g(\xi) = 0$ ó $|b_n-a_n|<\varepsilon$, con $n > 0$.
+
 

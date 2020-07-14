@@ -1,9 +1,27 @@
 \begin{thebibliography}{1}
 
+\bibitem{Logaritmo}
+Shuaiqiang Liu, Cornelis Oosterlee, and Sander Bohte.
+\newblock Pricing options and computing implied volatilities using neural
+  networks.
+\newblock {\em Risks}, 7(1):16, Feb 2019.
+
+\bibitem{Gencay}
+Ramazan~Gençay, René~Garcia.
+\newblock Pricing and hedging derivative securities with neural networks and a
+  homogeneity hint.
+\newblock {\em Journal of Econometrics}, 94:93--115, Enero 2000.
+
+\bibitem{Hutchinson}
+James M. Hutchinson, Andrew W.~L,~Tomaso Poggio.
+\newblock A Nonparametric Approach to Pricing and Hedging Derivative Securities
+  Via Learning Networks.
+\newblock {\em Journal of Finance}, 49:851--889, Julio 1994.
+
 \bibitem{Kisbye}
 Patricia Kisbye.
 \newblock Modelos matemáticos en finanzas cuantitativas.
-\newblock 2019.
+\newblock FAMAF-UNC, 2019.
 
 \bibitem{ICAP}
 Mark Yallop.
@@ -11,6 +29,11 @@ Mark Yallop.
 \newblock
   \url{https://thehill.com/sites/default/files/ICAP_TheFutureoftheOTCMarkets_0.pdf},
   2008.
+
+\bibitem{FormulaB}
+Fischer Black and Myron Scholes.
+\newblock The pricing of options and corporate liabilities.
+\newblock {\em The Journal of Political Economy}, 81(3):637--654, mayo 1973.
 
 \bibitem{Acumulada}
 Jay~L. Devore.
@@ -101,12 +124,6 @@ Ward~Cheney y~David~Kincaid.
   \newblock
     \url{https://web.archive.org/web/20160806053349/http://www.csee.umbc.edu/~tsimo1/CMSC455/IEEE-754-2008.pdf}.
 
-\bibitem{Gencay}
-Ramazan~Gençay René~Garcia.
-\newblock Pricing and hedging derivative securities with neural networks and a
-  homogeneity hint.
-\newblock {\em Journal of Econometrics}, 94:93--115, Enero 2000.
-
 \bibitem{Activation}
   Función de Activación.
   \newblock
@@ -118,7 +135,7 @@ Ramazan~Gençay René~Garcia.
     \url{https://keras.io/initializers/}
 
 \bibitem{Opti}
-  Optimizadores del Descenso del Gradiente.
+  Optimizadores del Descenso por el Gradiente.
   \newblock
     \url{https://keras.io/optimizers/}
 
@@ -141,12 +158,6 @@ Ramazan~Gençay René~Garcia.
 John~C. Hull.
 \newblock {\em Options, Futures, and Other Derivatives}, páginas 365--367.
 \newblock Pearson Prentice Hall, séptima edición, 2009.
-
-\bibitem{Logaritmo}
-Shuaiqiang Liu, Cornelis Oosterlee, and Sander Bohte.
-\newblock Pricing options and computing implied volatilities using neural
-  networks.
-\newblock {\em Risks}, 7(1):16, Feb 2019.
 
 \bibitem{Brentq}
   Método de Brent.

@@ -15,11 +15,10 @@ en un determinado monto, llamado \textbf{interés}.
 \begin{enumerate}
   \item \textbf{Interés Simple}:
 
-  $V = V_0 (1+r)^t$
+  $V = V_0 (1+r)t$
 
   Donde V representa el valor de un depósito de valor inicial $V_0$ transcurrido
   un tiempo t y r es la tasa de interés correspondiente a la unidad de tiempo utilizada, usualmente el año.
-  \textcolor{red}{..correspondiente a la unidad de tiempo utilizada, usualmente el año.}
 
   \item \textbf{Interés Compuesto}:
 
@@ -64,17 +63,13 @@ tipos de derivados, tales como contratos forward, futuros y opciones.
 
 Los instrumentos financieros se comercializan en el mercado financiero. En la práctica existe
 un mercado formal u organizado y un mercado extrabursátil, denominado también  
-\textit{over the counter market} (mercados OTC) 
-\textcolor{red}{.. over the counter}. En el caso del mercado formal, las negociaciones son multilaterales, es decir,
-existen múltiples agentes que actúan como compradores o vendedores de productos financieros.
+\textit{over the counter market} (mercados OTC) . En el caso del mercado formal, las negociaciones son multilaterales, es decir, existen múltiples agentes que actúan como compradores o vendedores de productos financieros.
 Los instrumentos que se comercializan están estandarizados, y existe una regulación de este tipo
 de mercados para proteger a los inversores de posibles incumplimientos de las contrapartes.
 En el caso del mercado extrabursátil, las negociaciones son bilaterales, es decir, entre dos partes.
 En estos casos los contratos suelen acordarse entre las partes en cuanto a la cantidad y 
 características del subyacente. No existe una regulación formal sino que se basa en un principio de confianza
 entre partes.
-
-\vspace{5mm}
 
 El tamaño del segmento de mercados OTC es varias veces mayor que el de los mercados regulados, especialmente en los contratos de tipos de interés y de divisas. Según un estudio de ICAP\cite{ICAP}, estima que cada día se producen 2 millones de transacciones en los mercados OTC por un nominal de 5 billones de dólares.
 
@@ -101,8 +96,7 @@ Dentro de las opciones vanilla existen dos tipos:
   \item \textbf{Opciones americanas}: son aquellas que pueden ser ejercidas en cualquier momento previo a la madurez.
 \end{itemize} 
 
-En el mercado OTC (
-\textcolor{red}{.. definir acá porque es la primera vez que aparece}) se negocia una variedad mucho mayor de opciones y se denominan en general
+En el mercado OTC se negocia una variedad mucho mayor de opciones y se denominan en general
 \textit{opciones exóticas}~\cite{Kisbye}. Dentro de las \textit{opciones exóticas} se agrupan a todas aquellas opciones que tienen una mayor complejidad en comparación con las opciones vanilla. Algunas opciones exóticas son:
 
  \begin{itemize}
@@ -116,16 +110,14 @@ Otras opciones exóticas son las binarias, bermudas, choice, shout, basket, exch
 
 \vspace{3mm}
 
-\textcolor{red}{.. Opcion Europea no amerita una sección y lo que se dice vale para todo tipo de opción}
-
 En cada contrato se fija entonces un precio de ejercicio o \textbf{strike}, que es el precio pactado al
 cual se comprará o venderá el subyacente, en la fecha de expiración o también llamada \textbf{madurez}
 del contrato. Así, un inversor que negocia una opción adquiere una de las siguientes posiciones en
 el contrato:
 
 \begin{itemize}
-  \item posición long: quien compra la opción, y por lo tanto tiene derecho a ejercerla.
-  \item posición short: quien vende la opción o suscriptor, y por lo tanto contrae una obligación.
+  \item \textbf{posición long}: quien compra la opción, y por lo tanto tiene derecho a ejercerla.
+  \item \textbf{posición short}: quien vende la opción o suscriptor, y por lo tanto contrae una obligación.
 \end{itemize}
 
 \subsection{Payoff y Ganancia}
@@ -146,7 +138,7 @@ El beneficio o ganancia real del inversor incluye además el costo de la prima
 
 \centerline{Payoff $\pm$ prima}
 
-donde $\pm$ dependerá de la posición long $(-)$ o la posición short $(+)$.~\ref{kisbye}
+donde $\pm$ dependerá de la posición long $(-)$ o la posición short $(+)$~\cite{Kisbye}.
 
 \begin{table}[h!]
 \begin{center}
@@ -166,12 +158,14 @@ Short en una Put & $-$ máx$(K - S(T), 0) = $mín$(S(T) - K, 0))$\\
 \end{table}
 
 \begin{figure}[H]
+  \centering
   \includegraphics[width=16cm, height=5cm]{payofflong}
   \caption{Payoff de posiciones long en una call y en una put con strike K y madurez T.}
   \label{longpayoff}
 \end{figure}
 
 \begin{figure}[H]
+  \centering
   \includegraphics[width=16cm, height=5cm]{payoffshort}
   \caption{Payoff de posiciones short en una call y en una put con strike K y madurez T.}
   \label{shortpayoff}
@@ -207,7 +201,7 @@ Short en una Put & $-$ máx$(K - S(T), 0) = $mín$(S(T) - K, 0))$\\
 
 \subsection{Estrategias con opciones}
 
-Las estrategias son mecanismos que utilizan los inversionistas para obtener ganancia, o cubrirse de posibles casos adversos. A la convinación de diferentes opciones y activos se las llama \textbf{portfolio}.
+Las estrategias son mecanismos que utilizan los inversionistas para obtener ganancia, o cubrirse de posibles casos adversos. A la combinación de diferentes opciones y activos se las llama \textbf{portfolio}.
 
 Un \textbf{portfolio} o cartera, es un conjunto de activos, derivados e inversiones bancarias que puede
 tener un inversor. El valor de este portfolio es la suma de los valores de sus componentes, con un
@@ -234,6 +228,7 @@ Notemos que el payoff es no negativo, y su valor es positivo si $S(T)$ es mayor 
 
 
 \begin{figure}[H]
+  \centering
   \includegraphics[width=10cm, height=5cm]{bullspread}
   \caption{Diagrama de ganancia del bull spread con calls}
   \label{fig:bullspread}
@@ -258,24 +253,16 @@ Payoff(bull spread con calls) $=$ máx\{$S(T ) - K, 0$\} $+$ máx\{$K - S(T), 0$
 La Figura~\ref{fig:straddle} muestra la ganancia del straddle. Notemos que el costo inicial está dado por $c + p$.
 
 \begin{figure}[H]
+  \centering
   \includegraphics[width=10cm, height=5cm]{straddleejem}
   \caption{Diagrama de ganancia para un straddle}
   \label{fig:straddle}
 \end{figure}
 
-\textcolor{red}{Patricia: Yo diría de hacer una sección que se llame "Modelo de Black Scholes", allí presentar la hipótesis de este modelo:
-  \begin{itemize}
-    \item no arbitraje (que habría que definirlo)
-    \item \textcolor{blue}{completo (definirlo)}
-    \item precio de un activo que sigue un MGB
-    \item Fórmula de BS que se obtiene a partir de las hipótesis anteriores
-  \end{itemize}
-}
 
 \subsection{Modelo de Black Scholes}
 
-
-Esta fórmula comienza con el diseño de un modelo, denominado Modelo de Black-Scholes, en el cual describen el comportamiento de los precios de las acciones, bajo ciertas hipótesis de mercado~\ref{Hipotesis}. A partir de esto, logran derivar una ecuación diferencial, la ecuación de Black-Scholes que es satisfecha por las opciones call y put europeas, y cuya resolución permite dar el valor exacto
+Esta fórmula comienza con el diseño de un modelo, denominado Modelo de Black-Scholes, en el cual describen el comportamiento de los precios de las acciones, bajo ciertas hipótesis de mercado. A partir de esto, logran derivar una ecuación diferencial, la ecuación de Black-Scholes que es satisfecha por las opciones call y put europeas, y cuya resolución permite dar el valor exacto
 de la prima de la opción en un escenario de mercado sin arbitraje. La solución de esta ecuación
 diferencial es conocida como la Fórmula de Black-Scholes.
 
@@ -283,13 +270,14 @@ Los supuestos hechos por Black y Scholes cuando derivaron su fórmula de valorac
 \begin{itemize}
     \item no arbitraje: No es posible invertir en un portfolio con costo cero y que exista una probabilidad positiva de
           ganancia futura y una probabilidad nula de pérdida.
-    \item \textcolor{blue}{completo (definirlo) Preguntar}
+    \item completo (Todo derivado puede ser replicable con un portfolio compuesto por el subyacente y la cuenta bancaria.)
     \item precio de un activo que sigue un Movimiento Geométrico Browniano~\cite{Kisbye}.
     \label{Hipotesis}
   \end{itemize}
 
 
 \subsection{Fórmula de Valoración de una call europea con Black-Scholes}
+\label{sec:FormulaB}
 
 La hipótesis del modelo de Black Scholes supone que el activo S(t) se comporta de acuerdo a
 un movimiento geométrico browniano, con tendencia $\mu$ y volatilidad $\sigma$. Sin embargo se demuestra
@@ -297,11 +285,8 @@ que, bajo una hipótesis de no arbitrage es posible realizar un cambio de medida
 sigue un movimiento geométrico browniano con tendencia r y volatilidad $\sigma$, siendo r la tasa libre
 de riesgo con capitalización continua. Esta medida de probabilidad también se \textbf{llama medida de
 probabilidad neutral al riesgo}
-\textcolor{red}{..falta breve introduccion y cita al trabajo original?}
 
-\textcolor{red}{..mejor no usar lenguaje tan formal como ``sea'', yo pondría ``Consideremos que c es ...''}
- 
-Consideremos que $c$ es la prima de una opción call europea, con strike K y madurez T , sobre un activo
+Consideremos que $c$ es la prima de una opción call europea, con strike K y madurez T, sobre un activo
 cuyo precio sigue un movimiento geométrico browniano con tendencia $r - \sigma^2/2$ y
 volatilidad $\sigma$ bajo las probabilidades de riesgo neutral. Sea r la tasa libre de riesgo.
 Entonces, bajo una hipótesis de no arbitraje se cumple que:
@@ -319,7 +304,7 @@ donde:
 $\Phi$ es la distribución normal estándar acumulada~\cite{Acumulada}
 
 \begin{equation}
-d_1 = \displaystyle\frac{Log \left(\displaystyle\frac{S(0)}{K}\right)+ \left( r + \displaystyle\frac{\sigma^2}{2}\right)T}{\sigma\sqrt{T}}
+d_1 = \displaystyle\frac{\ln \left(\displaystyle\frac{S(0)}{K}\right)+ \left( r + \displaystyle\frac{\sigma^2}{2}\right)T}{\sigma\sqrt{T}}
 \label{d1eq}
 \end{equation}
 \begin{equation}
@@ -327,13 +312,12 @@ d_2 = d_1 - \sigma\sqrt{T}
 \label{d2eq}
 \end{equation}
 
-\textcolor{red}{..itemizar, mejor redactar: donde $S(0)$ es el precio ..., $r$ la tasa ..., ... y $sigma$...}
 
 con: $S(0)$ es precio inicial del activo, r la tasa libre de riesgo, K el strike, T la madurez de la opción y
-$\sigma$ la volatilidad de la opción.
+$\sigma$ la volatilidad de la opción~\cite{FormulaB}.
 
 Para simplificar la notación vamos a utilizar $S_t$ en vez de $S(t)$, $\forall t > 0$.
-\textcolor{red}{.. Patricia: yo usaría $S_t$, $t>0$. Ya sé que es lo mismo, pero el n suena a discreto}
+
 
 \subsection{Volatilidad}
 
@@ -343,36 +327,30 @@ tal como se dan los cambios en el valor de S. Black Scholes asume $\sigma$
 constante, esto implica una previa estimación estadística de $\sigma$, por ejemplo
 medir el comportamiento de los precios en los últimos meses y usar estimadores de varianza(volatilidad Histórica).
 
-Como vimos en la sección 2.1.10 la fórmula de Black Scholes para una opción call depende de distintos parámetros,
-el precio inicial del activo, la tasa libre de riesgo, el stike, la madurez de la opción y su volatilidad. Pero esta 
-ultima no te la brinda el mercado.
+Como vimos en la sección~\ref{sec:FormulaB} la fórmula de Black Scholes para una opción call depende de distintos parámetros,el precio inicial del activo, la tasa libre de riesgo, el stike, la madurez de la opción y su volatilidad. Pero esta ultima no te la brinda el mercado.
 
 \subsubsection{Volatilidad Histórica}
 
-La volatilidad histórica como su nombre lo indica,
-\textcolor{red}{..(Patricia: no usar primera persona singular. De usar primera persona se usa el plural, pero viendo el resto del escrito diría que uses tercera persona)}
- muestra el riesgo histórico de un período de tiempo de hoy hacia atrás. Se calcula midiendo las variaciones que han tenido los rendimiento del activo en cierto período de tiempo, que puede ser 20 días, 50 días o 200 días o el que cada analista considere mejor y esta volatilidad por lo regular se presenta anualizada. La metodología mas común para calcularla es calculando las desviaciones estándar de los rendimientos del activo. La fórmula~\ref{histo} muestra el cálculo de la volatilidad histórica.
+La volatilidad histórica como su nombre lo indica, muestra el riesgo histórico de un período de tiempo de hoy hacia atrás. Se calcula midiendo las variaciones que han tenido los rendimiento del activo en cierto período de tiempo, que puede ser 20 días, 50 días o 200 días o el que cada analista considere mejor y esta volatilidad por lo regular se presenta anualizada. La metodología mas común para calcularla es calculando las desviaciones estándar de los rendimientos del activo. La fórmula~\ref{histo} muestra el cálculo de la volatilidad histórica.
 
 \begin{eqnarray}
-x_t = ln \left(\displaystyle\frac{S_t}{S_{t-1}}\right)
+x_t = \ln \left(\displaystyle\frac{S_t}{S_{t-1}}\right)
 \\
 \overline{X} = \displaystyle\frac{1}{n}\sum_{t=1}^{n} x_t
 \end{eqnarray}
 
 \begin{equation}
 \label{histo}
-HV = \sqrt{n*\displaystyle\frac{1}{n-1}\sum_{t-1}{n} (x_t -\overline{X})^2} 
+\mbox{Volatilidad Historica} = \sqrt{\displaystyle\frac{1}{n-1}\sum_{t=1}^{n} (x_t -\overline{X})^2} 
 \end{equation}
 
-Donde $S_t$ es el precio del activo en el dia t, n la cantidad de dias sobre la cual calcularemos la volatilidad historica, en el caso de la volatilidad histórica anualizada $n=252$ ya que es la cantidad de dias comerciales al año.
+Donde $S_t$ es el precio del activo en el día t, n la cantidad de días sobre la cual calcularemos la volatilidad histórica, en el caso de la volatilidad histórica anualizada $n=252$ ya que es la cantidad de días comerciales al año.
 
-\textcolor{red}{..Patricia: Escribiría una fórmula acá, para que además se entienda lo de anualizada}
 
 \subsubsection{Volatilidad Implícita}
 
 
 La volatilidad implícita es un factor clave en el trading de opciones que refleja las expectativas respecto al desplazamiento futuro del precio de un activo subyacente. Alta volatilidad implícita indica que los participantes del mercado esperan un movimiento mayor en el futuro y, por el contrario, baja volatilidad apunta hacia un desplazamiento posiblemente menor.
-\textcolor{red}{..Patricia: Revisar redacción de este párrafo}
 
  Como vimos en la sección 2.1.10 para valorar una call europea necesitamos conocer, el precio inicial 
  del subyacente, la tasa libre de riesgo, el strike, el tiempo de madurez de la opción y la volatilidad del
@@ -392,52 +370,37 @@ del strike y de la madurez.
 Una superficie de volatilidad es una representación tridimensional de las volatilidades
 implícitas de un subyacente en relación con los diferentes precios de ejercicio y las
 diferentes fechas de madurez.
-\textcolor{red}{..Patricia: madurez, o aclarar que se usará madurez o vencimiento}
-
 La superficie de volatilidad combina las sonrisas de volatilidad~\cite{Smile} 
-\textcolor{red}{.. Patricia: (falta definir)}
- con la estructura temporal de la 
-volatilidad para tabular las volatilidades adecuadas. De este modo poder valorar una opción con 
-cualquier precio de ejercicio y fecha de vencimiento. Un ejemplo de superficie de volatilidad que puede ser usada para opciones sobre divisas como se muestra en el Cuadro~\ref{surfi}. En este caso asumimos que la sonrisa es medida como la relación entre la volatilidad y 
-$\displaystyle\frac{K}{S_0}$.
+ con la estructura temporal de la volatilidad para tabular las volatilidades adecuadas. De este modo poder valorar una opción con cualquier precio de ejercicio y fecha de vencimiento. Un ejemplo de superficie de volatilidad que puede ser usada para opciones sobre divisas como se muestra en el Cuadro~\ref{surfi}. En este caso asumimos que la sonrisa es medida como la relación entre la volatilidad y $\displaystyle\frac{K}{S_0}$.
 
 Una dimensión de la tabla es $\displaystyle\frac{K}{S_0}$ (segunda fila) y la otra es el tiempo de madurez (primera columna). Los valores del cuadro son las volatilidades implícitas calculadas a partir de la fórmula de Black Scholes.
-\textcolor{red}{..Patricia: ...calculadas a partir de la fórmula de Black Scholes. (Black Scholes no es un método)}.
-Y las volatilidades que no se encuentren en la tabla son calculadas mediante interpolación, por lo general se utiliza Spline cúbicos.\cite{Surface} 
-\textcolor{red}{..Patricia: por ejemplo splines cúbicos. (no sé si Spline a secas queda claro qué es)}
+Y las volatilidades que no se encuentren en la tabla son calculadas mediante interpolación, por lo general se utiliza Spline cúbicos~\cite{Surface}.
+
 
 \begin{table}[]
 \caption{Superficie de volatilidad}
 \label{surfi}
 \begin{center}
-\begin{tabular}{llllll}
+\begin{tabular}{l|lllll}
 
 
              & \multicolumn{5}{c}{$K/S_0$}               \\ \cline{2-6}
 
             & 0.9  & 0.95 & 1.00 & 1.05 & 1.10 \\ \cline{2-6}
-            1 mes   & 14.2 & 13.0 & 12.0 & 13.1 & 14.5 \\ \cline{2-6}
-            3 meses & 14.0 & 13.0 & 12.0 & 13.1 & 14.2 \\ \cline{2-6}
-            6 meses & 14.1 & 13.3 & 12.5 & 13.4 & 14.3 \\ \cline{2-6}
-            1 año   & 14.7 & 14.0 & 13.5 & 14.0 & 15.1 \\ \cline{2-6}
-            2 años  & 15.0 & 14.4 & 14.0 & 14.5 & 15.1 \\ \cline{2-6}
+            1 mes   & 14.2 & 13.0 & 12.0 & 13.1 & 14.5 \\ 
+            3 meses & 14.0 & 13.0 & 12.0 & 13.1 & 14.2 \\ 
+            6 meses & 14.1 & 13.3 & 12.5 & 13.4 & 14.3 \\ 
+            1 año   & 14.7 & 14.0 & 13.5 & 14.0 & 15.1 \\ 
+            2 años  & 15.0 & 14.4 & 14.0 & 14.5 & 15.1 \\ 
             5 años  & 14.8 & 14.6 & 14.4 & 14.7 & 15.0 \\ 
 \end{tabular}
 \end{center}
 \end{table}
 
-\textcolor{blue}{Patricia: le falta un caption a esta tabla, y también decir que la primera columna es la madurez T. El caption diría que la tabla muestra la volatilidad sigma en la fórmula de BS de una call europea, con strike K sobre un activo con precio inicial $S_0$, y madurez T, bajo la hipótesis de no arbitraje. No sé quién es r acá}
-
-
-\textcolor{red}{..Patricia: de los valores intermedios. Esto como una sección suelta no vale la pena. Yo mencionaría el teorema en el momento que se utilice, es bien básico}
-
-
 
 \section{Método de Bisección}
 
-El método de bisección se basa en el teorema de valor intermedio \textcolor{red}{..teorema de valor intermedio} para f funcion continua~\cite{Intermedio}. Si f es continua en el intervalo [a,b] y f(a)f(b)$< 0$,
-\textcolor{red}{..Patricia: usar modo matemático para f, (a,b), [a,b], , y no escribir f(a)*f(b), $sino f(a)\cdot f(b)$, o directamente f(a)f(b)}
- entonces f tiene al menos una raiz en (a,b).
+El método de bisección se basa en el teorema de valor intermedio para f función continua~\cite{Intermedio}. Si f es continua en el intervalo [a,b] y f(a)f(b)$< 0$, entonces f tiene al menos una raíz en (a,b).
 
 Si el algoritmo de bisección se aplica a una función continua f en un intervalo [a, b], donde
 $f(a)f(b) < 0$, entonces, después de n pasos se habrá calculado una raíz aproximada con un error
@@ -445,23 +408,20 @@ a lo más de $\displaystyle\frac{(b - a)}{2^{n+1}}$ \cite{Bisec}.
 
 \vspace{3mm}
 
-El Algoritmo~\ref{Abisec} aplica el metodo de bisección.
+El Algoritmo~\ref{Abisec} detalla el método de bisección.
 
 \section{Método de Brent}
 
 El método de Brent es un algoritmo de búsqueda de raíces que combina el método de bisección, el método secante y la interpolación cuadrática inversa. Este método converge siempre que los valores de la función sean computables dentro de una región dada que contiene una raíz.
 
 A diferencia del método de Bisección, el método de Brent converge haciendo menos iteraciones sin perder la robustez del método de bisección ya que
-para ciertos casos utiliza el método de bisección, sin caer en los problemas de divergencia que tienen el metodo de interpolación cuadrática inversa, o del
-método de la secante.
+para ciertos casos utiliza el método de bisección, sin caer en los problemas de divergencia que tienen el método de interpolación cuadrática inversa, o del método de la secante.
 
-\subsubsection{Método de la Secante:}
-
-\textcolor{red}{..Patricia: Escribir una breve introducción acá, no empezar directamente con una fórmula}
+\subsubsection{Método de la Secante}
 
 
 En el método de la secante imita el de Newton~\ref{Newten} pero evita el cálculo de derivadas. Entonces se reemplaza
- $f'(x_n)$ de la fórmula de Newton por una aproximación de su derivada~\ref{derivate}.~\cite{Secante} \textcolor{red}{..Patricia: revisar redacción}
+ $f'(x_n)$ de la fórmula de Newton por una aproximación de su derivada~\ref{derivate}~\cite{Secante}.
 
 \begin{equation}
 \label{Newten}
@@ -474,19 +434,18 @@ x_{n+1} = x_n - \displaystyle\frac{f(x_n)}{f'(x_n)}
 f'(x) = \lim_{h \to 0} \displaystyle\frac{f(x+h)-f(x)}{h} \approx \displaystyle\frac{f(x+h)-f(x)}{h}
 \end{equation}
 
-Obteniendo como resultado:
+Luego el método de la secante esta dada por:
 
 \begin{equation}
 x_{n+1} = x_n - f(x_{n})\displaystyle\frac{x_{n}x_{n-1}}{f(x_{n})f(x_{n-1})}
 \end{equation}
 
 
-\subsubsection{interpolación cuadrática inversa:}
+\subsubsection{interpolación cuadrática inversa}
 
 
-Es un metodo iterativo, que aplica la fórmula de interpolación de Lagrange para hacer una interpolación cuadrática en el inverso de f.
+Es un método iterativo, que aplica la fórmula de interpolación de Lagrange para hacer una interpolación cuadrática en el inverso de f.
 Para hallar la raíz de la ecuación se implementa el método iterativo~\cite{Brent}:
-\textcolor{red}{.. la raíz de la ecuación}
  
 
 $$
@@ -499,7 +458,7 @@ $$
 
 %\vspace{5mm}
 
-Donde $f_k=f(x_k)$. El algoritmo~\ref{Abrent} aplica el metodo de Brent.
+Donde $f_k=f(x_k)$. El algoritmo~\ref{Abrent} detalla el método de Brent.
 
 
 %\vspace{5mm}
@@ -586,11 +545,7 @@ Donde $f_k=f(x_k)$. El algoritmo~\ref{Abrent} aplica el metodo de Brent.
 
 \section{Redes neuronales}
 
-\textcolor{blue}{Patricia: Introducir más el tema acá.  El lector no tiene por qué saber qué es una red neuronal}
-
-\textcolor{red}{..La red neuronal se entrena para estimar}
-
-La red neuronal se entrena para estimar los parámetros óptimos para una función $f(x,W,b)$, a partir de un conjunto de entrenamiento
+Una Red Neuronal Artificial es un modelo matemático inspirado en el comportamiento biológico de las neuronas y en la estructura del cerebro, y que es utilizada para resolver un amplio rango de problemas. La red neuronal se entrena para estimar los parámetros óptimos ($W$) para una función $f(x,W,b)$, a partir de un conjunto de entrenamiento 
 $\{(x_1,y_1),...,(x_n,y_n)\}$, tal que $f(x_i,W,b) \approx y_i$, para $i = 1,...,n$.
 
 %%%% Donde $x = [x_1,...,x_n]$, $y=[y_1,...,y_n]$
@@ -600,15 +555,14 @@ $\{(x_1,y_1),...,(x_n,y_n)\}$, tal que $f(x_i,W,b) \approx y_i$, para $i = 1,...
 La unidad básica de una red neuronal son los perceptrones (o neuronas). Un perceptrón toma un vector de entradas de valor real, calcula la combinación lineal
 de estas entradas con respecto a los pesos, luego genera una salida, dependiendo de la función de activación. Más precisamente:
 
-\vspace{5mm}
 
 $o(x_1,...,x_n) = \psi(w_0+x_1w_1+...+x_nw_n)$
 
-\vspace{5mm}
 
 donde cada $w_i$ es una constante de valor real, o peso, y $\psi$ es la función de activación \cite{Perceptron}, como muestra la figura~\ref{perceptronl}:
 
 \begin{figure}[H]
+  \centering
   \includegraphics[width=12cm, height=5cm]{perceptron}
   \caption{Esquema del perceptrón}
   \label{perceptronl}
@@ -621,14 +575,12 @@ Este tipo de algoritmo recibe el nombre de ``red'' porque se construye componien
 La arquitectura de este tipo de modelos se puede dividir en
 tres partes principales, denominadas capas, tal como se muestra en
 la Figura~\ref{Feed-Forward}. 
-\textcolor{red}{..La característica distintiva de este tipo de red es que no existen conecciones entre neuronas de una misma capa.}
-La característica distintiva de este tipo de red es que no existen conecciones entre neuronas de una misma capa.
-Las capas a su vez etán completamente conectadas (o fully connected) debido a que cada neurona de
+La característica distintiva de este tipo de red es que no existen conexiones entre neuronas de una misma capa.
+Las capas a su vez están completamente conectadas (o fully connected) debido a que cada neurona de
 una capa se conecta con todas las neuronas en la capa siguiente.
 
 En la Figura~\ref{Feed-Forward} podemos observar las distintas capas que componen una red neuronal. En primer lugar tenemos la capa de entrada, donde se define cuántos valores de entrada tomará nuestro modelo, estos serán luego enviados a la primer
 capa oculta. Después de esto puede venir una o más capas ocultas, seguidas de una capa de salida que genera 
-\textcolor{red}{..que genera} 
 una aproximación del resultado deseado, por ende,
 si una red neuronal Feed-Forward tiene N capas, entonces tiene N-2 capas ocultas.
 Cada unidad (o input) alimenta solo las unidades de la siguiente capa. Las unidades en intermedio
@@ -638,6 +590,7 @@ datos, tanto de entrada como de entrada como de salida~\cite{Feed}.
 
 
 \begin{figure}[H]
+  \centering
   \includegraphics[width=12cm, height=5cm]{feedforward}
   \caption{Feed-Forward}
   \label{Feed-Forward}
@@ -649,8 +602,8 @@ datos, tanto de entrada como de entrada como de salida~\cite{Feed}.
 
 
 Como hemos mencionado anteriormente el objetivo de una red neuronal es estimar los parámetros óptimos para una función 
-$f(x,W,b)$. Una forma de estimar esos parámetros es reducir el error medido por una función de costo
-\textcolor{red}{..medido por una función de costo:}
+$f(x,W,b)$. Una forma de estimar esos parámetros es reducir el error medido por una función de costo.
+
 
 \begin{equation}
 J(x,W,b,Y) = \displaystyle\frac{1}{n}\sum\limits_{i=1}^{n}(f(x_i,W,b) - y_i)^2
@@ -659,15 +612,14 @@ J(x,W,b,Y) = \displaystyle\frac{1}{n}\sum\limits_{i=1}^{n}(f(x_i,W,b) - y_i)^2
 
 \vspace{5mm}
 
-Para reducir dicho error se busca W tal que minimize la funcion $J(x,W,b,Y)$, se puede utilizar el descenso del gradiente.
+Para reducir dicho error se busca W tal que minimice la función $J(x,W,b,Y)$, se puede utilizar el descenso por el gradiente.
 
 Sea $w = [W,b]$, (para simplificar la notación). El gradiente de $J$ en $w$, denotado como $\nabla J(w)$, es el vector de derivadas parciales de $J$, es decir,
  $\nabla J(w) = \left( \frac{\partial J(w)}{\partial w_1}, \frac{\partial J(w)}{\partial w_2}, ..., \frac{\partial J(w)}{\partial w_n} \right)$
 
- El descenso del gradiente es un algoritmo iterativo, se comienza 
- \textcolor{red}{..se comienza} con valor inicial de $w^0$ (por ejemplo $w^0 = [0, 0, ..., 0]$) y entonces en
+ El descenso por el gradiente es un algoritmo iterativo, se comienza con valor inicial de $w^0$ (por ejemplo $w^0 = [0, 0, ..., 0]$) y entonces en
 cada iteración damos un paso en la dirección negativa del gradiente en el punto actual. Esto es, $w^{t+1} = w^t - \eta\nabla J(w^t)$
-, donde $\eta > 0$, conocido como el learning rate, es el encargado de decidir el tamaño del paso que damos.
+, donde $\eta > 0$, conocido como la tasa de aprendizaje, es el encargado de decidir el tamaño del paso que damos.
 Ya que $\nabla J(x,w^t,Y,b) > 0$ cuando J es creciente en $w^t$, y $\nabla J(x,w^t,Y,b) < 0$ cuando J es decreciente en $w^t$ 
 (como muestra la imagen 2.4), se obtiene 
 $J(x,w^{t+1},b,Y) \leq J(x,w^t,b,Y)$, siempre y cuando $\eta$ no sea muy grande(Observar Figura~\ref{Desgrad}).
@@ -696,63 +648,60 @@ En Algoritmo~\ref{Agrad} aplica el método del descenso por el gradiente.
  t := t+1\;
  }
  return\;
- \caption{Descenso por el gradiente}
+ \caption{Representación esquemática del descenso por el gradiente}
  \label{Agrad}
 \end{algorithm}
 
 \begin{figure}
+  \centering
   \includegraphics[width=10cm, height=6cm]{funcion_costo}
   \caption{Representación esquemática del descenso por el gradiente}
   \label{Desgrad}
 \end{figure}
-\textcolor{red}{..Representación esquemática del descenso por el gradiente}
+
 
 
 \subsection{Funciones de Activación}
 
-\textcolor{red}{..Esta sección cita la siguiete y no se entiende. Mejor }
 
 La función de activación en las redes neuronales son las encargadas de enviar señales al siguiente nivel
-o siguiente capa. Es crucial elegir la función de activacion correcta para no caer en el \textit{problema de desvanecimiento de gradiente}.
+o siguiente capa. Es crucial elegir la función de activación correcta para no caer en el \textit{problema de desvanecimiento de gradiente}.
 
-Otra importante caractirística que debe tener la función de activación es ser diferenciable. Ya que al aplicar el
-algoritmo del \textit{descenso del gradiente}, cuando se propaga para hacia atras, calcula los gradientes de error
-con respecto a los pesos, para calcular los nuevos pesos acordemente. \cite{ActivationL}
+Otra importante característica que debe tener la función de activación es ser diferenciable. Ya que al aplicar el
+algoritmo del \textit{descenso por el gradiente}, cuando se propaga para hacia atrás, calcula los gradientes de error
+con respecto a los pesos, para calcular los nuevos pesos acordemente~\cite{ActivationL}.
 
-Las fórmulas~\ref{Relu},~\ref{Tahn},~\ref{Elu} muestra las funciones de activación que vamos a utilizar, en nuestro caso el $\alpha$ de la Elu es 1. 
+Las fórmulas~\ref{Relu},~\ref{Tanh},~\ref{Elu} muestra las funciones de activación que vamos a utilizar, en nuestro caso el $\alpha$ de la Elu es 1. 
 
 \begin{eqnarray}
-ReLu(z) = max(z,0) 
+ReLu(z) = \max(z,0) 
 \label{Relu} 
 \\
-Tahn(z) = \displaystyle\frac{e^z - e^-z}{e^z + e^-z} 
-\label{Tahn} 
+\tanh(z) = \displaystyle\frac{e^z - e^{-z}}{e^z + e^{-z}} %latex fuction buscar
+\label{Tanh} 
 \\
 Elu(z)= \begin{cases}
-          \alpha(e^z -1) \qquad z < 0\\
-          z \qquad \qquad \quad \enskip  z > 0
+          \alpha(e^{z -1}) & z < 0\\
+          z  &   z \ge 0
         \end{cases} 
 \label{Elu}
 \end{eqnarray}
 
 
-\textcolor{red}{..Esto no correspponde como figura. Pasar las ecuaciones en latex y graficar esquemáticamente las funciones en una figura comparativa}
+\subsection{Tasa de Aprendizaje}
 
-\subsection{Learning Rate}
-
-El learning rate determina el tamaño del paso en cada iteración mientras se mueve hacia un mínimo de una función de error. Un learning rate grande conduce rápidamente al un mínimo local, pero con riesgo de diverger. En cambio un learning rate pequeño no diverge pero necesita muchas iteraciones para llegar al mínimo local (Figura~\ref{lratef}). Comúnmente se utiliza un learning rate grande y se lo va decrementando por cada época (es cuando un conjunto de datos completo pasa a travez de la red hacia adelante y hacia atras una vez)
-\textcolor{red}{..falta definir}
+La tasa de aprendizaje determina el tamaño del paso en cada iteración mientras se mueve hacia un mínimo de una función de error. Una tasa de aprendizaje grande conduce rápidamente al un mínimo local, pero con riesgo de divergir. En cambio una tasa de aprendizaje pequeño no diverge pero necesita muchas iteraciones para llegar al mínimo local (Figura~\ref{lratef}). Comúnmente se utiliza una tasa de aprendizaje grande y se lo va decrementando por cada época (es cuando un conjunto de datos completo pasa a través de la red hacia adelante y hacia atrás una vez)
  hasta encontrar un buen resultado.
 
 \begin{figure}
+  \centering
   \includegraphics[width=15cm, height=6cm]{learning_rate}
-  \caption{Efecto de la tasa de aprendisaje sobre el entrenamiento}
+  \caption{Efecto de la tasa de aprendizaje sobre el entrenamiento}
   \label{lratef}
 \end{figure}
 
-\textcolor{red}{..Efecto de la tasa de aprendisaje sobre el entrenamiento}
 
-\subsubsection{Algoritmos de decrecimiento del Learning Rate:}
+\subsubsection{Algoritmos de decrecimiento de la tasa de aprendizaje}
 
 \textbf{Time-Based Decay}: $ base\_lr\displaystyle\frac{1}{1+decay*epoch}$ \cite{Decay}
 
@@ -766,22 +715,21 @@ El learning rate determina el tamaño del paso en cada iteración mientras se mu
 
 \vspace{5mm}
 
-Donde epoch representa la época en cual la red se encuentra, base\_lr es el valor inicial del learning rate. Con decay
-y epoch\_drop como variables. 
-\textcolor{red}{..Falta definir varias cantidades}
+Donde epoch representa la época en cual la red se encuentra, base\_lr es el valor inicial de la tasa de aprendizaje, decay es el coeficiente de decrecimiento de la tasa de aprendizaje y epoch\_drop cada cuantas épocas se decrece la tasa de aprendizaje (Solo en el Step Decay).
 
-\subsubsection{Cyclical Learning Rate:}
 
-En este caso el learning rate varía entre un mínimo y máximo, creciendo y decreciendo como muestra la Figura~\ref{Cyclicallr}.
-Para obtener dicho máximo y mínimo utilizaremos un método similiar al de Smith \cite{Smith} para determinar el learning rate. 
-A diferencia del método de Smith, iremos subiendo el learning rate exponencialmente por cada iteracion de la red.
-\textcolor{red}{..falta definir}.
-Empezaremos con un learning rate de $10^{-10}$ hasta llegar a 1, comparando la tasa de error contra el learning rate.
+\subsubsection{Cyclical Learning Rate}
+
+En este caso la tasa de aprendizaje varía entre un mínimo y máximo, creciendo y decreciendo como muestra la Figura~\ref{Cyclicallr}.
+Para obtener dicho máximo y mínimo utilizaremos un método similar al de Smith \cite{Smith}. 
+A diferencia del método de Smith, iremos subiendo la tasa de aprendizaje exponencialmente por cada iteración de la red.
+Empezaremos con una tasa de aprendizaje de $10^{-10}$ hasta llegar a 1, comparando la tasa de error contra la tasa de aprendizaje.
 
 
 \begin{figure}
+  \centering
   \includegraphics[width=12cm, height=4cm]{cyclical_lr.png}
-  \caption{Cycical Learnig Rate}
+  \caption{Cyclical Learning Rate}
   \label{Cyclicallr}
 \end{figure}
 

@@ -4,7 +4,7 @@
 
 
 En este capítulo vamos a analizar la efectividad de los modelos propuestos.
-El experimiento se realizó en CPU(Intel(R) Core(TM) i5-8265U CPU @ 1.60GHz)
+El experimento se realizó en CPU(Intel(R) Core(TM) i5-8265U CPU @ 1.60GHz)
  
 \section{Primera Red}
 \label{PrimeraRed}
@@ -51,8 +51,8 @@ Una vez entrenada la red, en el Cuadro 6.2 y en las Figuras 6.1 y 6.2 se pueden 
 \begin{tabular}{|l|l|l|l|l|}
 \hline
  & ECM & EAM  &  EPAM & $R^2$  \\ \hline
-Muestra Amplia  & $3.21e(-4)$ & $6.09e(-3)$ & $9.30$ & 0.996031  \\ \hline
-Muestra Estrecha & $1.47e(-4)$ &  $4.07e(-3)$ & $5.46$ & 0.997714  \\ \hline
+Muestra Amplia  & $3.21 \times 10^{-4}$ & $6.09 \times 10^{-3}$ & $9.30$ & 0.996031  \\ \hline
+Muestra Estrecha & $1.47 \times 10^{-4}$ &  $4.07 \times 10^{-3}$ & $5.46$ & 0.997714  \\ \hline
   
 \end{tabular}
 \end{center}
@@ -61,11 +61,11 @@ Muestra Estrecha & $1.47e(-4)$ &  $4.07e(-3)$ & $5.46$ & 0.997714  \\ \hline
 
 \section{Optimización}
 
-Ya tenemos los hiperparámetros óptimos del capítulo anterior, entonces vamos a definir la muestra de entrenamiento, validación y test. Crearemos 2 muestras, una amplia y una estrecha. A diferencia de la muestra de la sección anterior, en esta se va a modificar utilizando la ecuación 5.1 del cápitulo anterior. En el cuadro 6.3 se define el ambiente de la muestra, y para generar las muestras se usa el algoritmo 5.1.
+Ya tenemos los hiperparámetros óptimos del capítulo anterior, entonces vamos a definir la muestra de entrenamiento, validación y test. Crearemos 2 muestras, una amplia y una estrecha. A diferencia de la muestra de la sección anterior, en esta se va a modificar utilizando la ecuación 5.1 del capítulo anterior. En el cuadro 6.3 se define el ambiente de la muestra, y para generar las muestras se usa el algoritmo 5.1.
 
 \begin{table}[!htbp]
 \begin{center}
-\caption{Hiperparametros de la Muestra}
+\caption{Hiperparámetros de la Muestra}
 \begin{tabular}{|l|l|l|l|l|}
 \hline
  & Parametros & muestra amplia  &  muestra estrecha   \\ \hline
@@ -73,12 +73,12 @@ Ya tenemos los hiperparámetros óptimos del capítulo anterior, entonces vamos 
  Entrada & Tiempo de madurez($\tau$) &  [0.2, 1.1] & [0.3, 0.95]   \\ \cline{2-4} 
   & volatilidad($\sigma$) &  [0.01, 1] & [0.02, 0.9]  \\ \cline{2-4} 
   & Tasa libre de riesgo($r$) &  [0.02, 0.1] & [0.03, 0.08] \\ \hline
- Salida & Precio de Call(log($\tilde{C}/{K}$)) &  [-16.12,-0.94] & [-16.12,-0.94] \\ \hline
+ Salida & Precio de Call($\ln$($\tilde{c}/{K}$)) &  [-16.12,-0.94] & [-16.12,-0.94] \\ \hline
 \end{tabular}
 \end{center}
 \end{table}
 
-Una vez obtenida la muestra, la entrada de la red será \{log($\tilde{C}/K$), $S_0$/K, $r$, $\tau$\} y la salida \{$\sigma$\}. Vamos a entrenar la red durante 1000 épocas.
+Una vez obtenida la muestra, la entrada de la red será \{$\ln$($\tilde{c}/K$), $S_0$/K, $r$, $\tau$\} y la salida \{$\sigma$\}. Vamos a entrenar la red durante 1000 épocas.
 
 Una vez entrenada la red, en el Cuadro 6.4 y en las Figuras 6.3 y 6.4 se pueden observar los resultados.
 
@@ -102,21 +102,21 @@ Una vez entrenada la red, en el Cuadro 6.4 y en las Figuras 6.3 y 6.4 se pueden 
 \begin{tabular}{|l|l|l|l|l|}
 \hline
  & ECM & EAM  &  EPAM & $R^2$  \\ \hline
-Muestra Amplia  & $6.24e(-8)$ & $1.92e(-4)$ & $0.059$ & 0.999999104  \\ \hline
-Muestra Estrecha & $5.58e(-8)$ &  $ 1.84e(-4)$ & $0.062$ & 0.999999020  \\ \hline
+Muestra Amplia  & $6.24\times10^{-8}$ & $1.92\times10^{-4}$ & $0.059$ & 0.999999104  \\ \hline
+Muestra Estrecha & $5.58\times10^{-8}$ &  $ 1.84\times10^{-4}$ & $0.062$ & 0.999999020  \\ \hline
   
 \end{tabular}
 \end{center}
 \end{table}
 
 
-\subsection{Cambio en función de decrecimiento del Learning Rate}
+\subsection{Cambio en función de decrecimiento de la Tasa de Aprendizaje}
 
-Observando la Figura 5.1 podemos concluir que el entrenamiento de la red con un learning rate menor a $10^{-7}$ prácticamente no actualizaría los pesos, entonces si queremos hacer mas épocas en el entrenamiento de la red, con el algoritmo que usamos en la sección anterior tendríamos en la época 3000 un learning rate aproximado de $1.87e^{-17}$, y en la época 1000 el learning rate aproximado sería de $2.65e^{-8}$. Una posible solución a este problema es modificar los hiperparámetros óptimos aumentando el $base\_lr$, aumentar el $decay$, y aumentar el $epoch\_drop$, para que el learnig rate descienda mas lentamente. Otra solución sería cuando el learning rate sea menor a un umbral, aumentar el $base\_lr$. El umbral puede ser variable.
+Observando la Figura~\ref{Smith} podemos concluir que el entrenamiento de la red con una tasa de aprendizaje menor a $10^{-7}$ prácticamente no actualizaría los pesos, entonces si queremos hacer mas épocas en el entrenamiento de la red, con el algoritmo que usamos en la sección anterior tendríamos en la época 3000 una tasa de aprendizaje aproximado de 
+$1.87\times10^{-17}$, y en la época 1000 la tasa de aprendizaje aproximado sería de $2.65\times10^{-8}$. Una posible solución a este problema es modificar los hiperparámetros óptimos aumentando el $base\_lr$, aumentar el $decay$, y aumentar el $epoch\_drop$, para que la tasa de aprendizaje descienda mas lentamente. Otra solución sería cuando la tasa de aprendizaje sea menor a un umbral, aumentar el $base\_lr$. El umbral puede ser variable.
 
-El algoritmo 6.1 muestra el método de decrecimiento de learning rate que utilizaremos:
+El algoritmo~\ref{al:decay} muestra el método de decrecimiento de la tasa de aprendizaje que utilizaremos.
 
-\vspace{5mm}
 
 \begin{algorithm}[H]
 \SetAlgoLined
@@ -134,55 +134,61 @@ El algoritmo 6.1 muestra el método de decrecimiento de learning rate que utiliz
  }
  return\;
  \caption{Step Decay Modificado}
+ \label{al:decay}
 \end{algorithm}
 
-\vspace{5mm}
 
-La Figura 6.5 muestra la comparación entre el step decay usado anteriormente y el step decay modificado.
+La Figura~\ref{StepDvsModi} muestra la comparación entre el step decay usado anteriormente y el step decay modificado.
 
 \begin{figure}[t!]
   \includegraphics[width=16cm, height=10cm]{imagenes/comparacion_step_1000}
-  \caption{Step Decay Modificado}
+  \caption{Step Decay contra Step Decay Modificado}
+  \label{StepDvsModi}
 \end{figure}
 
-Las Figuras 6.6 y 6.7 muestan el learning rate resultante con los diferentes algoritmos.
+Las Figuras~\ref{aprend1000} y~\ref{aprend3000} muestran el tasa de aprendizaje resultante con los diferentes algoritmos.
 
 \begin{figure}[!tbp]
   \centering
   \begin{minipage}[b]{0.45\textwidth}
     \includegraphics[width=\textwidth]{lr_1000.png}
-    \caption{Learning Rate sobre 1000 epocas.}
+    \caption{Tasa de aprendizaje sobre 1000 épocas.}
+    \label{aprend1000}
   \end{minipage}
   \hfill
   \begin{minipage}[b]{0.45\textwidth}
     \includegraphics[width=\textwidth]{lr_3000.png}
-    \caption{Learning Rate sobre 3000 epocas.}
+    \caption{Tasa de aprendizaje sobre 3000 épocas.}
+    \label{aprend3000}
   \end{minipage}
 \end{figure}
 
-Luego vamos a entrenar la red durante 3000 epocas usando step decay modificado. En las Figuras 6.8, 6.9, y en el Cuadro 6.5 se muestran los resultados.
+Luego vamos a entrenar la red durante 3000 épocas usando step decay modificado. En las Figuras~\ref{resultamplia},~\ref{resultestrecha}, y en el Cuadro~\ref{cu:erroropti} se muestran los resultados.
 
 \begin{figure}[!tbp]
   \centering
   \begin{minipage}[b]{0.45\textwidth}
     \includegraphics[width=\textwidth]{Predic_w_log_3mil.png}
     \caption{Predicción muestra amplia.}
+    \label{resultamplia}
   \end{minipage}
   \hfill
   \begin{minipage}[b]{0.45\textwidth}
     \includegraphics[width=\textwidth]{Predic_n_log_3mil.png}
     \caption{Predicción muestra estrecha.}
+    \label{resultestrecha}
   \end{minipage}
 \end{figure} 
 
 \begin{table}[!htbp]
 \begin{center}
 \caption{Error Red Optimizada}
+\label{cu:erroropti}
 \begin{tabular}{|l|l|l|l|l|}
 \hline
  & ECM & EAM  &  EPAM & $R^2$  \\ \hline
-Muestra Amplia  & $4.67e(-8)$ & $1.66e(-4)$ & $0.0515$ & 0.999999329  \\ \hline
-Muestra Estrecha & $4.02e(-8)$ &  $ 1.57e(-4)$ & $0.0526$ & 0.999999295  \\ \hline
+Muestra Amplia  & $4.67\times10^{-8}$ & $1.66\times10^{-4}$ & $0.0515$ & 0.999999329  \\ \hline
+Muestra Estrecha & $4.02\times10^{-8}$ &  $ 1.57\times10^{-4}$ & $0.0526$ & 0.999999295  \\ \hline
   
 \end{tabular}
 \end{center}
@@ -193,29 +199,24 @@ Muestra Estrecha & $4.02e(-8)$ &  $ 1.57e(-4)$ & $0.0526$ & 0.999999295  \\ \hli
 \section{Métodos Numéricos}
 
 
-\subsection{Problemas Númericos}
+\subsection{Problemas Numéricos}
 \label{sub:Problemas}
 
-En la muestra amplia definida en la sección~\ref{PrimeraRed} \textcolor{red}{..muestra (NO se entiende porque no fue definida la muestra. Tal vez conviene llevar este capítulo después del siguiente o adelantar la definición de muestra)}
- hay aproximado un 0.05\% de casos que no cumplen con la condición $g(a)g(b) < 0$, 
-para $a \to 0$ y $b \to \infty$, donde g es la función~\ref{funciong}.
-\textcolor{red}{..Usar siempre label y ref} Por lo tanto, no se puede aplicar ninguno de los métodos vistos anteriormente.
+En la muestra amplia definida en la sección~\ref{PrimeraRed} hay aproximado un 0.05\% de casos que no cumplen con la condición $g(a)g(b) < 0$, 
+para $a \to 0$ y $b \to \infty$, donde g es la función~\ref{funciong} anteriormente.
 
-El problema radica en el cálculo de la fórmula de Black-Scholes definida en la ecuación~\ref{eq:black} 
-\textcolor{red}{ ..NO --> el capítulo 2.1 (ecuación 2.1). Usar las referencias de latex}, 
+El problema radica en el cálculo de la fórmula de Black-Scholes definida en la ecuación~\ref{eq:black},
 básicamente en la distribución de probabilidad acumulada $\Phi(d)$. Por definición $\Phi(d) < 1$, $\forall d \in \mathbb{R}$. 
-Pero Python usa aritmética de punto flotante IEEE-754~\cite{IEEE}, donde su precisión es $2^{(-56)}$ 
-\textcolor{red}{..falta referencia} , 
-dando asi una precisión aproximada de 15,95 dígitos decimales. 
-Luego usando la función de Scipy para el cálculo de la distribución normal acumulada definida en la referncia~\cite{Normal}, 
+Pero Python usa aritmética de punto flotante IEEE-754~\cite{IEEE}, donde su precisión es $2^{-56}$,
+dando así una precisión aproximada de 15,95 dígitos decimales. 
+Luego usando la función de Scipy para el cálculo de la distribución normal acumulada definida en la referencia~\cite{Normal}, 
 obtenemos $\Phi(n) = 1$, para $n > 8.3$.
 %
-Volviendo a la fórmula de Black-Scholes, si bien sabemos que $\Phi(d_1) > \Phi(d_2)$, ya que 
-\textcolor{red}{..o ??}, $\sigma,T > 0$, 
+Volviendo a la fórmula de Black-Scholes, si bien sabemos que $\Phi(d_1) > \Phi(d_2)$, ya que $\sigma,T > 0$, 
 pero hay casos en que el extremo inferior definido para aplicar el método de bisección (o Brent), se obtiene 
 $\Phi(d_1) = \Phi(d_2)$ por el problema de precisión, ocasionando el error antes mencionado.
 
-El origen de todo el problema radica en la cantidad de posibles números representables en un dado rango. 
+Luego el problema está en la cantidad de posibles números representables en un dado rango. 
 El formato se escribe con un significando que tiene un bit entero implícito de valor 1 (excepto para los números especiales). 
 Con los 52 bits de la mantisa, la precisión total es por lo tanto de 53 bits (es decir de $53 \,\log_{10}(2) \approx 15.955$ 
 que se redondea a 16 dígitos decimales). El exponente de este formato está sesgado o desplazado en 1023 unidades, 
@@ -224,6 +225,7 @@ exponentes positivos y la otra, exponentes negativos~\cite{IEEE}. Podemos observ
 Lo expuesto permite ver que hay $2^{52}$ números de punto flotante entre $2^n$ y $2^{n+1}$ para todo $n$ entero en $[-1023, 1022]$.
 
 \begin{figure}[t!]
+  \centering
   \includegraphics[clip,width=0.95\textwidth]{imagenes/precision}
   \caption{Estructura de un número en formato de coma flotante de doble precisión}
   \label{reprebinaria}
@@ -232,28 +234,27 @@ Lo expuesto permite ver que hay $2^{52}$ números de punto flotante entre $2^n$ 
 
 %\subsection{Caso en Particular}
 
-Por ejemplo, consideremos un caso en particular, veamos los valores del Cuadro~\ref{params}
+Por ejemplo, consideremos un caso en particular, veamos los valores del Cuadro~\ref{params}, la Figura~\ref{fig:gin1} muestra la comparación entre $g(n)$ para $n \in [ 0.01, 1 ]$ 
+y la volatilidad implícita (linea roja punteada). 
+Se puede observar que no se puede hallar el intervalo $[a,b]$ para aplicar el método de bisección (o Brent), 
+ya que para este caso $g(\sigma)$ es positivo $ \forall \sigma$, tal que $0 < \sigma < 0.01$.
+
 
 \begin{table}[!htbp]
-\begin{tabular}{|cc|}
+\centering
+\begin{tabular}{|ll|}
 \hline
-c: & 5.983489610184446  \\ 
-S: & 15.752756180327959   \\             % \cline{2-4} 
-k: & 10   \\ % \cline{2-4} 
-r: & 0.09010364215460305 \\               % \cline{2-4} 
-T: & 0.2590760904347537  \\ \hline
+$c$: & $5.983489610184446$  \\ 
+$S$: & $15.752756180327959$  \\             % \cline{2-4} 
+$k$: & $10$   \\ % \cline{2-4} 
+$r$: & $0.09010364215460305$ \\               % \cline{2-4} 
+$T$: & $0.2590760904347537$  \\ \hline
 \end{tabular}
 \caption{Parámetros que no cumplen la pre-condición de los métodos numéricos}
 \label{params}
 \end{table}
 
-\textcolor{red}{..llevar esto a una tabla con label y caption}
 
-
-La Figura~\ref{fig:gin1} muestra la comparación entre $g(n)$ para $n \in [ 0.01, 1 ]$ 
-y la volatilidad implícita (linea roja punteada). 
-Se puede observar que no se puede hallar el intervalo $[a,b]$ para aplicar el método de bisección (o Brent), 
-ya que para este caso $g(\sigma)$ es positivo $ \forall \sigma$, tal que $0 < \sigma < 0.01$.
 
 \vspace{5mm}
 
@@ -261,55 +262,56 @@ Tomando $\sigma = 0.01$ (extremo inferior del intervalo), se obtiene,
 %
 $\Phi(d_1) = 1$, $\Phi(d_2) = 1$
 %
-y $g(0.01) = 1.7763568394002505e(-15)$.
+y $g(0.01) = 1.7763568394002505\times{-15}$.
 %
 Pero si se evalúa la función de distribución acumulada de la normal estándar utilizando la volatilidad implícita $\sigma = 0.11928197090875538$, se obtiene 
 %
-$\Phi(d_1) = 0.9999999999999986$, $\Phi(d_2) = 0.9999999999999982$ 
+$\Phi(d_1) = 0.9999999999999986$ (Figuras~\ref{fig:d1},~\ref{fig:d1c}), $\Phi(d_2) = 0.9999999999999982$ 
 y
 $g(0.11928197091) = 0$, se contradice la propiedad de monotonía creciente. 
 
-\begin{figure}
+\begin{figure}[t!]
+  \centering
   \includegraphics[width=0.95\textwidth]{g}
-  \caption{Función g \textcolor{red}{..aumentar el tamaño de font y ancho de la línea)}}
+  \caption{Función g.}
   \label{fig:gin1}
 \end{figure}
 
 \begin{figure}[]
-   %\centering
+   \centering
    %\begin{minipage}[b]{0.45\textwidth}
     \includegraphics[width=0.95\textwidth]{norm1.png}
-    \caption{$\Phi(d_1)$. \textcolor{red}{..aumentar el tamaño de font y ancho de la línea)}}
+    \caption{$\Phi(d_1)$.}
     \label{fig:d1}
    %\end{minipage}
    %\hfill
    %\begin{minipage}[b]{0.45\textwidth}
+    \centering
     \includegraphics[width=0.95\textwidth]{norm1_c.png}
-    \caption{$\Phi(d_1)$. \textcolor{red}{..aumentar el tamaño de font y ancho de la línea)}}
+    \caption{$\Phi(d_1)$.}
     \label{fig:d1c}
   %\end{minipage}
 \end{figure}
 
 
-\textcolor{red}{..Falta describir en detalle las dos últimas figuras en el texto y citarlas En esta sección también falta la discusión que tuvimos con las gráficas de la prima en función de la volatilidad y el efecto de la vega. La discusión que está en los correos de comienzos de junio.}
 
 \subsection{Prescisi\'on M\'etodos Num\'ericos} 
 
 
-En la sección~\ref{sub:Problemas} vimos que hay casos en los que no se puede aplicar los métodos numéricos, exceptuando esos casos, vamos a analizar su precisión. Ademas se vió que lo máximo que podemos aspirar es un error absoluto de 
-$2^{-56}$. Ahora vamos a analizar si en la práctica, la tolerancia de los métodos corresponden con los resultados obtenidos de aplicar los mismos. En el método de Brent utilizamos el de la librería Scipy. \cite{Brentq}
+En la sección~\ref{sub:Problemas} vimos que hay casos en los que no se puede aplicar los métodos numéricos, exceptuando esos casos, vamos a analizar su precisión. Ademas se vio que lo máximo que podemos aspirar es un error absoluto de 
+$2^{-56}$. Ahora vamos a analizar si en la práctica, la tolerancia de los métodos corresponden con los resultados obtenidos de aplicar los mismos. En el método de Brent utilizamos el de la biblioteca Scipy~\cite{Brentq}.
 
 %En el cuadro 6.6 se muestran los resultados.
 
 \begin{table}[!htbp]
 \begin{center}
-\caption{Error brent y Bisección}
+\caption{Error Brent y Bisección}
 \label{metodosnum}
 \begin{tabular}{|l|l|l|l|l|}
 \hline
  & ECM & EAM  &  EPAM & $R^2$  \\ \hline
-Bisección  & $1.10e(-8)$ & $2.89e(-6)$ & $0.00469$ & 0.99999986  \\ \hline
-Brent & $8.17e(-6)$ &  $ 9.18e(-5)$ & $0.35894$ & 0.99989551  \\ \hline
+Bisección  & $1.10\times10^{-8}$ & $2.89\times10^{-6}$ & $0.00469$ & 0.99999986  \\ \hline
+Brent & $8.17\times10^{-6}$ &  $ 9.18\times10^{-5}$ & $0.35894$ & 0.99989551  \\ \hline
   
 \end{tabular}
 \end{center}
@@ -318,39 +320,42 @@ Brent & $8.17e(-6)$ &  $ 9.18e(-5)$ & $0.35894$ & 0.99989551  \\ \hline
 
 %\subsection{Peso de la Volatilidad sobre el precio de la opción}
 
-Observando el Cuadro~\ref{metodosnum}, el error absoluto medio del método de bisección es $2.89e(-6)$ y de brent es
-$ 9.18e(-5)$, siendo la tolerancia $2e(-56)$, esto es por el problema de presición y el impacto que tiene la volatilidad
-sobre el precio de la opción (vega) utilizando la fórmuala de Black Scholes~\ref{eq:black}. En la Figura~\ref{ratiovscall}, que compara el precio de la opción con respecto a la variación de volatilidad, utilizando diferentes ratios (S/K), se puede observar que mientras más diferencia hay entre
-$S_0$ y K la volatilidad tiene menos impacto sobre el precio en especial en los casos OTM y en las volatilidades cercanas a 0. Luego en la Figura~\ref{interesvscall}, que compara el precio de la opción con respecto a la variación de volatilidad, utilizando diferentes tasas de interés, se observa practicamente un desplazamiento.
+Observando el Cuadro~\ref{metodosnum}, el error absoluto medio del método de bisección es $2.89\times10^{-6}$ y de Brent es
+$ 9.18\times10^{-5}$, siendo la tolerancia $2^{-56}$, esto es por el problema de precisión y el impacto que tiene la volatilidad sobre el precio de la opción (derivada de la fórmula de Black Scholes sobre $\sigma$) utilizando la fórmula de Black Scholes~\ref{eq:black}. En la Figura~\ref{ratiovscall}, que compara el precio de la opción con respecto a la variación de volatilidad, utilizando diferentes ratios (S/K), se puede observar que mientras más diferencia hay entre
+$S_0$ y K la volatilidad tiene menos impacto sobre el precio en especial en los casos OTM y en las volatilidades cercanas a 0. Luego en la Figura~\ref{interesvscall}, que compara el precio de la opción con respecto a la variación de volatilidad, utilizando diferentes tasas de interés, se observa prácticamente un desplazamiento.
 Por último en la Figura~\ref{Tvscall}, que compara el precio de la opción con respecto a la variación de volatilidad, utilizando diferentes tiempos de madurez, se puede observa que mientras los contratos sean más largos la volatilidad tiene un mayor impacto sobre el precio.
 
 \begin{figure}[t!]
+  \centering
   \includegraphics[width=16cm, height=8cm]{imagenes/ratio_v_call}
-  \caption{Volatilidad implícita vs precio call con distiontos ratios}
+  \caption{Volatilidad implícita contra precio call con distintos ratios}
   \label{ratiovscall}
 \end{figure}
 
 \begin{figure}[t!]
+  \centering
   \includegraphics[width=16cm, height=6cm]{imagenes/interes_v_call}
-  \caption{Volatilidad implícita vs precio call con distiontas tasas de interés}
+  \caption{Volatilidad implícita contra precio call con distintas tasas de interés}
   \label{interesvscall}
 \end{figure}
 
 \begin{figure}[t!]
+  \centering
   \includegraphics[width=16cm, height=6cm]{imagenes/T_v_call}
-  \caption{Volatilidad implícita vs precio call con distiontos tiempos de madurez}
+  \caption{Volatilidad implícita contra precio call con distintos tiempos de madurez}
   \label{Tvscall}
 \end{figure}
 
 Ahora bien observando los gráficos podemos concluir que la volatilidad tiene menos impacto en los contratos cortos(en nuestro ambiente), en OTM y con volatilidades menores a 0.2, pero en la practica los casos con mas error son ITM
 con $\Phi_1(\sigma)$ y $\Phi_2(\sigma)$ cercanos a 1.
 
-Esto se debe a la densidad de puntos flotates visto en el capítulo 4. Luego como el ancho de 11 bits del exponente permite la representación de números en el rango comprendido entre 
-$2^{-1023}$ y $2^{1023}$ ($10^{-308}$ y $10^{308}$). Esto nos permite concluir que hay la misma cantidad de numeros representables entre $10^{-308}$ y $10^{-307}$ que en $0.1$ y $1$, osea que su densidad es mayor cuando tiende a 0 (Observar Figura~\ref{Densidad10}). Por lo tanto los $\Phi_1(\sigma)$ y $\Phi_2(\sigma)$
+Esto se debe a la densidad de puntos flotantes visto en la sección anterior. Luego como el ancho de 11 bits del exponente permite la representación de números en el rango comprendido entre 
+$2^{-1023}$ y $2^{1023}$ ($10^{-308}$ y $10^{308}$ aproximado). Esto nos permite concluir que hay aproximadamente la misma cantidad de números representables entre $10^{-307}$ y $10^{-306}$ que en $0.1$ y $1$, osea que su densidad es mayor cuando tiende a 0 (Observar Figura~\ref{Densidad10}). Por lo tanto los $\Phi_1(\sigma)$ y $\Phi_2(\sigma)$
 cercanos a 0 en OTM van a tener mas precisión aunque el peso de la volatilidad sobre el precio de la opción sea menor.
 
 
 \begin{figure}[t!]
+  \centering
   \includegraphics[width=14cm, height=8cm]{imagenes/precision_g}
   \caption{Densidad de números representables en rango de $10^{-5}$ entre 0.1 y 1}
   \label{Densidad10}
@@ -362,9 +367,9 @@ cercanos a 0 en OTM van a tener mas precisión aunque el peso de la volatilidad 
 
 \section{Tiempo de Ejecución y Robustez}
 
-Una vez entrenada la red (Fue calculado sobre GPU(GeForce GTX 1080/PCIe/SSE2), RAM(15.6 GiB). La busqueda de hiperpámetros en un tiempo 10.08 horas, la busqueda del algoritmo de learning rate fue 11.72 horas y entrenamiento de la red 3000 epocas fue 8.83 horas), vamos a observar el tiempo ejecución de evaluación de la misma sobre una muestra de 10000. Ademas el tiempo de ejecución de los métodos de brent y bisección sobre la misma muestra en una CPU(Intel(R) Core(TM) i5-8265U CPU @ 1.60GHz).
+Una vez entrenada la red (Fue calculado sobre GPU(GeForce GTX 1080/PCIe/SSE2), RAM(15.6 GiB). La búsqueda de hiperpámetros en un tiempo 10.08 horas, la búsqueda del algoritmo de la tasa de aprendizaje fue 11.72 horas y entrenamiento de la red 3000 épocas fue 8.83 horas), vamos a observar el tiempo ejecución de evaluación de la misma sobre una muestra de 10000. Ademas el tiempo de ejecución de los métodos de Brent y bisección sobre la misma muestra en una CPU(Intel(R) Core(TM) i5-8265U CPU @ 1.60GHz).
 
-Tambien analizaremos su robustez, esto sería, si para todo elemento de la muesta el modelo genera una salida.
+También analizaremos su robustez, esto sería, si para todo elemento de la muestra el modelo genera una salida.
 
 En el Cuadro 6.8 se observan el tiempo de ejecución y la Robustez. 
 
