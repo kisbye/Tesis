@@ -295,7 +295,7 @@ $g(0.11928197091) = 0$, se contradice la propiedad de monotonía creciente.
 
 
 
-\subsection{Prescisi\'on M\'etodos Num\'ericos} 
+\subsection{Precisi\'on M\'etodos Num\'ericos} 
 
 
 En la sección~\ref{sub:Problemas} vimos que hay casos en los que no se puede aplicar los métodos numéricos, exceptuando esos casos, vamos a analizar su precisión. Ademas se vio que lo máximo que podemos aspirar es un error absoluto de 

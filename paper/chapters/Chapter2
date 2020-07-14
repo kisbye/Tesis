@@ -13,25 +13,25 @@ en un determinado monto, llamado \textbf{interés}.
 \vspace{5mm}
 
 \begin{enumerate}
-  \item \textbf{Interés Simple}:
+  \item \textbf{Interés Simple}: La fórmula correspondiente es:
 
-  $V = V_0 (1+r)t$
+  $V = V_0 (1+rt)$
 
-  Donde V representa el valor de un depósito de valor inicial $V_0$ transcurrido
-  un tiempo t y r es la tasa de interés correspondiente a la unidad de tiempo utilizada, usualmente el año.
+  donde $V$ representa el valor de un depósito de valor inicial $V_0$ transcurrido
+  un tiempo $t$ y $r$ es la tasa de interés correspondiente a la unidad de tiempo utilizada, usualmente el año.
 
   \item \textbf{Interés Compuesto}:
 
   $V = V_0 \left( 1+ \displaystyle\frac{r}{n} \right)^{nt}$
 
-  Donde que V , $V_0$ y t tienen las mismas condiciones que para el interés simple, pero una tasa
-  r de interés compuesto n veces al año.
+  donde que $V$ , $V_0$ y $t$ tienen las mismas condiciones que para el interés simple, pero una tasa
+  $r$ de interés nominal anual compuesta $n$ veces al año.
 
   \item \textbf{Interés Continuo}:
 
   El interés continuo puede verse como el interés compuesto para $n \rightarrow \infty$, es decir:
 
-  $\lim_{n \to \infty} V_0 \left( 1+ \displaystyle\frac{r}{n} \right)^{nt} = V_0e^{rt}$ 
+  $V = \lim_{n \to \infty} V_0 \left( 1+ \displaystyle\frac{r}{n} \right)^{nt} = V_0e^{rt}$ 
 
 \end{enumerate}
 
@@ -100,7 +100,7 @@ En el mercado OTC se negocia una variedad mucho mayor de opciones y se denominan
 \textit{opciones exóticas}~\cite{Kisbye}. Dentro de las \textit{opciones exóticas} se agrupan a todas aquellas opciones que tienen una mayor complejidad en comparación con las opciones vanilla. Algunas opciones exóticas son:
 
  \begin{itemize}
-  \item \textbf{Opciones look-back}: son aquellas cuyo payoff depende del valor máximo, o del valor mínimo, que haya alcanzado el subyacente desde el inicio del contrato hasta su madurez.
+  \item \textbf{Opciones lookback}: son aquellas cuyo payoff depende del valor máximo, o del valor mínimo, que haya alcanzado el subyacente desde el inicio del contrato hasta su madurez.
   \item \textbf{Opciones asiáticas}: son aquellas cuyo payoff depende del promedio de valores que ha tomado el subyacente durante la vigencia del contrato, o de una parte de ese tiempo.
   \item \textbf{Opciones barrera}: son aquellas cuyo payoff depende de que el subyacente haya cruzado una
   determinada barrera a lo largo de la vigencia del contrato.
@@ -124,7 +124,7 @@ el contrato:
 
 El payoff de una opción europea es el valor del contrato en su madurez en función del valor del
 subyacente. El costo inicial o prima de la opción no se incluye en el cálculo.
-Si K es el precio strike y $S(T)$ es el precio final del subyacente, entonces una opción call se
+Si $K$ es el precio strike y $S(T)$ es el precio final del subyacente, entonces una opción call se
 ejerce sólo si $S(T) > K$ ya que en caso contrario el inversor en posición long preferirá comprar
 el subyacente en el mercado. En el caso de una put, el inversor en posición long ejercerá la opción
 sólo si $K > S(T)$. Así, el valor del contrato en su madurez está dado por la ganancia o pérdida
@@ -149,9 +149,9 @@ donde $\pm$ dependerá de la posición long $(-)$ o la posición short $(+)$~\ci
 
 Opción & Payoff \\  \hhline{|=|=|}
 Long en una Call & máx$(S(T) - K, 0)$ \\  \hline
-Short en una Call & $-$ máx$(S(T) - K, 0) =$ mín$(K - S(T), 0)$ \\ \hline
-Long en una Put & máx$(K - S(T), 0)$ \\ \hline
-Short en una Put & $-$ máx$(K - S(T), 0) = $mín$(S(T) - K, 0))$\\ 
+Short en una Call & $- \max(S(T) - K, 0) =\min(K - S(T), 0)$ \\ \hline
+Long en una Put & $\max(K - S(T), 0)$ \\ \hline
+Short en una Put & $-\max(K - S(T), 0) = \min(S(T) - K, 0))$\\ 
 \hline
 \end{tabular}
 \end{center}
@@ -160,14 +160,14 @@ Short en una Put & $-$ máx$(K - S(T), 0) = $mín$(S(T) - K, 0))$\\
 \begin{figure}[H]
   \centering
   \includegraphics[width=16cm, height=5cm]{payofflong}
-  \caption{Payoff de posiciones long en una call y en una put con strike K y madurez T.}
+  \caption{Payoff de posiciones long en una call y en una put con strike $K$ y madurez T.}
   \label{longpayoff}
 \end{figure}
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=16cm, height=5cm]{payoffshort}
-  \caption{Payoff de posiciones short en una call y en una put con strike K y madurez T.}
+  \caption{Payoff de posiciones short en una call y en una put con strike $K$ y madurez T.}
   \label{shortpayoff}
 \end{figure}
 
@@ -180,7 +180,7 @@ Short en una Put & $-$ máx$(K - S(T), 0) = $mín$(S(T) - K, 0))$\\
    \begin{minipage}[b]{0.45\textwidth}
     \includegraphics[width=1\textwidth]{putganancia.png}
   \end{minipage}
-  \caption{Ganancia de posiciones long en una call y en una put con strike K y madurez T.}
+  \caption{Ganancia de posiciones long en una call y en una put con strike $K$ y madurez T.}
   \label{longganancia}
 \end{figure}
 
@@ -194,7 +194,7 @@ Short en una Put & $-$ máx$(K - S(T), 0) = $mín$(S(T) - K, 0))$\\
    \begin{minipage}[b]{0.45\textwidth}
     \includegraphics[width=1\textwidth]{putshorty.png}
   \end{minipage}
-  \caption{Ganancia de posiciones short en una call y en una put con strike K y madurez T.}
+  \caption{Ganancia de posiciones short en una call y en una put con strike $K$ y madurez T.}
   \label{shortganancia}
 \end{figure}
 
@@ -216,11 +216,11 @@ Veremos algunos portfolios específicos construidos con opciones.
 Los \textit{spreads} son estrategias que utilizan opciones del mismo tipo. Esto es: todas call o todas
 put. Un inversor que cree que el mercado está en alza utiliza un \textit{bull spread}, mientras que si cree
 que está en baja utiliza un \textit{bear spread}.
-Un \textit{bull spread} con calls se construye con una posición long en una call, con strike $K_1$, y 1 posición short en una call, con strike $K_2$, con $K_1 < K_2$ y ambos con la misma fecha de expiración T . Luego el payoff está dado por:
+Un \textit{bull spread} con calls se construye con una posición long en una call, con strike $K_1$, y 1 posición short en una call, con strike $K_2$, con $K_1 < K_2$ y ambos con la misma fecha de expiración $T$ . Luego el payoff está dado por:
 
 \vspace{5mm}
 
-Payoff(bull spread con calls) $=$ m\'ax\{$S(T) - K_1, 0$\} - m\'ax\{$S(T) - K_2, 0$\}
+$$\mbox{Payoff(bull spread con calls)} = \max\{S(T) - K_1, 0\} - \max\{S(T) - K_2, 0\}$$
 
 \vspace{5mm}
 
@@ -234,23 +234,23 @@ Notemos que el payoff es no negativo, y su valor es positivo si $S(T)$ es mayor 
   \label{fig:bullspread}
 \end{figure}
 
-Sin embargo, un \textit{bull spread} con calls tiene un costo inicial $c_1 - c_2$. Por ello, si el valor de la
+Sin embargo, un \textit{bull spread} con calls tiene un costo inicial $c_1 - c_2$ \textcolor{red}{decir antes quién es $c_1$ y $c_2$}. Por ello, si el valor de la
 acción baja habrá una pérdida, aunque acotada.
 
 \subsubsection{Combinaciones}
 
 Las combinaciones, son estrategias que consisten en posiciones en distintos tipos de opción, tanto call como puts.
-Por ejemplo, un \textit{straddle} se construye con una posición long en una call y posición long en una put, ambos con la misma fecha de expiración T y strike K. 
+Por ejemplo, un \textit{straddle} se construye con una posición long en una call y posición long en una put, ambos con la misma fecha de expiración $T$ y strike $K$. 
 
 El payoff de una \textit{straddle} está dado por:
 
 \vspace{5mm}
 
-Payoff(bull spread con calls) $=$ máx\{$S(T ) - K, 0$\} $+$ máx\{$K - S(T), 0$\} = $|S(T) - K|$.
+$$\mbox{Payoff(bull spread con calls)}= \max\{S(T ) - K, 0\} +\max\{K - S(T), 0\} = |S(T) - K|.$$
 
 \vspace{5mm}
 
-La Figura~\ref{fig:straddle} muestra la ganancia del straddle. Notemos que el costo inicial está dado por $c + p$.
+La Figura~\ref{fig:straddle} muestra la ganancia del straddle. Notemos que el costo inicial está dado por $c + p$. \textcolor{red}{Decir antes quién es $c$ y $p$}
 
 \begin{figure}[H]
   \centering
@@ -272,6 +272,8 @@ Los supuestos hechos por Black y Scholes cuando derivaron su fórmula de valorac
           ganancia futura y una probabilidad nula de pérdida.
     \item completo (Todo derivado puede ser replicable con un portfolio compuesto por el subyacente y la cuenta bancaria.)
     \item precio de un activo que sigue un Movimiento Geométrico Browniano~\cite{Kisbye}.
+    \item Tasa de interés libre de riesgo constante.
+    \item Posibilidad de invertir en un número ilimitado de opciones y acciones, y de manera continua.
     \label{Hipotesis}
   \end{itemize}
 
@@ -279,16 +281,16 @@ Los supuestos hechos por Black y Scholes cuando derivaron su fórmula de valorac
 \subsection{Fórmula de Valoración de una call europea con Black-Scholes}
 \label{sec:FormulaB}
 
-La hipótesis del modelo de Black Scholes supone que el activo S(t) se comporta de acuerdo a
+La hipótesis del modelo de Black Scholes supone que el valor del activo $S(t)$ se comporta de acuerdo a
 un movimiento geométrico browniano, con tendencia $\mu$ y volatilidad $\sigma$. Sin embargo se demuestra
-que, bajo una hipótesis de no arbitrage es posible realizar un cambio de medida bajo la cual S(t)
-sigue un movimiento geométrico browniano con tendencia r y volatilidad $\sigma$, siendo r la tasa libre
+que, bajo una hipótesis de no arbitraje es posible realizar un cambio de medida de probabilidad bajo la cual $S(t)$
+sigue un movimiento geométrico browniano con tendencia $r$ y volatilidad $\sigma$, siendo $r$ la tasa libre
 de riesgo con capitalización continua. Esta medida de probabilidad también se \textbf{llama medida de
 probabilidad neutral al riesgo}
 
-Consideremos que $c$ es la prima de una opción call europea, con strike K y madurez T, sobre un activo
-cuyo precio sigue un movimiento geométrico browniano con tendencia $r - \sigma^2/2$ y
-volatilidad $\sigma$ bajo las probabilidades de riesgo neutral. Sea r la tasa libre de riesgo.
+Consideremos que $c$ es la prima de una opción call europea, con strike $K$ y madurez $T$, sobre un activo
+cuyo precio sigue un movimiento geométrico browniano con tendencia $r - \sigma^2/2$ \textcolor{red}{el MGB tiene tendencia $r$, el logaritmo tiene tendencia $r-\sigma^2/2$} y
+volatilidad $\sigma$ bajo las probabilidades de riesgo neutral. Sea $r$ la tasa libre de riesgo.
 Entonces, bajo una hipótesis de no arbitraje se cumple que:
 
 
@@ -297,11 +299,8 @@ Entonces, bajo una hipótesis de no arbitraje se cumple que:
 c = S(0)\Phi(d_1) - Ke^{-rT}\Phi(d_2)
 \label{eq:black}
 \end{equation}
-
-
-donde:
-
-$\Phi$ es la distribución normal estándar acumulada~\cite{Acumulada}
+donde 
+$\Phi$ es la función de distribución normal estándar acumulada~\cite{Acumulada},
 
 \begin{equation}
 d_1 = \displaystyle\frac{\ln \left(\displaystyle\frac{S(0)}{K}\right)+ \left( r + \displaystyle\frac{\sigma^2}{2}\right)T}{\sigma\sqrt{T}}
@@ -311,9 +310,7 @@ d_1 = \displaystyle\frac{\ln \left(\displaystyle\frac{S(0)}{K}\right)+ \left( r 
 d_2 = d_1 - \sigma\sqrt{T}
 \label{d2eq}
 \end{equation}
-
-
-con: $S(0)$ es precio inicial del activo, r la tasa libre de riesgo, K el strike, T la madurez de la opción y
+con $S(0)$ el precio inicial del activo, $r$ la tasa libre de riesgo, $K$ el strike, $T$ la madurez de la opción y
 $\sigma$ la volatilidad de la opción~\cite{FormulaB}.
 
 Para simplificar la notación vamos a utilizar $S_t$ en vez de $S(t)$, $\forall t > 0$.
@@ -323,15 +320,15 @@ Para simplificar la notación vamos a utilizar $S_t$ en vez de $S(t)$, $\forall 
 
 La volatilidad mide la incertidumbre acerca del precio futuro de un activo.
 En teoría, la volatilidad se calcula continuamente, para valuar las opciones,
-tal como se dan los cambios en el valor de S. Black Scholes asume $\sigma$
+tal como se dan los cambios en el valor de $S$. Black Scholes asume $\sigma$
 constante, esto implica una previa estimación estadística de $\sigma$, por ejemplo
-medir el comportamiento de los precios en los últimos meses y usar estimadores de varianza(volatilidad Histórica).
+medir el comportamiento de los precios en los últimos meses y usar estimadores de varianza (volatilidad Histórica).
 
-Como vimos en la sección~\ref{sec:FormulaB} la fórmula de Black Scholes para una opción call depende de distintos parámetros,el precio inicial del activo, la tasa libre de riesgo, el stike, la madurez de la opción y su volatilidad. Pero esta ultima no te la brinda el mercado.
+Como vimos en la sección~\ref{sec:FormulaB} la fórmula de Black Scholes para una opción call depende de distintos parámetros, el precio inicial del activo, la tasa libre de riesgo, el stike, la madurez de la opción y su volatilidad. Pero esta última no te la brinda el mercado.
 
 \subsubsection{Volatilidad Histórica}
 
-La volatilidad histórica como su nombre lo indica, muestra el riesgo histórico de un período de tiempo de hoy hacia atrás. Se calcula midiendo las variaciones que han tenido los rendimiento del activo en cierto período de tiempo, que puede ser 20 días, 50 días o 200 días o el que cada analista considere mejor y esta volatilidad por lo regular se presenta anualizada. La metodología mas común para calcularla es calculando las desviaciones estándar de los rendimientos del activo. La fórmula~\ref{histo} muestra el cálculo de la volatilidad histórica.
+La volatilidad histórica como su nombre lo indica, muestra el riesgo histórico de un período de tiempo de hoy hacia atrás. Se calcula midiendo las variaciones que han tenido los rendimientos del activo en cierto período de tiempo, que puede ser 20 días, 50 días o 200 días o el que cada analista considere mejor y esta volatilidad por lo regular se presenta anualizada. La metodología mas común para calcularla es calculando las desviaciones estándar de los rendimientos del activo. La fórmula~\ref{histo} muestra el cálculo de la volatilidad histórica.
 
 \begin{eqnarray}
 x_t = \ln \left(\displaystyle\frac{S_t}{S_{t-1}}\right)
@@ -341,10 +338,9 @@ x_t = \ln \left(\displaystyle\frac{S_t}{S_{t-1}}\right)
 
 \begin{equation}
 \label{histo}
-\mbox{Volatilidad Historica} = \sqrt{\displaystyle\frac{1}{n-1}\sum_{t=1}^{n} (x_t -\overline{X})^2} 
+\mbox{Volatilidad Historica} =\frac 1{\Delta t}\cdot  \sqrt{\displaystyle\frac{1}{n-1}\sum_{t=1}^{n} (x_t -\overline{X})^2} 
 \end{equation}
-
-Donde $S_t$ es el precio del activo en el día t, n la cantidad de días sobre la cual calcularemos la volatilidad histórica, en el caso de la volatilidad histórica anualizada $n=252$ ya que es la cantidad de días comerciales al año.
+donde $S_t$ es el precio del activo en el día $t$, $n$ la cantidad de días sobre la cual calcularemos la volatilidad histórica, y $\Delta t$ es el factor que permite dar la volatilidad histórica anualizada, en general $\Delta t = \frac 1{252}$ ya que $252$ es la cantidad de días comerciales al año.
 
 
 \subsubsection{Volatilidad Implícita}
@@ -352,14 +348,14 @@ Donde $S_t$ es el precio del activo en el día t, n la cantidad de días sobre l
 
 La volatilidad implícita es un factor clave en el trading de opciones que refleja las expectativas respecto al desplazamiento futuro del precio de un activo subyacente. Alta volatilidad implícita indica que los participantes del mercado esperan un movimiento mayor en el futuro y, por el contrario, baja volatilidad apunta hacia un desplazamiento posiblemente menor.
 
- Como vimos en la sección 2.1.10 para valorar una call europea necesitamos conocer, el precio inicial 
- del subyacente, la tasa libre de riesgo, el strike, el tiempo de madurez de la opción y la volatilidad del
+ Como vimos en la sección 2.1.10 \textcolor{red}{usar referencias. } para valorar una call europea necesitamos conocer, el precio inicial 
+ del subyacente, la tasa libre de riesgo, el strike, el tiempo de madurez de la opción y la volatilidad $\sigma$ del
  subyacente. Los primeros cuatro parámetros son conocidos al momento de iniciar la opción. En cambio $\sigma$
 representa una volatilidad del activo en el período de vigencia de la opción, y por lo tanto es
 desconocido. Más aún, se está suponiendo constante cuando en la práctica puede ser un valor
 variable e incluso estocástico.
 Dado que las opciones call cotizan en el mercado, también es conocida la prima de la opción.
-Por ello se denomina volatilidad implícita al valor de $\sigma$ que iguala la prima de la opción con la
+Por ello se denomina volatilidad implícita al valor de $\sigma$ que iguala la prima en el mercado de la opción con la
 correspondiente fórmula de Black-Scholes.
  
 \subsection{Superficie de volatilidad}
@@ -371,10 +367,10 @@ Una superficie de volatilidad es una representación tridimensional de las volat
 implícitas de un subyacente en relación con los diferentes precios de ejercicio y las
 diferentes fechas de madurez.
 La superficie de volatilidad combina las sonrisas de volatilidad~\cite{Smile} 
- con la estructura temporal de la volatilidad para tabular las volatilidades adecuadas. De este modo poder valorar una opción con cualquier precio de ejercicio y fecha de vencimiento. Un ejemplo de superficie de volatilidad que puede ser usada para opciones sobre divisas como se muestra en el Cuadro~\ref{surfi}. En este caso asumimos que la sonrisa es medida como la relación entre la volatilidad y $\displaystyle\frac{K}{S_0}$.
+ con la estructura temporal de la volatilidad para tabular las volatilidades adecuadas y de este modo poder valorar una opción con cualquier precio de ejercicio y fecha de vencimiento. Un ejemplo de superficie de volatilidad que puede ser usada para opciones sobre divisas como se muestra en el Cuadro~\ref{surfi} \textcolor{red}{corregir esta oración, le falta verbo}. En este caso asumimos que la sonrisa es medida como la relación entre la volatilidad y $\displaystyle\frac{K}{S_0}$.
 
 Una dimensión de la tabla es $\displaystyle\frac{K}{S_0}$ (segunda fila) y la otra es el tiempo de madurez (primera columna). Los valores del cuadro son las volatilidades implícitas calculadas a partir de la fórmula de Black Scholes.
-Y las volatilidades que no se encuentren en la tabla son calculadas mediante interpolación, por lo general se utiliza Spline cúbicos~\cite{Surface}.
+Las volatilidades que no se encuentren en la tabla son calculadas mediante interpolación, por lo general se utilizan Spline cúbicos~\cite{Surface}.
 
 
 \begin{table}[]
@@ -386,7 +382,7 @@ Y las volatilidades que no se encuentren en la tabla son calculadas mediante int
 
              & \multicolumn{5}{c}{$K/S_0$}               \\ \cline{2-6}
 
-            & 0.9  & 0.95 & 1.00 & 1.05 & 1.10 \\ \cline{2-6}
+            & $0.9$  & $0.95$ & $1.00$ & 1.05 & 1.10 \\ \cline{2-6}
             1 mes   & 14.2 & 13.0 & 12.0 & 13.1 & 14.5 \\ 
             3 meses & 14.0 & 13.0 & 12.0 & 13.1 & 14.2 \\ 
             6 meses & 14.1 & 13.3 & 12.5 & 13.4 & 14.3 \\ 
@@ -396,14 +392,14 @@ Y las volatilidades que no se encuentren en la tabla son calculadas mediante int
 \end{tabular}
 \end{center}
 \end{table}
-
+\textcolor{red}{Poner entre signos \$ a todos los números de la tabla}
 
 \section{Método de Bisección}
 
-El método de bisección se basa en el teorema de valor intermedio para f función continua~\cite{Intermedio}. Si f es continua en el intervalo [a,b] y f(a)f(b)$< 0$, entonces f tiene al menos una raíz en (a,b).
+El método de bisección se basa en el Teorema de los valores intermedios~\cite{Intermedio}. Si $f$ es continua en un intervalo cerrado $[a,b]$ y $f(a)f(b)< 0$, entonces $f$ tiene al menos una raíz en el intervalo abierto $(a,b)$.
 
-Si el algoritmo de bisección se aplica a una función continua f en un intervalo [a, b], donde
-$f(a)f(b) < 0$, entonces, después de n pasos se habrá calculado una raíz aproximada con un error
+Si el algoritmo de bisección se aplica a una función continua $f$ en un intervalo $[a, b]$, donde
+$f(a)f(b) < 0$, entonces, después de $n$ pasos se habrá calculado una raíz aproximada con un error
 a lo más de $\displaystyle\frac{(b - a)}{2^{n+1}}$ \cite{Bisec}.
 
 \vspace{3mm}
@@ -420,8 +416,8 @@ para ciertos casos utiliza el método de bisección, sin caer en los problemas d
 \subsubsection{Método de la Secante}
 
 
-En el método de la secante imita el de Newton~\ref{Newten} pero evita el cálculo de derivadas. Entonces se reemplaza
- $f'(x_n)$ de la fórmula de Newton por una aproximación de su derivada~\ref{derivate}~\cite{Secante}.
+En el método de la secante imita el de Newton~\ref{Newten} pero evita el cálculo de derivadas. Entonces se reemplaza la derivada en el punto $x_n$,
+ $f'(x_n)$, de la fórmula de Newton por una aproximación de su derivada~\ref{derivate}~\cite{Secante}.
 
 \begin{equation}
 \label{Newten}
@@ -434,7 +430,7 @@ x_{n+1} = x_n - \displaystyle\frac{f(x_n)}{f'(x_n)}
 f'(x) = \lim_{h \to 0} \displaystyle\frac{f(x+h)-f(x)}{h} \approx \displaystyle\frac{f(x+h)-f(x)}{h}
 \end{equation}
 
-Luego el método de la secante esta dada por:
+Luego el método de la secante esta dado por:
 
 \begin{equation}
 x_{n+1} = x_n - f(x_{n})\displaystyle\frac{x_{n}x_{n-1}}{f(x_{n})f(x_{n-1})}
@@ -455,10 +451,8 @@ x_{n+1} =& \displaystyle\frac{f_{n-1}f_n}{(f_{n-2}-f_{n-1})(f_{n-2}-f_n)}x_{n-2}
 &+ \displaystyle\frac{f_{n-1}f_{n-2}}{(f_{n}-f_{n-1})(f_{n}-f_{n-2})}x_{n}
 \end{array}
 $$
-
 %\vspace{5mm}
-
-Donde $f_k=f(x_k)$. El algoritmo~\ref{Abrent} detalla el método de Brent.
+donde $f_k=f(x_k)$. El algoritmo~\ref{Abrent} detalla el método de Brent.
 
 
 %\vspace{5mm}
@@ -547,7 +541,7 @@ Donde $f_k=f(x_k)$. El algoritmo~\ref{Abrent} detalla el método de Brent.
 
 Una Red Neuronal Artificial es un modelo matemático inspirado en el comportamiento biológico de las neuronas y en la estructura del cerebro, y que es utilizada para resolver un amplio rango de problemas. La red neuronal se entrena para estimar los parámetros óptimos ($W$) para una función $f(x,W,b)$, a partir de un conjunto de entrenamiento 
 $\{(x_1,y_1),...,(x_n,y_n)\}$, tal que $f(x_i,W,b) \approx y_i$, para $i = 1,...,n$.
-
+\textcolor{red}{decir qué es $b$}
 %%%% Donde $x = [x_1,...,x_n]$, $y=[y_1,...,y_n]$
 
 \subsection{Perceptrón}
@@ -601,18 +595,18 @@ datos, tanto de entrada como de entrada como de salida~\cite{Feed}.
 \subsection{Aprendizaje por Descenso por el Gradiente}
 
 
-Como hemos mencionado anteriormente el objetivo de una red neuronal es estimar los parámetros óptimos para una función 
+Como hemos mencionado anteriormente el objetivo de una red neuronal es estimar los parámetros $W$ óptimos para una función 
 $f(x,W,b)$. Una forma de estimar esos parámetros es reducir el error medido por una función de costo.
 
 
 \begin{equation}
 J(x,W,b,Y) = \displaystyle\frac{1}{n}\sum\limits_{i=1}^{n}(f(x_i,W,b) - y_i)^2
 \end{equation}
-
+\textcolor{red}{completar: donde $Y=(y_1, \dots$}
 
 \vspace{5mm}
 
-Para reducir dicho error se busca W tal que minimice la función $J(x,W,b,Y)$, se puede utilizar el descenso por el gradiente.
+Para reducir dicho error se busca $W$ tal que minimice la función $J(x,W,b,Y)$, se puede utilizar el descenso por el gradiente.
 
 Sea $w = [W,b]$, (para simplificar la notación). El gradiente de $J$ en $w$, denotado como $\nabla J(w)$, es el vector de derivadas parciales de $J$, es decir,
  $\nabla J(w) = \left( \frac{\partial J(w)}{\partial w_1}, \frac{\partial J(w)}{\partial w_2}, ..., \frac{\partial J(w)}{\partial w_n} \right)$
@@ -733,8 +727,8 @@ Empezaremos con una tasa de aprendizaje de $10^{-10}$ hasta llegar a 1, comparan
   \label{Cyclicallr}
 \end{figure}
 
-\section{K-fold cross validation}
+\section{$K$-fold cross validation}
 
-K-fold cross validation es una técnica utilizada para evaluar modelos propuestos, con el fin de
+$K$-fold cross validation es una técnica utilizada para evaluar modelos propuestos, con el fin de
 encontrar el mejor modelo.
-En K-fold cross validation los datos de prueba se dividen en K subconjuntos. Uno de los subconjuntos se utiliza como datos de test y el resto (K-1) como datos de entrenamiento. El proceso de cross validation es repetido durante K iteraciones, con cada uno de los posibles subconjuntos de datos de test. Finalmente se realiza el promedio de los resultados de cada modelo(cada modelo tiene K resultados), guardando el modelo que obtuvo mejor promedio. Este método es muy preciso puesto que evaluamos a partir de K combinaciones de datos de entrenamiento y de test.
+En $K$-foldcross validation los datos de prueba se dividen en $K$ subconjuntos. Uno de los subconjuntos se utiliza como datos de test y el resto ($K-1$) como datos de entrenamiento. El proceso de cross validation es repetido durante $K$ iteraciones, con cada uno de los posibles subconjuntos de datos de test. Finalmente se realiza el promedio de los resultados de cada modelo(cada modelo tiene $K$ resultados), guardando el modelo que obtuvo mejor promedio. Este método es muy preciso puesto que evaluamos a partir de $K$  combinaciones de datos de entrenamiento y de test.
