@@ -1,0 +1,68 @@
+\babel@toc {spanish}{}
+\babel@toc {spanish}{}
+\contentsline {chapter}{Agradecimientos}{3}{chapter*.1}
+\contentsline {chapter}{Resumen}{5}{chapter*.2}
+\contentsline {chapter}{\'{I}ndice general}{7}{chapter*.3}
+\contentsline {chapter}{\numberline {1}Introducci\IeC {\'o}n}{9}{chapter.1}
+\contentsline {section}{\numberline {1.1}Motivaci\IeC {\'o}n}{9}{section.1.1}
+\contentsline {section}{\numberline {1.2}Objetivos del trabajo}{9}{section.1.2}
+\contentsline {section}{\numberline {1.3}Estructura de la Tesis}{10}{section.1.3}
+\contentsline {chapter}{\numberline {2}Nociones Preliminares}{11}{chapter.2}
+\contentsline {section}{\numberline {2.1}Conceptos financieros elementales}{11}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}Los tipos de Inter\IeC {\'e}s}{11}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}Tasa libre de riesgo}{12}{subsection.2.1.2}
+\contentsline {subsection}{\numberline {2.1.3}Productos b\IeC {\'a}sicos}{12}{subsection.2.1.3}
+\contentsline {subsection}{\numberline {2.1.4}Derivados}{12}{subsection.2.1.4}
+\contentsline {subsection}{\numberline {2.1.5}Mercados financieros}{12}{subsection.2.1.5}
+\contentsline {subsection}{\numberline {2.1.6}Opciones}{13}{subsection.2.1.6}
+\contentsline {subsection}{\numberline {2.1.7}Payoff y Ganancia}{14}{subsection.2.1.7}
+\contentsline {subsection}{\numberline {2.1.8}Estrategias con opciones}{15}{subsection.2.1.8}
+\contentsline {subsubsection}{Spreads}{17}{section*.4}
+\contentsline {subsubsection}{Combinaciones}{17}{section*.5}
+\contentsline {subsection}{\numberline {2.1.9}Modelo de Black Scholes}{18}{subsection.2.1.9}
+\contentsline {subsection}{\numberline {2.1.10}F\IeC {\'o}rmula de Valoraci\IeC {\'o}n de una call europea con Black-Scholes}{19}{subsection.2.1.10}
+\contentsline {subsection}{\numberline {2.1.11}Volatilidad}{19}{subsection.2.1.11}
+\contentsline {subsubsection}{Volatilidad Hist\IeC {\'o}rica}{20}{section*.6}
+\contentsline {subsubsection}{Volatilidad Impl\IeC {\'\i }cita}{20}{section*.7}
+\contentsline {subsection}{\numberline {2.1.12}Superficie de volatilidad}{21}{subsection.2.1.12}
+\contentsline {section}{\numberline {2.2}M\IeC {\'e}todo de Bisecci\IeC {\'o}n}{21}{section.2.2}
+\contentsline {section}{\numberline {2.3}M\IeC {\'e}todo de Brent}{22}{section.2.3}
+\contentsline {subsubsection}{M\IeC {\'e}todo de la Secante}{22}{section*.8}
+\contentsline {subsubsection}{interpolaci\IeC {\'o}n cuadr\IeC {\'a}tica inversa}{22}{section*.9}
+\contentsline {section}{\numberline {2.4}Redes neuronales}{23}{section.2.4}
+\contentsline {subsection}{\numberline {2.4.1}Perceptr\IeC {\'o}n}{23}{subsection.2.4.1}
+\contentsline {subsection}{\numberline {2.4.2}Redes Feed-Forward}{25}{subsection.2.4.2}
+\contentsline {subsection}{\numberline {2.4.3}Aprendizaje por Descenso por el Gradiente}{26}{subsection.2.4.3}
+\contentsline {subsection}{\numberline {2.4.4}Funciones de Activaci\IeC {\'o}n}{27}{subsection.2.4.4}
+\contentsline {subsection}{\numberline {2.4.5}Tasa de Aprendizaje}{28}{subsection.2.4.5}
+\contentsline {subsubsection}{Algoritmos de decrecimiento de la tasa de aprendizaje}{28}{section*.10}
+\contentsline {subsubsection}{Cyclical Learning Rate}{29}{section*.12}
+\contentsline {section}{\numberline {2.5}$K$-fold cross validation}{30}{section.2.5}
+\contentsline {chapter}{\numberline {3}Implicancias de la volatilidad impl\'icita}{31}{chapter.3}
+\contentsline {section}{\numberline {3.1}Superficie de Volatilidad para valorar opciones}{31}{section.3.1}
+\contentsline {section}{\numberline {3.2}Estrategias dependiendo de la volatilidad impl\IeC {\'\i }cita}{32}{section.3.2}
+\contentsline {paragraph}{Terminolog\IeC {\'\i }a}{32}{section*.13}
+\contentsline {subsection}{\numberline {3.2.1}Backspread}{32}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Long Straddle y Long Strangle}{34}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}Long Butterfly Spread}{35}{subsection.3.2.3}
+\contentsline {chapter}{\numberline {4}Implementaci\'on n\'umerica del m\'etodo de Bisecci\'on y de Brent}{39}{chapter.4}
+\contentsline {section}{\numberline {4.1}Introducci\IeC {\'o}n}{39}{section.4.1}
+\contentsline {section}{\numberline {4.2}Implementaci\IeC {\'o}n de los m\IeC {\'e}todos num\IeC {\'e}ricos}{40}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Intervalo inicial para el m\IeC {\'e}todo de bisecci\IeC {\'o}n y de Brent}{40}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Aplicaci\IeC {\'o}n del M\IeC {\'e}todo de Bisecci\IeC {\'o}n}{41}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}Aplicaci\IeC {\'o}n del M\IeC {\'e}todo de Brent}{41}{subsection.4.2.3}
+\contentsline {chapter}{\numberline {5}Implementaci\'on con Red Neuronal Feed-Forward}{43}{chapter.5}
+\contentsline {section}{\numberline {5.1}C\IeC {\'a}lculo de prima de opci\IeC {\'o}n call usando $S/K$}{43}{section.5.1}
+\contentsline {section}{\numberline {5.2}Generaci\IeC {\'o}n de muestra}{43}{section.5.2}
+\contentsline {section}{\numberline {5.3}k-fold cross validation}{45}{section.5.3}
+\contentsline {section}{\numberline {5.4}Optimizaci\IeC {\'o}n}{48}{section.5.4}
+\contentsline {chapter}{\numberline {6}Resultados}{51}{chapter.6}
+\contentsline {section}{\numberline {6.1}Primera Red}{51}{section.6.1}
+\contentsline {section}{\numberline {6.2}Optimizaci\IeC {\'o}n}{52}{section.6.2}
+\contentsline {subsection}{\numberline {6.2.1}Cambio en funci\IeC {\'o}n de decrecimiento de la Tasa de Aprendizaje}{53}{subsection.6.2.1}
+\contentsline {section}{\numberline {6.3}M\IeC {\'e}todos Num\IeC {\'e}ricos}{56}{section.6.3}
+\contentsline {subsection}{\numberline {6.3.1}Problemas Num\IeC {\'e}ricos}{56}{subsection.6.3.1}
+\contentsline {subsection}{\numberline {6.3.2}Precisi\'on M\'etodos Num\'ericos}{57}{subsection.6.3.2}
+\contentsline {section}{\numberline {6.4}Tiempo de Ejecuci\IeC {\'o}n y Robustez}{61}{section.6.4}
+\contentsline {chapter}{\numberline {7}Conclusiones}{63}{chapter.7}
+\contentsline {chapter}{Bibliograf\'{\i }a}{65}{chapter*.14}
