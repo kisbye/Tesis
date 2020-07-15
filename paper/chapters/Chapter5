@@ -10,7 +10,7 @@ En este capítulo presentamos el cálculo de la volatilidad implícita mediante 
 
 Rene Garcia y Ramazan Gen\c{c}ay~\cite{Gencay} invocando la homogeneidad de la fórmula de Black Scholes,
 demostraron que las redes neuronales estiman mejor el precio de una opción usando el cociente $S/K$. 
-Así podemos reescribir la ecuación, obteniendo~\ref{c2}.
+Así podemos reescribir la ecuación \textcolor{red}{decir cuál}, obteniendo~\ref{c2}.
 %
 \begin{equation}
 \displaystyle\frac{c}{K} = \displaystyle\frac{S(0)}{K}\Phi(d_1) - e^{-rT}\Phi(d_2) = B'(S(0)/K, T, r, \sigma)
