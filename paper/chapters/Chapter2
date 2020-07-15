@@ -180,7 +180,7 @@ Short en una Put & $-\max(K - S(T), 0) = \min(S(T) - K, 0))$\\
    \begin{minipage}[b]{0.45\textwidth}
     \includegraphics[width=1\textwidth]{putganancia.png}
   \end{minipage}
-  \caption{Ganancia de posiciones long en una call y en una put con strike $K$ y madurez T.}
+  \caption{Ganancia de posiciones long en una call y en una put con strike $K$ y madurez $T$.}
   \label{longganancia}
 \end{figure}
 
@@ -194,7 +194,7 @@ Short en una Put & $-\max(K - S(T), 0) = \min(S(T) - K, 0))$\\
    \begin{minipage}[b]{0.45\textwidth}
     \includegraphics[width=1\textwidth]{putshorty.png}
   \end{minipage}
-  \caption{Ganancia de posiciones short en una call y en una put con strike $K$ y madurez T.}
+  \caption{Ganancia de posiciones short en una call y en una put con strike $K$ y madurez $T$.}
   \label{shortganancia}
 \end{figure}
 
@@ -539,21 +539,19 @@ donde $f_k=f(x_k)$. El algoritmo~\ref{Abrent} detalla el método de Brent.
 
 \section{Redes neuronales}
 
-Una Red Neuronal Artificial es un modelo matemático inspirado en el comportamiento biológico de las neuronas y en la estructura del cerebro, y que es utilizada para resolver un amplio rango de problemas. La red neuronal se entrena para estimar los parámetros óptimos ($W$) para una función $f(x,W,b)$, a partir de un conjunto de entrenamiento 
-$\{(x_1,y_1),...,(x_n,y_n)\}$, tal que $f(x_i,W,b) \approx y_i$, para $i = 1,...,n$.
-\textcolor{red}{decir qué es $b$}
+Una Red Neuronal Artificial es un modelo matemático inspirado en el comportamiento biológico de las neuronas y en la estructura del cerebro, y que es utilizada para resolver un amplio rango de problemas. 
+\textcolor{blue}{Su diseño consiste en un conjunto de variables de entrada y de salida con ciertas funciones que relacionan unas con otras y que están determinadas por ciertos parámetros. }
+La red neuronal se entrena para estimar los parámetros óptimos ($W$ \textcolor{red}{y $b$}) para una función $f(x,W,b)$, a partir de un conjunto de \textcolor{red}{de datos de }entrenamiento 
+$\{(x_1,y_1),...,(x_n,y_n)\}$, \textcolor{red}{con el objetivo de lograr que }tal que $f(x_i,W,b) \approx y_i$,\textcolor{red}{  donde $y_i$ es la salida esperada para el dato de entrada $x_i$,} para cada $i = 1,...,n$.
 %%%% Donde $x = [x_1,...,x_n]$, $y=[y_1,...,y_n]$
+\textcolor{red}{Una vez entrenada la red neuronal ésta es utilizada para computar $f(x,W,b)$ para otros datos $x$ de interés.}
 
 \subsection{Perceptrón}
 
 La unidad básica de una red neuronal son los perceptrones (o neuronas). Un perceptrón toma un vector de entradas de valor real, calcula la combinación lineal
-de estas entradas con respecto a los pesos, luego genera una salida, dependiendo de la función de activación. Más precisamente:
-
-
-$o(x_1,...,x_n) = \psi(w_0+x_1w_1+...+x_nw_n)$
-
-
-donde cada $w_i$ es una constante de valor real, o peso, y $\psi$ es la función de activación \cite{Perceptron}, como muestra la figura~\ref{perceptronl}:
+de estas entradas con respecto a \textcolor{red}{ciertos} los pesos, y luego genera una salida, dependiendo de la función de activación. Más precisamente,\textcolor{red}{ la salida $o$ para un vector de entradas $(x_1,...,x_n)$ es de la forma}:
+$$o(x_1,...,x_n) = \psi(w_0+x_1w_1+...+x_nw_n),$$
+donde cada $w_i$ es una constante de valor real, o peso, y $\psi$ es la función de activación \cite{Perceptron}. \textcolor{red}{La Figura \ref{percpetronl} ilustra un perceptrón:}, como muestra la figura~\ref{perceptronl}:
 
 \begin{figure}[H]
   \centering
@@ -576,16 +574,18 @@ una capa se conecta con todas las neuronas en la capa siguiente.
 En la Figura~\ref{Feed-Forward} podemos observar las distintas capas que componen una red neuronal. En primer lugar tenemos la capa de entrada, donde se define cuántos valores de entrada tomará nuestro modelo, estos serán luego enviados a la primer
 capa oculta. Después de esto puede venir una o más capas ocultas, seguidas de una capa de salida que genera 
 una aproximación del resultado deseado, por ende,
-si una red neuronal Feed-Forward tiene N capas, entonces tiene N-2 capas ocultas.
-Cada unidad (o input) alimenta solo las unidades de la siguiente capa. Las unidades en intermedio
-las capas a menudo se llaman capas ocultas (hidden units) porque no tienen conexión directa con el
-datos, tanto de entrada como de entrada como de salida~\cite{Feed}.
+si una red neuronal Feed-Forward tiene $N$ capas, entonces tiene $N-2$ capas ocultas.
+Cada unidad (o input) alimenta solo las unidades de la siguiente capa. Las unidades en intermedio de
+las capas a menudo se llaman capas ocultas (hidden units) porque no tienen conexión directa con el conjunto de
+datos, tanto de entrada como de salida~\cite{Feed}.
 
 
-
+\textcolor{red}{A las figuras redimensionarlas sólo con width o con height, porque si le das los dos datos puede que te lo deforme}
 \begin{figure}[H]
   \centering
-  \includegraphics[width=12cm, height=5cm]{feedforward}
+  \includegraphics[width=0.7\textwidth
+  %12cm, height=5cm
+  ]{feedforward}
   \caption{Feed-Forward}
   \label{Feed-Forward}
 \end{figure}
@@ -595,7 +595,7 @@ datos, tanto de entrada como de entrada como de salida~\cite{Feed}.
 \subsection{Aprendizaje por Descenso por el Gradiente}
 
 
-Como hemos mencionado anteriormente el objetivo de una red neuronal es estimar los parámetros $W$ óptimos para una función 
+Como hemos mencionado anteriormente, el objetivo de una red neuronal es estimar los parámetros $W$ y $b$ óptimos para una función 
 $f(x,W,b)$. Una forma de estimar esos parámetros es reducir el error medido por una función de costo.
 
 
@@ -604,21 +604,20 @@ J(x,W,b,Y) = \displaystyle\frac{1}{n}\sum\limits_{i=1}^{n}(f(x_i,W,b) - y_i)^2
 \end{equation}
 \textcolor{red}{completar: donde $Y=(y_1, \dots$}
 
-\vspace{5mm}
+%\vspace{5mm}
 
-Para reducir dicho error se busca $W$ tal que minimice la función $J(x,W,b,Y)$, se puede utilizar el descenso por el gradiente.
+Para reducir dicho error se buscan $W$ \textcolor{red}{y $b$} tal que se minimice la función $J(x,W,b,Y)$. Para esto se puede utilizar el método de descenso por el gradiente.
 
-Sea $w = [W,b]$, (para simplificar la notación). El gradiente de $J$ en $w$, denotado como $\nabla J(w)$, es el vector de derivadas parciales de $J$, es decir,
- $\nabla J(w) = \left( \frac{\partial J(w)}{\partial w_1}, \frac{\partial J(w)}{\partial w_2}, ..., \frac{\partial J(w)}{\partial w_n} \right)$
+Para simplificar la notación escribimos $w = [W,b]$. El gradiente de $J$ en $w$, denotado como $\nabla J(w)$, es el vector de derivadas parciales de $J$, es decir,
+ $\nabla J(w) = \left( \frac{\partial J(w)}{\partial w_1}, \frac{\partial J(w)}{\partial w_2}, ..., \frac{\partial J(w)}{\partial w_n} \right)$. \textcolor{red}{aquí habría incluir la derivada con respecto a $b$, o bien decir que son $n+1$ derivadas y $w_0=b$}
 
  El descenso por el gradiente es un algoritmo iterativo, se comienza con valor inicial de $w^0$ (por ejemplo $w^0 = [0, 0, ..., 0]$) y entonces en
-cada iteración damos un paso en la dirección negativa del gradiente en el punto actual. Esto es, $w^{t+1} = w^t - \eta\nabla J(w^t)$
-, donde $\eta > 0$, conocido como la tasa de aprendizaje, es el encargado de decidir el tamaño del paso que damos.
-Ya que $\nabla J(x,w^t,Y,b) > 0$ cuando J es creciente en $w^t$, y $\nabla J(x,w^t,Y,b) < 0$ cuando J es decreciente en $w^t$ 
-(como muestra la imagen 2.4), se obtiene 
-$J(x,w^{t+1},b,Y) \leq J(x,w^t,b,Y)$, siempre y cuando $\eta$ no sea muy grande(Observar Figura~\ref{Desgrad}).
+cada iteración damos un paso en la dirección negativa del gradiente en el punto actual. Esto es, $w^{t+1} = w^t - \eta\nabla J(w^t)$, donde $\eta > 0$, conocido como la tasa de aprendizaje, \textcolor{red}{determina la longitud del paso.} es el encargado de decidir el tamaño del paso que damos.
+Ya que $\nabla J(x,w^t,Y,b) > 0$ cuando $J$ es creciente en $w^t$, y $\nabla J(x,w^t,Y,b) < 0$ cuando $J$ es decreciente en $w^t$ 
+(como muestra la \textcolor{red}{Figura y poner referencia} imagen 2.4), se obtiene 
+$J(x,w^{t+1},b,Y) \leq J(x,w^t,b,Y)$, siempre y cuando $\eta$ no sea muy grande (Ver Figura~\ref{Desgrad}).
 
-En Algoritmo~\ref{Agrad} aplica el método del descenso por el gradiente.
+El Algoritmo~\ref{Agrad} aplica el método del descenso por el gradiente.
 
 \vspace{5mm}
 
@@ -661,9 +660,9 @@ En Algoritmo~\ref{Agrad} aplica el método del descenso por el gradiente.
 La función de activación en las redes neuronales son las encargadas de enviar señales al siguiente nivel
 o siguiente capa. Es crucial elegir la función de activación correcta para no caer en el \textit{problema de desvanecimiento de gradiente}.
 
-Otra importante característica que debe tener la función de activación es ser diferenciable. Ya que al aplicar el
-algoritmo del \textit{descenso por el gradiente}, cuando se propaga para hacia atrás, calcula los gradientes de error
-con respecto a los pesos, para calcular los nuevos pesos acordemente~\cite{ActivationL}.
+Otra importante característica que debe tener la función de activación es ser diferenciable, ya que al aplicar el
+algoritmo del \textit{descenso por el gradiente}, cuando se propaga para hacia atrás, se calculan los gradientes de error
+con respecto a los pesos para calcular los nuevos pesos acordemente~\cite{ActivationL}.
 
 Las fórmulas~\ref{Relu},~\ref{Tanh},~\ref{Elu} muestra las funciones de activación que vamos a utilizar, en nuestro caso el $\alpha$ de la Elu es 1. 
 
@@ -675,21 +674,23 @@ ReLu(z) = \max(z,0)
 \label{Tanh} 
 \\
 Elu(z)= \begin{cases}
-          \alpha(e^{z -1}) & z < 0\\
-          z  &   z \ge 0
-        \end{cases} 
+          \alpha(e^{z -1}) & \mbox{si } z < 0\\
+          z  &   \mbox{si }z \ge 0
+        \end{cases} .
 \label{Elu}
 \end{eqnarray}
 
 
 \subsection{Tasa de Aprendizaje}
 
-La tasa de aprendizaje determina el tamaño del paso en cada iteración mientras se mueve hacia un mínimo de una función de error. Una tasa de aprendizaje grande conduce rápidamente al un mínimo local, pero con riesgo de divergir. En cambio una tasa de aprendizaje pequeño no diverge pero necesita muchas iteraciones para llegar al mínimo local (Figura~\ref{lratef}). Comúnmente se utiliza una tasa de aprendizaje grande y se lo va decrementando por cada época (es cuando un conjunto de datos completo pasa a través de la red hacia adelante y hacia atrás una vez)
+La tasa de aprendizaje determina el tamaño del paso en cada iteración mientras se mueve hacia un mínimo de una función de error. Una tasa de aprendizaje grande conduce rápidamente a un mínimo local, pero con riesgo de diverger. En cambio una tasa de aprendizaje pequeña no diverge pero necesita muchas iteraciones para llegar al mínimo local (Figura~\ref{lratef}). Comúnmente se utiliza una tasa de aprendizaje grande y se la va decrementando por cada época (es cuando un conjunto de datos completo pasa a través de la red hacia adelante y hacia atrás una vez)
  hasta encontrar un buen resultado.
+ \textcolor{red}{La definición de época tiene que ser un poco más clara. La pondría en la sección anterior cuando se habla de la función costo}
 
 \begin{figure}
   \centering
-  \includegraphics[width=15cm, height=6cm]{learning_rate}
+  \includegraphics[width=15cm%, height=6cm
+  ]{learning_rate}
   \caption{Efecto de la tasa de aprendizaje sobre el entrenamiento}
   \label{lratef}
 \end{figure}
@@ -697,20 +698,28 @@ La tasa de aprendizaje determina el tamaño del paso en cada iteración mientras
 
 \subsubsection{Algoritmos de decrecimiento de la tasa de aprendizaje}
 
+\textcolor{red}{Escribir alguna introducción acá, no se entiende qué son los títulos que siguen ni cómo se aplican las fórmulas que se presentan. También usaría un paragrah para cada título:
+\paragraph{Time-Based Decay}}
+
+
 \textbf{Time-Based Decay}: $ base\_lr\displaystyle\frac{1}{1+decay*epoch}$ \cite{Decay}
 
+\textcolor{red}{Escribir una fórmula matemática: $ base\_lr\displaystyle\frac{1}{1+decay\cdot
+ epoch}$}
 \vspace{5mm}
 
 \textbf{Step Decay}: $ base\_lr * dacay^{floor\left(\displaystyle\frac{1+epoch}{epoch\_drop}\right)}$ \cite{Decay}
 
+\textcolor{red}{$ base\_lr \cdot decay^{\left\lfloor\displaystyle\frac{1+epoch}{epoch\_drop}\right\rfloor}$}
 \vspace{5mm}
 
 \textbf{Exponential Decay}: $ base\_lr * e^{(-k*epoch)}$ \cite{Exponential}
 
+\textcolor{red}{Escribir una fórmula matemática: $ base\_lr \cdot e^{(-k\cdot epoch)}$}
+
 \vspace{5mm}
-
-Donde epoch representa la época en cual la red se encuentra, base\_lr es el valor inicial de la tasa de aprendizaje, decay es el coeficiente de decrecimiento de la tasa de aprendizaje y epoch\_drop cada cuantas épocas se decrece la tasa de aprendizaje (Solo en el Step Decay).
-
+donde $epoch$ representa la época en cual la red se encuentra, $base\_lr$ es el valor inicial de la tasa de aprendizaje, $decay$ es el coeficiente de decrecimiento de la tasa de aprendizaje y $epoch\_drop$ cada cuantas épocas se decrece la tasa de aprendizaje (Solo en el Step Decay).
+\textcolor{red}{Aquí $\lfloor x \rfloor$ indica la parte entera inferior de $x$.}
 
 \subsubsection{Cyclical Learning Rate}
 
@@ -722,7 +731,8 @@ Empezaremos con una tasa de aprendizaje de $10^{-10}$ hasta llegar a 1, comparan
 
 \begin{figure}
   \centering
-  \includegraphics[width=12cm, height=4cm]{cyclical_lr.png}
+  \includegraphics[width=0.6\textwidth%12cm, height=4cm
+  ]{cyclical_lr.png}
   \caption{Cyclical Learning Rate}
   \label{Cyclicallr}
 \end{figure}
