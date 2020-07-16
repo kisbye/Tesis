@@ -7,31 +7,39 @@ En este capítulo vamos a analizar la efectividad de los modelos propuestos.
 El experimento se realizó en CPU(Intel(R) Core(TM) i5-8265U CPU @ 1.60GHz)
  
 \section{Primera Red}
-\label{PrimeraRed}
+\label{Primera Red}
+\textcolor{blue}{¿No se iba a llamar Red inicial esta sección?
+\\
+No me convence el uso del tiempo futuro en este capítulo. Yo redactaría en tiempo pasado, explicando el trabajo que se realizó. He corregido un poco al principio para dar una idea.}
 
-Ya tenemos los hiperparámetros óptimos del capítulo anterior, entonces vamos a definir la muestra de entrenamiento, validación y test. Crearemos 2 muestras, una amplia y una estrecha. En el cuadro 6.1 se define el ambiente de las muestras, y para generar la muestra se usa el algoritmo 5.1.
+\
+
+\textcolor{blue}{Con los hiperparámetros obtenidos en el Capítulo \ref{Red Neuronal}, se definieron la muestra de entrenamiento, validación y test. Se crearon dos muestras, una amplia y una estrecha.}
+\textcolor{yellow}{Ya tenemos los hiperparámetros óptimos del capítulo anterior, entonces vamos a definir la muestra de entrenamiento, validación y test. Crearemos 2 muestras, una amplia y una estrecha. } En el Cuadro 6.1 se define el ambiente de las muestras, y para generar la muestra se utilizó el algoritmo 5.1. \textcolor{red}{usar referencias para Cuadro 6.1 y para algoritmo 5.1.}
 
 
 \begin{table}[!htbp]
 \begin{center}
-\caption{Hiperparametros de la Muestra}
+\caption{Hiperparámetros de la Muestra}
 \begin{tabular}{|l|l|l|l|l|}
 \hline
- & Parametros & muestra amplia  &  muestra estrecha   \\ \hline
-  & precio ratio($S_0$/K) & [0.4, 1.6] & [0.5, 1.5]   \\ \cline{2-4} 
- Entrada & Tiempo de madurez($\tau$) &  [0.2, 1.1] & [0.3, 0.95]   \\ \cline{2-4} 
-  & volatilidad($\sigma$) &  [0.01, 1] & [0.02, 0.9]  \\ \cline{2-4} 
-  & Tasa libre de riesgo($r$) &  [0.02, 0.1] & [0.03, 0.08] \\ \hline
- Salida & Precio de Call(c/K) &  (0, 0.9) & (0, 0.73) \\ \hline
+ & Parámetros & muestra amplia  &  muestra estrecha   \\ \hline
+  & precio ratio($S_0/K$) & $[0.4, 1.6]$ & $[0.5, 1.5]$   \\ \cline{2-4} 
+ Entrada & Tiempo de madurez($\tau$) &  $[0.2, 1.1]$ & $[0.3, 0.95]$   \\ \cline{2-4} 
+  & volatilidad($\sigma$) &  $[0.01, 1]$ & $[0.02, 0.9]$  \\ \cline{2-4} 
+  & Tasa libre de riesgo($r$) &  $[0.02, 0.1]$ & $[0.03, 0.08]$ \\ \hline
+ Salida & Precio de Call($c/K$) &  $(0, 0.9)$ & $(0, 0.73)$ \\ \hline
 \end{tabular}
 \end{center}
 \end{table}
 
-Una vez obtenida la muestra, la entrada de la red será \{c/K, $S_0$/K, $r$, $\tau$\} y la salida \{$\sigma$\}. Vamos a entrenar la red durante 1000 épocas utilizando la muestra amplia y los hiperparámetros del obtenidos capítulo anterior. 
+Una vez obtenida la muestra, la entrada de la red fueron las uplas $\{c/K, S_0/K, r, \tau\}$ y la salida 
+$\{\sigma\}$. Vamos a entrenar \textcolor{blue}{Se entrenó } la red durante $1000$ épocas utilizando la muestra amplia y los hiperparámetros del obtenidos Capítulo \ref{Red Neuronal}\textcolor{yellow}{anterior}. 
 
-Una vez entrenada la red, en el Cuadro 6.2 y en las Figuras 6.1 y 6.2 se pueden observar los resultados.
+\textcolor{yellow}{Una vez entrenada la red, }En el Cuadro 6.2 y en las Figuras 6.1 y 6.2 \textcolor{red}{usar referencia para las figuras} \textcolor{blue}{se pueden observar los resultados una vez realizado el entrenamiento de la red.}
 
 
+\textcolor{red}{Los histogramas  no tienen la misma escala, uno llega a 0.175 y el otro a 0.200. No dice qué es $S(\sigma)$, y no está explicado qué se representa en los histogramas.}
 \begin{figure}[!tbp]
   \centering
   \begin{minipage}[b]{0.45\textwidth}
@@ -61,26 +69,26 @@ Muestra Estrecha & $1.47 \times 10^{-4}$ &  $4.07 \times 10^{-3}$ & $5.46$ & 0.9
 
 \section{Optimización}
 
-Ya tenemos los hiperparámetros óptimos del capítulo anterior, entonces vamos a definir la muestra de entrenamiento, validación y test. Crearemos 2 muestras, una amplia y una estrecha. A diferencia de la muestra de la sección anterior, en esta se va a modificar utilizando la ecuación 5.1 del capítulo anterior. En el cuadro 6.3 se define el ambiente de la muestra, y para generar las muestras se usa el algoritmo 5.1.
+Ya tenemos los hiperparámetros óptimos del capítulo anterior, entonces vamos a definir la muestra de entrenamiento, validación y test. Crearemos 2 muestras, una amplia y una estrecha. A diferencia de la muestra de la sección anterior, en esta se va a modificar utilizando la ecuación \textcolor{red}{usar referencias. No son ecuación sino fórmula, y se cita entre paréntesis: (ref...)} 5.1 del capítulo anterior. En el cuadro 6.3 se define el ambiente de la muestra, y para generar las muestras se usa el algoritmo 5.1.
 
 \begin{table}[!htbp]
 \begin{center}
 \caption{Hiperparámetros de la Muestra}
 \begin{tabular}{|l|l|l|l|l|}
 \hline
- & Parametros & muestra amplia  &  muestra estrecha   \\ \hline
-  & precio ratio($S_0$/K) & [0.4, 1.6] & [0.5, 1.5]   \\ \cline{2-4} 
- Entrada & Tiempo de madurez($\tau$) &  [0.2, 1.1] & [0.3, 0.95]   \\ \cline{2-4} 
-  & volatilidad($\sigma$) &  [0.01, 1] & [0.02, 0.9]  \\ \cline{2-4} 
-  & Tasa libre de riesgo($r$) &  [0.02, 0.1] & [0.03, 0.08] \\ \hline
- Salida & Precio de Call($\ln$($\tilde{c}/{K}$)) &  [-16.12,-0.94] & [-16.12,-0.94] \\ \hline
+ & Parámetros & muestra amplia  &  muestra estrecha   \\ \hline
+  & precio ratio($S_0/K$) & $[0.4, 1.6]$ & $[0.5, 1.5]$   \\ \cline{2-4} 
+ Entrada & Tiempo de madurez($\tau$) &  $[0.2, 1.1]$ & $[0.3, 0.95]$   \\ \cline{2-4} 
+  & volatilidad($\sigma$) &  $[0.01, 1]$ & $[0.02, 0.9]$  \\ \cline{2-4} 
+  & Tasa libre de riesgo($r$) &  $[0.02, 0.1]$ & $[0.03, 0.08]$ \\ \hline
+ Salida & Precio de Call($\ln(\tilde{c}/{K})$) &  $[-16.12,-0.94]$ & $[-16.12,-0.94]$ \\ \hline
 \end{tabular}
 \end{center}
 \end{table}
 
-Una vez obtenida la muestra, la entrada de la red será \{$\ln$($\tilde{c}/K$), $S_0$/K, $r$, $\tau$\} y la salida \{$\sigma$\}. Vamos a entrenar la red durante 1000 épocas.
+Una vez obtenida la muestra, la entrada de la red será $\{\ln(\tilde{c}/K, S_0/K, r, \tau\}$ y la salida $\{\sigma\}$. Vamos a entrenar la red durante 1000 épocas.
 
-Una vez entrenada la red, en el Cuadro 6.4 y en las Figuras 6.3 y 6.4 se pueden observar los resultados.
+Una vez entrenada la red, en el Cuadro \textcolor{red}{usar referencias}6.4 y en las Figuras \textcolor{red}{usar referencias}6.3 y 6.4 se pueden observar los resultados.
 
 
 \begin{figure}[!tbp]
@@ -102,8 +110,8 @@ Una vez entrenada la red, en el Cuadro 6.4 y en las Figuras 6.3 y 6.4 se pueden 
 \begin{tabular}{|l|l|l|l|l|}
 \hline
  & ECM & EAM  &  EPAM & $R^2$  \\ \hline
-Muestra Amplia  & $6.24\times10^{-8}$ & $1.92\times10^{-4}$ & $0.059$ & 0.999999104  \\ \hline
-Muestra Estrecha & $5.58\times10^{-8}$ &  $ 1.84\times10^{-4}$ & $0.062$ & 0.999999020  \\ \hline
+Muestra Amplia  & $6.24\times10^{-8}$ & $1.92\times10^{-4}$ & $0.059$ & $0.999999104$  \\ \hline
+Muestra Estrecha & $5.58\times10^{-8}$ &  $ 1.84\times10^{-4}$ & $0.062$ & $0.999999020$  \\ \hline
   
 \end{tabular}
 \end{center}
@@ -141,7 +149,8 @@ El algoritmo~\ref{al:decay} muestra el método de decrecimiento de la tasa de ap
 La Figura~\ref{StepDvsModi} muestra la comparación entre el step decay usado anteriormente y el step decay modificado.
 
 \begin{figure}[t!]
-  \includegraphics[width=16cm, height=10cm]{imagenes/comparacion_step_1000}
+  \includegraphics[width=16cm%, height=10cm
+  ]{imagenes/comparacion_step_1000}
   \caption{Step Decay contra Step Decay Modificado}
   \label{StepDvsModi}
 \end{figure}
@@ -163,7 +172,7 @@ Las Figuras~\ref{aprend1000} y~\ref{aprend3000} muestran el tasa de aprendizaje 
   \end{minipage}
 \end{figure}
 
-Luego vamos a entrenar la red durante 3000 épocas usando step decay modificado. En las Figuras~\ref{resultamplia},~\ref{resultestrecha}, y en el Cuadro~\ref{cu:erroropti} se muestran los resultados.
+Luego vamos a entrenar la red durante $3000$ épocas usando step decay modificado. En las Figuras~\ref{resultamplia},~\ref{resultestrecha}, y en el Cuadro~\ref{cu:erroropti} se muestran los resultados.
 
 \begin{figure}[!tbp]
   \centering
@@ -187,8 +196,8 @@ Luego vamos a entrenar la red durante 3000 épocas usando step decay modificado.
 \begin{tabular}{|l|l|l|l|l|}
 \hline
  & ECM & EAM  &  EPAM & $R^2$  \\ \hline
-Muestra Amplia  & $4.67\times10^{-8}$ & $1.66\times10^{-4}$ & $0.0515$ & 0.999999329  \\ \hline
-Muestra Estrecha & $4.02\times10^{-8}$ &  $ 1.57\times10^{-4}$ & $0.0526$ & 0.999999295  \\ \hline
+Muestra Amplia  & $4.67\times10^{-8}$ & $1.66\times10^{-4}$ & $0.0515$ & $0.999999329$  \\ \hline
+Muestra Estrecha & $4.02\times10^{-8}$ &  $ 1.57\times10^{-4}$ & $0.0526$ & $0.999999295$  \\ \hline
   
 \end{tabular}
 \end{center}
@@ -202,13 +211,13 @@ Muestra Estrecha & $4.02\times10^{-8}$ &  $ 1.57\times10^{-4}$ & $0.0526$ & 0.99
 \subsection{Problemas Numéricos}
 \label{sub:Problemas}
 
-En la muestra amplia definida en la sección~\ref{PrimeraRed} hay aproximado un 0.05\% de casos que no cumplen con la condición $g(a)g(b) < 0$, 
-para $a \to 0$ y $b \to \infty$, donde g es la función~\ref{funciong} anteriormente.
+En la muestra amplia definida en la sección~\ref{PrimeraRed} hay aproximadamente un 0.05\% de casos que no cumplen con la condición $g(a)g(b) < 0$, 
+para $a \to 0$ y $b \to \infty$, donde $g$ es la función~\ref{funciong} anteriormente.
 
 El problema radica en el cálculo de la fórmula de Black-Scholes definida en la ecuación~\ref{eq:black},
 básicamente en la distribución de probabilidad acumulada $\Phi(d)$. Por definición $\Phi(d) < 1$, $\forall d \in \mathbb{R}$. 
 Pero Python usa aritmética de punto flotante IEEE-754~\cite{IEEE}, donde su precisión es $2^{-56}$,
-dando así una precisión aproximada de 15,95 dígitos decimales. 
+dando así una precisión aproximada de $15,95$ dígitos decimales. 
 Luego usando la función de Scipy para el cálculo de la distribución normal acumulada definida en la referencia~\cite{Normal}, 
 obtenemos $\Phi(n) = 1$, para $n > 8.3$.
 %
@@ -219,14 +228,14 @@ $\Phi(d_1) = \Phi(d_2)$ por el problema de precisión, ocasionando el error ante
 Luego el problema está en la cantidad de posibles números representables en un dado rango. 
 El formato se escribe con un significando que tiene un bit entero implícito de valor 1 (excepto para los números especiales). 
 Con los 52 bits de la mantisa, la precisión total es por lo tanto de 53 bits (es decir de $53 \,\log_{10}(2) \approx 15.955$ 
-que se redondea a 16 dígitos decimales). El exponente de este formato está sesgado o desplazado en 1023 unidades, 
+que se redondea a 16 dígitos decimales). El exponente de este formato está sesgado o desplazado en $1023$ unidades, 
 ya que como el máximo valor representado por $11$ bits es  $2^{11}-1 = 2047$, es la mitad de este rango la que representa 
 exponentes positivos y la otra, exponentes negativos~\cite{IEEE}. Podemos observar esto en la Figura~\ref{reprebinaria}.
 Lo expuesto permite ver que hay $2^{52}$ números de punto flotante entre $2^n$ y $2^{n+1}$ para todo $n$ entero en $[-1023, 1022]$.
 
 \begin{figure}[t!]
   \centering
-  \includegraphics[clip,width=0.95\textwidth]{imagenes/precision}
+  \includegraphics[clip,width=0.9\textwidth]{imagenes/precision}
   \caption{Estructura de un número en formato de coma flotante de doble precisión}
   \label{reprebinaria}
 \end{figure}
@@ -272,22 +281,24 @@ $g(0.11928197091) = 0$, se contradice la propiedad de monotonía creciente.
 
 \begin{figure}[t!]
   \centering
-  \includegraphics[width=0.95\textwidth]{g}
-  \caption{Función g.}
+  \includegraphics[width=0.9\textwidth]{g}
+  \caption{Función $g$. \textcolor{red}{No entiendo las referencias en este gráfico}}
   \label{fig:gin1}
 \end{figure}
 
 \begin{figure}[]
    \centering
    %\begin{minipage}[b]{0.45\textwidth}
-    \includegraphics[width=0.95\textwidth]{norm1.png}
+    \includegraphics[width=0.9\textwidth]{norm1.png}
     \caption{$\Phi(d_1)$.}
     \label{fig:d1}
+\end{figure}
+\begin{figure}
    %\end{minipage}
    %\hfill
    %\begin{minipage}[b]{0.45\textwidth}
     \centering
-    \includegraphics[width=0.95\textwidth]{norm1_c.png}
+    \includegraphics[width=0.9\textwidth]{norm1_c.png}
     \caption{$\Phi(d_1)$.}
     \label{fig:d1c}
   %\end{minipage}
@@ -310,8 +321,8 @@ $2^{-56}$. Ahora vamos a analizar si en la práctica, la tolerancia de los méto
 \begin{tabular}{|l|l|l|l|l|}
 \hline
  & ECM & EAM  &  EPAM & $R^2$  \\ \hline
-Bisección  & $1.10\times10^{-8}$ & $2.89\times10^{-6}$ & $0.00469$ & 0.99999986  \\ \hline
-Brent & $8.17\times10^{-6}$ &  $ 9.18\times10^{-5}$ & $0.35894$ & 0.99989551  \\ \hline
+Bisección  & $1.10\times10^{-8}$ & $2.89\times10^{-6}$ & $0.00469$ & $0.99999986$  \\ \hline
+Brent & $8.17\times10^{-6}$ &  $ 9.18\times10^{-5}$ & $0.35894$ & $0.99989551$  \\ \hline
   
 \end{tabular}
 \end{center}
@@ -321,27 +332,30 @@ Brent & $8.17\times10^{-6}$ &  $ 9.18\times10^{-5}$ & $0.35894$ & 0.99989551  \\
 %\subsection{Peso de la Volatilidad sobre el precio de la opción}
 
 Observando el Cuadro~\ref{metodosnum}, el error absoluto medio del método de bisección es $2.89\times10^{-6}$ y de Brent es
-$ 9.18\times10^{-5}$, siendo la tolerancia $2^{-56}$, esto es por el problema de precisión y el impacto que tiene la volatilidad sobre el precio de la opción (derivada de la fórmula de Black Scholes sobre $\sigma$) utilizando la fórmula de Black Scholes~\ref{eq:black}. En la Figura~\ref{ratiovscall}, que compara el precio de la opción con respecto a la variación de volatilidad, utilizando diferentes ratios (S/K), se puede observar que mientras más diferencia hay entre
-$S_0$ y K la volatilidad tiene menos impacto sobre el precio en especial en los casos OTM y en las volatilidades cercanas a 0. Luego en la Figura~\ref{interesvscall}, que compara el precio de la opción con respecto a la variación de volatilidad, utilizando diferentes tasas de interés, se observa prácticamente un desplazamiento.
+$ 9.18\times10^{-5}$, siendo la tolerancia $2^{-56}$, esto es por el problema de precisión y el impacto que tiene la volatilidad sobre el precio de la opción (derivada de la fórmula de Black Scholes sobre $\sigma$) utilizando la fórmula de Black Scholes~\ref{eq:black}. En la Figura~\ref{ratiovscall}, que compara el precio de la opción con respecto a la variación de volatilidad, utilizando diferentes ratios ($S/K$), se puede observar que mientras más diferencia hay entre
+$S_0$ y K la volatilidad tiene menos impacto sobre el precio en especial en los casos OTM y en las volatilidades cercanas a $0$. Luego en la Figura~\ref{interesvscall}, que compara el precio de la opción con respecto a la variación de volatilidad, utilizando diferentes tasas de interés, se observa prácticamente un desplazamiento.
 Por último en la Figura~\ref{Tvscall}, que compara el precio de la opción con respecto a la variación de volatilidad, utilizando diferentes tiempos de madurez, se puede observa que mientras los contratos sean más largos la volatilidad tiene un mayor impacto sobre el precio.
 
 \begin{figure}[t!]
   \centering
-  \includegraphics[width=16cm, height=8cm]{imagenes/ratio_v_call}
+  \includegraphics[width=16cm%, height=8cm
+  ]{imagenes/ratio_v_call}
   \caption{Volatilidad implícita contra precio call con distintos ratios}
   \label{ratiovscall}
 \end{figure}
 
 \begin{figure}[t!]
   \centering
-  \includegraphics[width=16cm, height=6cm]{imagenes/interes_v_call}
+  \includegraphics[width=16cm%, height=6cm
+  ]{imagenes/interes_v_call}
   \caption{Volatilidad implícita contra precio call con distintas tasas de interés}
   \label{interesvscall}
 \end{figure}
 
 \begin{figure}[t!]
   \centering
-  \includegraphics[width=16cm, height=6cm]{imagenes/T_v_call}
+  \includegraphics[width=16cm%, height=6cm
+  ]{imagenes/T_v_call}
   \caption{Volatilidad implícita contra precio call con distintos tiempos de madurez}
   \label{Tvscall}
 \end{figure}
@@ -356,7 +370,8 @@ cercanos a 0 en OTM van a tener mas precisión aunque el peso de la volatilidad 
 
 \begin{figure}[t!]
   \centering
-  \includegraphics[width=14cm, height=8cm]{imagenes/precision_g}
+  \includegraphics[width=14cm%, height=8cm
+  ]{imagenes/precision_g}
   \caption{Densidad de números representables en rango de $10^{-5}$ entre 0.1 y 1}
   \label{Densidad10}
 \end{figure}
@@ -367,11 +382,11 @@ cercanos a 0 en OTM van a tener mas precisión aunque el peso de la volatilidad 
 
 \section{Tiempo de Ejecución y Robustez}
 
-Una vez entrenada la red (Fue calculado sobre GPU(GeForce GTX 1080/PCIe/SSE2), RAM(15.6 GiB). La búsqueda de hiperpámetros en un tiempo 10.08 horas, la búsqueda del algoritmo de la tasa de aprendizaje fue 11.72 horas y entrenamiento de la red 3000 épocas fue 8.83 horas), vamos a observar el tiempo ejecución de evaluación de la misma sobre una muestra de 10000. Ademas el tiempo de ejecución de los métodos de Brent y bisección sobre la misma muestra en una CPU(Intel(R) Core(TM) i5-8265U CPU @ 1.60GHz).
+Una vez entrenada la red (Fue calculado sobre GPU(GeForce GTX 1080/PCIe/SSE2), RAM(15.6 GiB). La búsqueda de hiperpámetros en un tiempo $10.08$ horas, la búsqueda del algoritmo de la tasa de aprendizaje fue $11.72$ horas y entrenamiento de la red $3000$ épocas fue $8.83$ horas), vamos a observar el tiempo ejecución de evaluación de la misma sobre una muestra de $10000$. Ademas el tiempo de ejecución de los métodos de Brent y bisección sobre la misma muestra en una CPU(Intel(R) Core(TM) i5-8265U CPU @ 1.60GHz).
 
 También analizaremos su robustez, esto sería, si para todo elemento de la muestra el modelo genera una salida.
 
-En el Cuadro 6.8 se observan el tiempo de ejecución y la Robustez. 
+En el Cuadro \textcolor{red}{usar referencias}6.8 se observan el tiempo de ejecución y la Robustez. 
 
 \begin{table}[!htbp]
 \begin{center}
