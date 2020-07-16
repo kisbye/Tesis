@@ -2,11 +2,11 @@
 \label{Conclusiones}
 \markboth{}{}
 
-En este trabajo se presentó la importancia del cálculo de la volatilidad implícita. Ademas se propuso una manera diferente del cálculo que usualmente se utiliza, usando redes neuronales feedforward.
+En este trabajo se presentó la importancia del cálculo de la volatilidad implícita. Además se propuso una manera diferente del cálculo que usualmente se utiliza, usando redes neuronales feedforward.
 
 Si bien el método de bisección estima mejor la volatilidad implícita, no es una mejora significativa con respecto 
-a la red neuronal o al método de Brent, sin embargo el tiempo de ejecución la red neuronal es 21.12 veces mas rápido
-que el método de Brent y 43.37 veces mas rápido que el método de bisección.
+a la red neuronal o al método de Brent, sin embargo el tiempo de ejecución la red neuronal es $21.12$ veces mas rápido
+que el método de Brent y $43.37$ veces mas rápido que el método de bisección.
 
 En caso de tener datos atípicos, por ejemplo precio de strike tres veces mas grande que el precio del subyacente,
 o tasas libre de riesgo superiores al 20\%, o contratos muy largos, en esos casos es conveniente usar los métodos numéricos, ya que la red no va a estimar bien, porque la red no entrenó con esos datos. Sin embargo hay casos en los que los métodos numéricos no pueden ser aplicados.
@@ -17,6 +17,6 @@ En caso que la precisión sea imprescindible, entonces se utilizará el método 
 \vspace{5mm}
 
 Dentro de las posibilidades de continuar con el trabajo tenemos, uso de GPU en la implementación de los
-modelos numéricos propuestos, presentar soluciones para el problema numérico del capítulo 6.
+modelos numéricos propuestos, presentar soluciones para el problema numérico del capítulo \textcolor{red}{usar referencias}6.
 
 En este trabajo se planteó el cálculo de la volatilidad implícita mediante opciones call europeas, ademas se podrían proponer otros modelos obtener la volatilidad implícita mediante puts europeas. 
