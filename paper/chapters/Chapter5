@@ -8,9 +8,9 @@ En este capítulo presentamos el cálculo de la volatilidad implícita mediante 
 
 \section{Cálculo de prima de opción call usando $S/K$}
 
-Rene Garcia y Ramazan Gen\c{c}ay~\cite{Gencay}, invocando la homogeneidad de la fórmula de Black Scholes,
+Rene Garcia y Ramazan Gen\c{c}ay~\cite{Gencay}, invocando la homogeneidad de la fórmula de Black-Scholes,
 demostraron que las redes neuronales estiman mejor el precio de una opción usando el cociente $S/K$. 
-Así podemos reescribir la ecuación \textcolor{red}{decir cuál \ref{eq:Black}}, obteniendo~\ref{c2}.
+Así podemos reescribir la fórmula de Black-Scholes~\ref{eq:black}, obteniendo~\ref{c2}.
 %
 \begin{eqnarray}
 \frac{c}{K} = \frac{B(S(0),K,r,\sigma,T)}{K}&=&\frac{S(0)}{K}\Phi\left(d_1\left(\frac {S(0)}K\right)\right) - e^{-rT}\Phi\left(d_2\left(\frac {S(0)}K\right)\right)\\
@@ -19,17 +19,13 @@ Así podemos reescribir la ecuación \textcolor{red}{decir cuál \ref{eq:Black}}
 \end{eqnarray}
 %
 donde $d_1$ es la ecuación~\ref{d1eq} y $d_2$ es la ecuación~\ref{d2eq}.
-\textcolor{red}{donde
-$$d_1(x) = \frac{\ln (x)+ \left( r + \displaystyle\frac{\sigma^2}{2}\right)T}{\sigma\sqrt{T}}
-, \qquad d_2(x) = d_1(x)-\sigma\sqrt T.$$
-}
 
 \section{Generación de muestra}
 
 Como hemos visto en la sección anterior, la fórmula (\ref{c2})
 nos da un valor para $\displaystyle\frac{c}{K}$.
 En nuestro caso buscamos estimar la volatilidad implícita, pero usaremos el cociente para generar la muestra ya
-que en la práctica la red estima mejor.
+que en la práctica la red estima mejor, observar que podemos generar la muestra del tamaño que deseemos, por lo general generaremos muestras de $10^6$ elementos para entrenamiento, ya que consideramos que es una muestra lo suficientemente grande para no tener problemas de sobreentrenamiento sin tener tanto costo en el tiempo de entrenamiento, en tanto las muestras de validación y test serán de $10^5$ elementos.
 
 Luego vamos a generar dos muestras, una muestra amplia y una muestra estrecha. La muestra amplia va a ser para el entrenamiento de la red, y la muestra angosta para la evaluación de la red.
 
@@ -88,19 +84,19 @@ Luego para generar una muestra de tamaño $N$, aplicaremos $N$ veces el algoritm
 
 \section{$k$-fold cross validation}
 
-\textcolor{red}{Fijate de corregir en los capítulos anteriores el $K$-fold por $k$-fold, así no se confunde strike con fold}
-
 
 En nuestro caso utilizaremos 8-fold cross validation porque nos garantizará alta varianza y bajo sesgo
- para estimar los hiperparámetros que definen la red neuronal que queremos construir.
+ para estimar los hiperparámetros que definen la red neuronal que queremos construir. Este método lo aplicaremos
+ sobre una muestra de $10^4$ elementos.
 Los hiperparámetros propuestos para aplicar 8-fold cross validation están definidos en el Cuadro~\ref{hyper}.
 %
 A tales fines, primero definiremos la estructura de la red neuronal entre 1 y 10 capas ocultas, 
 variando entre 50 a 1000 neuronas por capa oculta. 
-Luego elegiremos la función de activación \cite{Activation}, 
-la inicialización de pesos de la red \cite{Init} 
-y el algoritmo de optimización del método de descenso por el gradiente \cite{Opti} 
-en simultáneo (haciendo todas las combinaciones posibles), siguiendo por determinar la mejor función de error \cite{Loss}. \textcolor{red}{Parece que las referencias apuntaran a una función de activación, o inicialización de pesos, etc., pero en realidad es el paquete de python que las contiene}
+Luego elegiremos la función de activación (Keras~\cite{Activation}), 
+la inicialización de pesos de la red (Keras~\cite{Init})
+y el algoritmo de optimización del método de descenso por el gradiente (Keras~\cite{Opti})
+en simultáneo (haciendo todas las combinaciones posibles), siguiendo por determinar la mejor función de error 
+(Keras~\cite{Loss}).
 Luego determinaremos el dropout (porcentaje neuronas que se ignoran durante el entrenamiento) y por último el tamaño del batch (cantidad de elementos de la muestra que se propagarán a través de la red).
 
 Para iniciar la búsqueda de los hiperparámetros óptimos, se usarán los hiperparámetros por defecto 
@@ -206,9 +202,8 @@ Tamaño de batch &  1024 \\
 En la búsqueda de los hiperparámetros óptimos (Cuadro~\ref{Halgo}) hemos utilizado una \textbf{tasa de aprendizaje} fija igual a $10^{-3}$. 
 
 Tomando los hiperparámetros del Cuadro~\ref{Halgo}
- utilizaremos un método similar al de Smith \cite{Smith} para determinar la tasa de aprendizaje. A diferencia del método de Smith, iremos incrementando la tasa de aprendizaje exponencialmente por cada batch.
-Empezaremos con una tasa de aprendizaje de $10^{-10}$ hasta llegar a 1, comparando ECM contra la tasa de aprendizaje. \textcolor{red}{¿se compara el error con la tasa?}
-
+ utilizaremos un método similar al de Smith \cite{Smith} para determinar la tasa de aprendizaje. A diferencia del método de Smith, iremos incrementando la tasa de aprendizaje exponencialmente por cada batch, la red se entrenará
+ con una tasa de aprendizaje de $10^{-10}$ hasta llegar a 1 calculando su ECM.
 Como se puede observar en la Figura~\ref{Smith},
  el rango de tasa de aprendizaje óptimo
  se encuentra entre $5 \times 10^{-6}$ y $5 \times 10^{-3}$.
@@ -265,7 +260,7 @@ epoch\_drop & $20$ & - & -\\
 \end{table}
 
 
-Observando los parámetros del Cuadro~\ref{OptioD} entrenaremos \textcolor{red}{se procedió a entrenar, ¿no sería mejor así?} la red por 1000 épocas utilizando los algoritmos de decrecimiento de la tasa de aprendizaje y los hiperpárametros del Cuadro~\ref{Halgo} antes mencionados. Los \textcolor{red}{compararemos } vamos a comparar mediante su ECM para obtener el mejor algoritmo de decrecimiento. Como se puede observar en la Figura~\ref{comparacion} Step Decay es el algoritmo que mejor resultado obtuvo.
+Observando los parámetros del Cuadro~\ref{OptioD} se procedió a entrenar la red por 1000 épocas utilizando los algoritmos de decrecimiento de la tasa de aprendizaje y los hiperpárametros del Cuadro~\ref{Halgo} antes mencionados. Los compararemos mediante su ECM para obtener el mejor algoritmo de decrecimiento. Como se puede observar en la Figura~\ref{comparacion} Step Decay es el algoritmo que mejor resultado obtuvo.
 
 \begin{figure}[t!]
   \centering
@@ -294,23 +289,24 @@ de $5 \times 10^{-3}$ y un mínimo de $5 \times 10^{-6}$, con un paso cada 8 ép
 
 \section{Optimización}
 
-El objetivo aquí es aprender la relación \textcolor{red}{existente, para no usar implícit dos veces} implícita entre las volatilidades implícitas y los precios de las opciones. Entonces\textcolor{red}{En lugar de Entonces, pondría Vemos que..} la derivada de la fórmula de Black Scholes~\ref{eq:derivadaB} sobre $\sigma$ puede volverse arbitrariamente pequeña, lo que puede dar lugar a
-un problema de gradiente pronunciado. 
-\textcolor{red}{Explicar bien acá por qué hablás de derivada pequeña y gradiente pronunciado, porque son conceptos opuestos.}
+El objetivo aquí es aprender la relación existente entre las volatilidades implícitas y los precios de las opciones. Vemos que la derivada de la fórmula de Black-Scholes~\ref{eq:derivadaB} sobre $\sigma$ puede volverse arbitrariamente pequeña, por lo tanto su recíproca es muy grande lo que puede dar lugar a un problema de gradiente pronunciado. 
+
 Ahora bien, se pueden generar importantes
 errores de predicción en regiones con grandes gradientes. Por lo tanto, proponemos un enfoque de aplanamiento del gradiente para manejar este problema.
 
 
-Primero, cada opción puede ser dividida entre el valor intrínseco y un valor \textcolor{red}{temporal} de tiempo.
-\textcolor{red}{El valor intrínseco de una opción en un tiempo $t$ es el payoff que se obtiene si se ejerciera en ese momento. Para una call sería $\max(S_t - K, 0)$. Acá es como que considera el $K$ descontado con la tasa $r$.}
+Primero, cada opción puede ser dividida entre el valor intrínseco y un valor temporal.
+El valor intrínseco de una opción en un tiempo $t$ es el payoff que se obtiene si se ejerciera en ese momento. Para una call sería $\max(S_t - K, 0)$. Acá es como que considera el $K$ descontado con la tasa $r$.
 
  Luego sustraemos el valor intrínseco de la siguiente manera:
 $$\underbrace{\tilde{c}}_{\mbox{valor temporal}} = c -\underbrace{ \max(S_0 - Ke^{-r\tau}, 0) }_{\mbox{valor intrínseco}}.$$
-El nuevo cálculo propone superar el problema, logrando reducir el gradiente pronunciado aplicando una transformación logarítmica sobre el valor de la opción \cite{Logaritmo}. En nuestro caso sería:
+
+ En nuestro caso sería:
 
 
 \begin{equation}
  \displaystyle\frac{\tilde{c}}{K} = \displaystyle\frac{c}{K} - \max(S/K - e^{-r\tau}, 0)
+ \label{form:opti}
 \end{equation}
 
-\textcolor{red}{Decir un poco más acá, no se entiende cuál es la transformación logarítmica}
+El nuevo cálculo propone superar el problema, logrando reducir el gradiente pronunciado aplicando una transformación logarítmica sobre el valor de la opción, obteniendo como entrada de la red las uplas $\{\ln(c/K), S_0/K, r, \tau\}$~\cite{Logaritmo}.

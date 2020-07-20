@@ -25,28 +25,28 @@ el valor la opción. A continuación listaremos una serie de modelos desarrollad
 \end{itemize}
 
 Todos los modelos anteriormente mencionados para ser aplicados necesitan la volatilidad 
-entre otros parámetros. Pero si el mercado no nos brinda el valor de la volatilidad, 
-una manera de estimarla es mediante la superficie de volatilidad, definida en el capítulo anterior. \textcolor{red}{nuevamente no entiendo por qué la volatilidad se estima de la superficie de volatilidad, si la superficie es justamente el gráfico de la volatilidad vs $K$ y vs $T$}
+entre otros parámetros. Pero si el mercado no nos brinda el valor de la volatilidad hay que estimarla, 
+una manera es mediante la volatilidad implícita, pero como la volatilidad depende del stike y la madurez, pueden haber casos en que no puedo obtener la volatilidad para algún contrato, entonces en esos casos se estima la volatilidad con superficie de volatilidad visto en el capítulo anterior.
 
 \section{Estrategias dependiendo de la volatilidad implícita}
 
 Entender el concepto de volatilidad es esencial para tener éxito en la comercialización de opciones. Un inversor que puede reconocer cuándo una opción o series de opciones están baratas o caras tiene una gran ventaja a la hora de invertir.
 Esto quiere decir que si la volatilidad implícita es baja, entonces el prima de la opción va a ser baja. En cambio si la volatilidad implícita es alta, el prima de la opción va a ser alta. Ya que el prima de la opción es creciente con respecto a la volatilidad~\cite{Kisbye}.
 
-\textcolor{blue}{Ahora bien, ¿cómo reconocer cuándo la volatilidad implícita es alta o baja?. Una manera es comparar las volatilidades históricas anuales calculadas mensualmente de la opción sobre los últimos 2 años contra la volatilidad implícita de la opción. Por ejemplo si la volatilidad implícita es aproximadamente menor al 70\% de las volatilidades históricas anuales calculadas mensuales de los últimos 2 años (hay 24 volatilidades históricas calculadas), entonces la volatilidad implícita es baja.}
+Ahora bien, ¿cómo reconocer cuándo la volatilidad implícita es alta o baja?. Una manera es comparar las volatilidades históricas anuales calculadas mensualmente de la opción sobre los últimos 2 años contra la volatilidad implícita de la opción. Por ejemplo si la volatilidad implícita es aproximadamente menor al 70\% de las volatilidades históricas anuales calculadas mensuales de los últimos 2 años (hay 24 volatilidades históricas calculadas), entonces la volatilidad implícita es baja.
 
 Ahora nombraremos algunas estrategias en las cuales se hace uso de la volatilidad implícita~\cite{Estrategias}.
 
 %\vspace{5mm}
 
-\paragraph{Terminología}
-\textcolor{red}{En las siguientes definiciones consideremos una opción europea con strike $K$ sobre un subyacente con valor $S(0)$.}
+\paragraph{Terminología.}
+En las siguientes definiciones consideremos una opción europea con strike $K$ sobre un subyacente con valor $S(0)$.
 %Terminología que se utilizará en esta sección:
 
 \begin{itemize}
   \item ATM (at-the-money): Una opción está ATM cuando $S(0)=K$ tanto en opciones put como call.
-  \item OTM (out-of-the-money): Una opción call está OTM cuando $S(0) < K$ y una opción put cuando $S(0) > K$. \textcolor{red}{Es decir que si se ejerce la opción en ese momento el payoff es positivo}
-  \item ITM (at-the-money): Una opción call está ITM cuando $S(0) > K$ y en una opción put cuando $S(0) < K$.
+  \item OTM (out-of-the-money): Una opción call está OTM cuando $S(0) < K$ y una opción put cuando $S(0) > K$. Es decir que si se ejerce la opción en ese momento el payoff es cero.
+  \item ITM (at-the-money): Una opción call está ITM cuando $S(0) > K$ y en una opción put cuando $S(0) < K$. Es decir que si se ejerce la opción en ese momento el payoff es $|S(0) - K|$.
 \end{itemize}
 
 %Donde $S(0)$ es el precio del subyacente al momento de entrar a la opción y K es el strike de la opción.
@@ -61,8 +61,7 @@ Las claves para aplicar la estrategia Backspread son las siguientes:
 \end{itemize}
 
 La estrategia Backspread involucra suscribir opciones call o put, ATM o ITM, las cuales tienen primas caras ya que el inversor que compra la opción tiene más posibilidades de obtener un payoff positivo y entonces es más probable que la opción sea ejecutada, y simultáneamente comprar un número mayor de opciones OTM, las cuales tienen primas baratas porque
-es más difícil que el inversor que compra la opción ejerza.
-\textcolor{red}{Así, si se suscriben $n$ opciones con primas $s_1$, $s_2$, \dots, $s_n$, y se compran $m$ opciones con primas $c_1$, $c_2$, \dots, $c_m$ respectivamente, idealmente se busca la relación:}
+es más difícil que el inversor que compra la opción ejerza.Así, si se suscriben $n$ opciones con primas $s_1$, $s_2$, \dots, $s_n$, y se compran $m$ opciones con primas $c_1$, $c_2$, \dots, $c_m$ respectivamente, idealmente se busca la relación:
 %Idealmente se busca:
 \begin{equation}
 \sum_{i=1}^n s_i > \sum_{j=1}^m c_j
@@ -87,7 +86,7 @@ y su ganancia por:
 \end{equation}
 donde $c_1$ es la prima de la opción suscrita con strike $K_1$, $c_2$ es la prima de la opción comprada con strike $K_2$, y ambas opciones sobre un subyacente con valor $S_T$ el valor del subyacente en el tiempo $T$.
 %\vspace{5mm}
-\textcolor{red}{no usar $\backslash$ mbox para las letras dentro de una fórmula.}
+
 
 En el caso que tengamos expectativas de un movimiento bajista del subyacente entonces la estrategia será
 Put Backspread, que consiste en vender y comprar opciones put. El objetivo es el mismo que el Call Backspread, con preferencia bajista como se puede observar en la Figura~\ref{PBackspread}, en el caso que se suscriba una  opción con strike $K_1$ y prima $p_1$ y se compren dos opciones con strike $K_2$ de prima $p_2$ cada una, su payoff está dado por:
@@ -118,7 +117,8 @@ Ver Figuras \ref{CBackspread} y \ref{PBackspread}.
 \end{figure}
 
 \subsection{Long Straddle y Long Strangle}
-\textcolor{red}{El título dice Long, pero luego no decís qué significa lo de long. Explicitá que es porque la posición es long, no sea que se interprete que es porque las opciones son largas}
+
+Se denomina Long Straddle o Long Strangle porque el inversor se encuentra en posición long sobre las opciones de la estrategia.
 
 Las claves para aplicar estas estrategias son las siguientes:
 
@@ -129,30 +129,22 @@ Las claves para aplicar estas estrategias son las siguientes:
 	\item Se busca que sean opciones largas.%para que el precio del subyacente varie lo suficiente
 \end{itemize}
 
-La estrategia de comprar una Straddle o una Strangle consiste en comprar una opción call y una opción put al mismo tiempo, con el mismo tiempo de madurez, ambas con el igual strike (Straddle) o diferente strike (Strangle). Ideamente se busca que al momento de comprar las opciones, la volatilidad implícita sea baja (comprar opciones baratas), y que el precio del subyacente tenga un abrupto cambio (\textcolor{red}{Por ejemplo por situaciones atípicas como la }Guerra comercial entre Estados Unidos y China, Pandemia, Precio Petróleo, entre otros) sin importar su dirección, puede ser alcista o bajista. Por eso el tiempo de madurez es clave en este tipo de estrategias. La pérdida en este tipo de estrategias es limitada, es el valor de las primas. En cambio la ganancia puede ser ilimitada. 
+La estrategia de comprar una Straddle o una Strangle consiste en comprar una opción call y una opción put al mismo tiempo, con el mismo tiempo de madurez, ambas con el igual strike (Straddle) o diferente strike (Strangle). Ideamente se busca que al momento de comprar las opciones, la volatilidad implícita sea baja (comprar opciones baratas), y que el precio del subyacente tenga un abrupto cambio (Por ejemplo por situaciones atípicas como la Guerra comercial entre Estados Unidos y China, Pandemia, Precio Petróleo, entre otros) sin importar su dirección, puede ser alcista o bajista. Por eso el tiempo de madurez es clave en este tipo de estrategias. La pérdida en este tipo de estrategias es limitada, es el valor de las primas. En cambio la ganancia puede ser ilimitada. 
 
-La Figura~\ref{fig:Strangle} muestra la ganancia de la estrategia de Strangle como función del precio del subyacente, mientras que la Figura~\ref{fig:Straddle} la muestra para la estrategia de Straddle, y el payoff de ambas estrategias está dado por:
-\begin{equation}
-\mbox{Payoff} = \max(S_T-K_2, 0) + \max(K_1-S_T, 0)
-\end{equation}
-y su ganancia por: 
-\begin{equation}
+El payoff y ganancia para una Straddle o Strangle que consiste en comprar una opción put con strike $K_1$ y prima $p$ y comprar una opción call con strike  $K_2$ y prima $c$:
+\begin{eqnarray}
+\mbox{Payoff} = \max(S_T-K_2, 0) + \max(K_1-S_T, 0) \\
 \mbox{Ganancia} = \max(S_T-K_2-c, -c) + \max(K_1-S_T-p, -p)
-\end{equation}
-\textcolor{red}{opino que es mejor poner todos los datos antes de la fórmula, como te corregí en casos anteriores}
-donde $c$ es la prima de la opción call, $p$ es la prima de la opción put, $S_T$ es el precio del subyacente en el tiempo $T$, $K_1$
-strike de la opción put, y $K_2$ strike de la opción call 
-(Notar que si la estrategia es straddle $K_1 = K_2$). 
+\end{eqnarray}
 
-\textcolor{red}{Yo pondría:}
-\textcolor{blue}{En el caso de una estrategia straddle, donde $K_1=K_2=K$, las fórmulas para el payoff y la ganancia se traducen en:
+En el caso de una estrategia straddle, donde $K_1=K_2=K$, las fórmulas para el payoff y la ganancia se traducen en:
 \begin{eqnarray}
 \mbox{Payoff} &=& |S_T-K|\\
 \mbox{Ganancia} &=& |S_T-K| - c - p.
 \end{eqnarray}
 Los diagramas de ganancia de las estrategias strangle y straddle se ilustran en las Figuras \ref{fig:Strangle} y \ref{fig:Straddle}.
-}
-\textcolor{green}{Le cambié el tamaño a las figuras siguientes, no sé qué opinan}
+
+
 \begin{figure}[htbp]
   %\centering
   %\begin{minipage}[b]{0.5\textwidth}
@@ -175,7 +167,8 @@ Los diagramas de ganancia de las estrategias strangle y straddle se ilustran en 
 
 
 \subsection{Long Butterfly Spread}
-\textcolor{red}{Explicitar más abajo que lo de long es por la posición en las opciones}
+
+
 
 Las claves para aplicar la estrategia son los siguientes:
 
@@ -185,7 +178,7 @@ Las claves para aplicar la estrategia son los siguientes:
 	\item Se invierte en opciones cortas, con un tiempo de expiración menor a 60 días.
 \end{itemize}
 
-La estrategia Long Butterfly Spread puede utilizarse tanto con opciones call, como con opciones put.
+La estrategia Long Butterfly Spread (Long significa que el valor de las primas en posición long son mayores a las primas en posición short) puede utilizarse tanto con opciones call, como con opciones put.
 
 En caso que se utilicen opciones call, la estrategia consiste en comprar una opción call con un determinado strike $K_1$, vender dos call con un strike mayor al strike de la opción nombrada anteriormente,$K_2$, y comprar otra opción call con un strike mayor a todos los anteriores, $K_3$. Esto es, $K_1<K_2<K_3$.
 
@@ -193,18 +186,18 @@ En caso que nuestra estrategia utilice opciones put, la estrategia consiste en c
 strike, vender dos put con un strike menor al strike de la opción nombrada anteriormente, y comprar otra opción put con un strike menor a todos los anteriores.
 
 En esta estrategia la mayor ganancia se obtiene cuando el precio del subyacente se encuentre próximo al strike del 
-medio(opciones vendidas). Pero al ser la volatilidad alta, el precio del subyacente es muy variable, siendo así esta estrategia riesgosa. Una buena medida es abandonar la estrategia cuando se haya obtenido una buena ganancia, sin esperar que el precio del subyacente llegue al pico, como se observa en la Figura~\ref{fig:LongButterflySpread}.
-\textcolor{blue}{Una estrategia en la que se compra tres opciones con strike $K_1$, $K_2$ y $K_3$ de primas $c_1$, $c_2$ y $c_3$ respectivamente tendrá un payoff dado por:}
+medio (opciones vendidas). Pero al ser la volatilidad alta, el precio del subyacente es muy variable, siendo así esta estrategia riesgosa. Una buena medida es abandonar la estrategia cuando se haya obtenido una buena ganancia, sin esperar que el precio del subyacente llegue al pico, como se observa en la Figura~\ref{fig:LongButterflySpread}.
+Una estrategia en la que se compra dos opciones call con strike $K_1$ y $K_3$ de primas $c_1$ y $c_3$ respectivamente y se suscriben 2 opciones call con strike $K_2$ y prima $c_2$ tendrá un payoff y una ganancia dada por:
+
 \begin{equation}
-\mbox{Payoff} = \max(S_T-K_1, 0) + 2\min(K_2-S_T, 0) + \max(S_T-K_3, 0),
+\mbox{Payoff} = \max(S_T-K_1, 0) + 2\min(K_2-S_T, 0) + \max(S_T-K_3, 0) 
 \end{equation}
-y una ganancia:
-%Y su ganancia por: 
 \begin{equation}
 \mbox{Ganancia} = \max(S_T-K_1-c_1, -c_1) + 2\min(K_2-S_T+c_2, c_2) + \max(S_T-K_3-c_3, -c_3)
 \end{equation}
-\textcolor{red}{Sugiero poner las definiciones antes}
-donde $c_1$ es la prima de la opción call con strike $K_1$, $c_2$ es la prima de la opción call con srike $K_2$, $c_3$ es la prima de la opción call con strike $K_3$ y $S_T$ es el valor del subyacente en el tiempo $T$.
+donde $S_T$ es el valor del subyacente en el tiempo $T$.
+
+El diagramas de ganancia de la estrategia Long Butterfly Spread se ilustran en las Figuras~\ref{fig:LongButterflySpread}
 \begin{figure}[]
   \centering
   \includegraphics[width=0.8\textwidth

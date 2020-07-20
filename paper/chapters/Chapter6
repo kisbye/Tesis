@@ -6,21 +6,18 @@
 En este capítulo vamos a analizar la efectividad de los modelos propuestos.
 El experimento se realizó en CPU(Intel(R) Core(TM) i5-8265U CPU @ 1.60GHz)
  
-\section{Primera Red}
-\label{Primera Red}
-\textcolor{blue}{¿No se iba a llamar Red inicial esta sección?
-\\
-No me convence el uso del tiempo futuro en este capítulo. Yo redactaría en tiempo pasado, explicando el trabajo que se realizó. He corregido un poco al principio para dar una idea.}
+\section{Red inicial}
+\label{Redinit}
 
-\
 
-\textcolor{blue}{Con los hiperparámetros obtenidos en el Capítulo \ref{Red Neuronal}, se definieron la muestra de entrenamiento, validación y test. Se crearon dos muestras, una amplia y una estrecha.}
-\textcolor{yellow}{Ya tenemos los hiperparámetros óptimos del capítulo anterior, entonces vamos a definir la muestra de entrenamiento, validación y test. Crearemos 2 muestras, una amplia y una estrecha. } En el Cuadro 6.1 se define el ambiente de las muestras, y para generar la muestra se utilizó el algoritmo 5.1. \textcolor{red}{usar referencias para Cuadro 6.1 y para algoritmo 5.1.}
+Con los hiperparámetros obtenidos en el Capítulo~\ref{Red Neuronal}, se definieron las muestras de entrenamiento 
+($10^6$ elementos), validación ($10^5$ elementos) y test ($10^5$ elementos). Se crearon dos muestras, una amplia y una estrecha. La muestra amplia es para entrenamiento y validación y la muestra estrecha para test. En el Cuadro~\ref{cu:Himu} se define el ambiente de las muestras, y para generar la muestra se utilizó el algoritmo~\ref{muestras}.
 
 
 \begin{table}[!htbp]
 \begin{center}
 \caption{Hiperparámetros de la Muestra}
+\label{cu:Himu}
 \begin{tabular}{|l|l|l|l|l|}
 \hline
  & Parámetros & muestra amplia  &  muestra estrecha   \\ \hline
@@ -34,33 +31,35 @@ No me convence el uso del tiempo futuro en este capítulo. Yo redactaría en tie
 \end{table}
 
 Una vez obtenida la muestra, la entrada de la red fueron las uplas $\{c/K, S_0/K, r, \tau\}$ y la salida 
-$\{\sigma\}$. Vamos a entrenar \textcolor{blue}{Se entrenó } la red durante $1000$ épocas utilizando la muestra amplia y los hiperparámetros del obtenidos Capítulo \ref{Red Neuronal}\textcolor{yellow}{anterior}. 
+$\{\sigma\}$. Se entrenó la red durante $1000$ épocas utilizando la muestra amplia y los hiperparámetros del obtenidos Capítulo anterior. 
 
-\textcolor{yellow}{Una vez entrenada la red, }En el Cuadro 6.2 y en las Figuras 6.1 y 6.2 \textcolor{red}{usar referencia para las figuras} \textcolor{blue}{se pueden observar los resultados una vez realizado el entrenamiento de la red.}
+Una vez entrenada la red, en el Cuadro~\ref{cu:errorpr} y en las Figuras~\ref{fig:PreApr} y~\ref{fig:PreEpr} se pueden observar los resultados una vez realizado el entrenamiento de la red, donde $S(\sigma)$ es la desviación estándar de la diferencia entre la volatilidad implícita y la volatilidad estimada por la red.
 
 
-\textcolor{red}{Los histogramas  no tienen la misma escala, uno llega a 0.175 y el otro a 0.200. No dice qué es $S(\sigma)$, y no está explicado qué se representa en los histogramas.}
 \begin{figure}[!tbp]
   \centering
   \begin{minipage}[b]{0.45\textwidth}
     \includegraphics[width=\textwidth]{Predic_w_n.png}
     \caption{Predicción muestra amplia.}
+    \label{fig:PreApr}
   \end{minipage}
   \hfill
   \begin{minipage}[b]{0.45\textwidth}
     \includegraphics[width=\textwidth]{Predic_n_n.png}
     \caption{Predicción muestra estrecha.}
+    \label{fig:PreEpr}
   \end{minipage}
 \end{figure}
 
 \begin{table}[!htbp]
 \begin{center}
-\caption{Error Red}
+\caption{Error de predicción en el test de la red original.}
+\label{cu:errorpr}
 \begin{tabular}{|l|l|l|l|l|}
 \hline
  & ECM & EAM  &  EPAM & $R^2$  \\ \hline
-Muestra Amplia  & $3.21 \times 10^{-4}$ & $6.09 \times 10^{-3}$ & $9.30$ & 0.996031  \\ \hline
-Muestra Estrecha & $1.47 \times 10^{-4}$ &  $4.07 \times 10^{-3}$ & $5.46$ & 0.997714  \\ \hline
+Muestra Amplia  & $3.21 \times 10^{-4}$ & $6.09 \times 10^{-3}$ & $9.30$ & $0.996031$  \\ \hline
+Muestra Estrecha & $1.47 \times 10^{-4}$ &  $4.07 \times 10^{-3}$ & $5.46$ & $0.997714$  \\ \hline
   
 \end{tabular}
 \end{center}
@@ -68,12 +67,15 @@ Muestra Estrecha & $1.47 \times 10^{-4}$ &  $4.07 \times 10^{-3}$ & $5.46$ & 0.9
 
 
 \section{Optimización}
+\label{sec:opti}
 
-Ya tenemos los hiperparámetros óptimos del capítulo anterior, entonces vamos a definir la muestra de entrenamiento, validación y test. Crearemos 2 muestras, una amplia y una estrecha. A diferencia de la muestra de la sección anterior, en esta se va a modificar utilizando la ecuación \textcolor{red}{usar referencias. No son ecuación sino fórmula, y se cita entre paréntesis: (ref...)} 5.1 del capítulo anterior. En el cuadro 6.3 se define el ambiente de la muestra, y para generar las muestras se usa el algoritmo 5.1.
+Ya tenemos los hiperparámetros óptimos del capítulo anterior, entonces vamos a definir la muestra de entrenamiento
+($10^6$ elementos), validación ($10^5$ elementos) y test ($10^5$ elementos). Crearemos 2 muestras, una amplia y una estrecha. A diferencia de la muestra de la sección anterior, en esta se va a modificar utilizando la fórmula (\ref{form:opti}) del capítulo anterior. En el cuadro~\ref{cu:muestraent} se define el ambiente de la muestra, y para generar las muestras se usa el algoritmo~\ref{muestras}.
 
 \begin{table}[!htbp]
 \begin{center}
 \caption{Hiperparámetros de la Muestra}
+\label{cu:muestraent}
 \begin{tabular}{|l|l|l|l|l|}
 \hline
  & Parámetros & muestra amplia  &  muestra estrecha   \\ \hline
@@ -88,7 +90,7 @@ Ya tenemos los hiperparámetros óptimos del capítulo anterior, entonces vamos 
 
 Una vez obtenida la muestra, la entrada de la red será $\{\ln(\tilde{c}/K, S_0/K, r, \tau\}$ y la salida $\{\sigma\}$. Vamos a entrenar la red durante 1000 épocas.
 
-Una vez entrenada la red, en el Cuadro \textcolor{red}{usar referencias}6.4 y en las Figuras \textcolor{red}{usar referencias}6.3 y 6.4 se pueden observar los resultados.
+Una vez entrenada la red, en el Cuadro~\ref{cu:resultopti} y en las Figuras~\ref{fig:resultoptiA} y \ref{fig:resultoptiE} se pueden observar los resultados, donde $S(\sigma)$ es la desviación estándar de la diferencia entre la volatilidad implícita y la volatilidad estimada por la red.
 
 
 \begin{figure}[!tbp]
@@ -96,17 +98,20 @@ Una vez entrenada la red, en el Cuadro \textcolor{red}{usar referencias}6.4 y en
   \begin{minipage}[b]{0.45\textwidth}
     \includegraphics[width=\textwidth]{Predic_w_log_mil.png}
     \caption{Predicción muestra amplia.}
+    \label{fig:resultoptiA}
   \end{minipage}
   \hfill
   \begin{minipage}[b]{0.45\textwidth}
     \includegraphics[width=\textwidth]{Predic_n_log_mil.png}
     \caption{Predicción muestra estrecha.}
+    \label{fig:resultoptiE}
   \end{minipage}
 \end{figure}
 
 \begin{table}[!htbp]
 \begin{center}
-\caption{Error Red Optimizada}
+\caption{Error de predicción en el test de la red optimizada.}
+\label{cu:resultopti}
 \begin{tabular}{|l|l|l|l|l|}
 \hline
  & ECM & EAM  &  EPAM & $R^2$  \\ \hline
@@ -172,7 +177,8 @@ Las Figuras~\ref{aprend1000} y~\ref{aprend3000} muestran el tasa de aprendizaje 
   \end{minipage}
 \end{figure}
 
-Luego vamos a entrenar la red durante $3000$ épocas usando step decay modificado. En las Figuras~\ref{resultamplia},~\ref{resultestrecha}, y en el Cuadro~\ref{cu:erroropti} se muestran los resultados.
+Luego vamos a entrenar la red durante $3000$ épocas usando step decay modificado. Una vez entrenada la red 
+en el Cuadro~\ref{cu:erroropti} y en las Figuras~\ref{resultamplia},~\ref{resultestrecha} se observan los resultados, donde $S(\sigma)$ es la desviación estándar de la diferencia entre la volatilidad implícita y la volatilidad estimada por la red.
 
 \begin{figure}[!tbp]
   \centering
@@ -191,7 +197,7 @@ Luego vamos a entrenar la red durante $3000$ épocas usando step decay modificad
 
 \begin{table}[!htbp]
 \begin{center}
-\caption{Error Red Optimizada}
+\caption{Error de predicción en el test de la red final.}
 \label{cu:erroropti}
 \begin{tabular}{|l|l|l|l|l|}
 \hline
@@ -203,6 +209,22 @@ Muestra Estrecha & $4.02\times10^{-8}$ &  $ 1.57\times10^{-4}$ & $0.0526$ & $0.9
 \end{center}
 \end{table}
 
+En el Cuadro~\ref{comparacionModelos} se compara el rendimiento de cada red neuronal implementada por su error y por su desviación estándar, se puede observar que cuando se modifica la entrada de la red en la sección~\ref{sec:opti} las métricas de la red mejoran considerablemente (4 ordenes en el ECM), y cuando se modifica la función de decrecimiento de la tasa de aprendizaje mejora aproximadamente un 25\% comparando su ECM.
+
+\begin{table}[!htbp]
+\begin{center}
+\caption{Error de predicción en el test de la red final.}
+\label{comparacionModelos}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+ & ECM & EAM  &  EPAM & $R^2$ & Desvió estándar\\ \hline
+Red inicial  & $3.21 \times 10^{-4}$ & $6.09 \times 10^{-3}$ & $9.30$ & $0.996031$ & $0.017664868$\\ \hline
+Red optimizada & $6.24\times10^{-8}$ & $1.92\times10^{-4}$ & $0.059$ & $0.999999104$ & $0.0002491482$\\ \hline
+Red definitiva & $4.67\times10^{-8}$ & $1.66\times10^{-4}$ & $0.0515$ & $0.999999329$ & $0.000215171$\\ \hline
+  
+\end{tabular}
+\end{center}
+\end{table}
 
 
 \section{Métodos Numéricos}
@@ -211,7 +233,7 @@ Muestra Estrecha & $4.02\times10^{-8}$ &  $ 1.57\times10^{-4}$ & $0.0526$ & $0.9
 \subsection{Problemas Numéricos}
 \label{sub:Problemas}
 
-En la muestra amplia definida en la sección~\ref{PrimeraRed} hay aproximadamente un 0.05\% de casos que no cumplen con la condición $g(a)g(b) < 0$, 
+En la muestra amplia definida en la sección~\ref{Redinit} hay aproximadamente un 0.05\% de casos que no cumplen con la condición $g(a)g(b) < 0$, 
 para $a \to 0$ y $b \to \infty$, donde $g$ es la función~\ref{funciong} anteriormente.
 
 El problema radica en el cálculo de la fórmula de Black-Scholes definida en la ecuación~\ref{eq:black},
@@ -243,10 +265,9 @@ Lo expuesto permite ver que hay $2^{52}$ números de punto flotante entre $2^n$ 
 
 %\subsection{Caso en Particular}
 
-Por ejemplo, consideremos un caso en particular, veamos los valores del Cuadro~\ref{params}, la Figura~\ref{fig:gin1} muestra la comparación entre $g(n)$ para $n \in [ 0.01, 1 ]$ 
-y la volatilidad implícita (linea roja punteada). 
-Se puede observar que no se puede hallar el intervalo $[a,b]$ para aplicar el método de bisección (o Brent), 
-ya que para este caso $g(\sigma)$ es positivo $ \forall \sigma$, tal que $0 < \sigma < 0.01$.
+Por ejemplo, consideremos un caso en particular, tomando los valores del Cuadro~\ref{params} se puede observar en la Figura~\ref{fig:gin1} que $g(n) >= 0$ para $n \in [ 0.01, 1 ]$, por lo tanto no se puede aplicar el método de bisección 
+(o Brent).
+
 
 
 \begin{table}[!htbp]
@@ -267,13 +288,13 @@ $T$: & $0.2590760904347537$  \\ \hline
 
 \vspace{5mm}
 
-Tomando $\sigma = 0.01$ (extremo inferior del intervalo), se obtiene,
+Luego si $\sigma = 0.01$ (extremo inferior del intervalo), se obtiene,
 %
 $\Phi(d_1) = 1$, $\Phi(d_2) = 1$
 %
-y $g(0.01) = 1.7763568394002505\times{-15}$.
+y $g(0.01) = 1.7763568394002505\times10^{-15}$.
 %
-Pero si se evalúa la función de distribución acumulada de la normal estándar utilizando la volatilidad implícita $\sigma = 0.11928197090875538$, se obtiene 
+Pero si se evalúa la función de distribución normal acumulada utilizando la volatilidad implícita ($\sigma = 0.11928197090875538$), se obtiene 
 %
 $\Phi(d_1) = 0.9999999999999986$ (Figuras~\ref{fig:d1},~\ref{fig:d1c}), $\Phi(d_2) = 0.9999999999999982$ 
 y
@@ -282,7 +303,7 @@ $g(0.11928197091) = 0$, se contradice la propiedad de monotonía creciente.
 \begin{figure}[t!]
   \centering
   \includegraphics[width=0.9\textwidth]{g}
-  \caption{Función $g$. \textcolor{red}{No entiendo las referencias en este gráfico}}
+  \caption{Función $g$.}
   \label{fig:gin1}
 \end{figure}
 
@@ -303,7 +324,6 @@ $g(0.11928197091) = 0$, se contradice la propiedad de monotonía creciente.
     \label{fig:d1c}
   %\end{minipage}
 \end{figure}
-
 
 
 \subsection{Precisi\'on M\'etodos Num\'ericos} 
@@ -331,8 +351,7 @@ Brent & $8.17\times10^{-6}$ &  $ 9.18\times10^{-5}$ & $0.35894$ & $0.99989551$  
 
 %\subsection{Peso de la Volatilidad sobre el precio de la opción}
 
-Observando el Cuadro~\ref{metodosnum}, el error absoluto medio del método de bisección es $2.89\times10^{-6}$ y de Brent es
-$ 9.18\times10^{-5}$, siendo la tolerancia $2^{-56}$, esto es por el problema de precisión y el impacto que tiene la volatilidad sobre el precio de la opción (derivada de la fórmula de Black Scholes sobre $\sigma$) utilizando la fórmula de Black Scholes~\ref{eq:black}. En la Figura~\ref{ratiovscall}, que compara el precio de la opción con respecto a la variación de volatilidad, utilizando diferentes ratios ($S/K$), se puede observar que mientras más diferencia hay entre
+Observando el Cuadro~\ref{metodosnum}, el error absoluto medio del método de bisección es $2.89\times10^{-6}$ y de Brent es $ 9.18\times10^{-5}$, siendo la tolerancia $2^{-56}$, esto es por el problema de precisión y el impacto que tiene la volatilidad sobre el precio de la opción (derivada de la fórmula de Black-Scholes sobre $\sigma$) utilizando la fórmula de Black-Scholes~\ref{eq:black}. En la Figura~\ref{ratiovscall}, que compara el precio de la opción con respecto a la variación de volatilidad, utilizando diferentes ratios ($S/K$), se puede observar que mientras más diferencia hay entre
 $S_0$ y K la volatilidad tiene menos impacto sobre el precio en especial en los casos OTM y en las volatilidades cercanas a $0$. Luego en la Figura~\ref{interesvscall}, que compara el precio de la opción con respecto a la variación de volatilidad, utilizando diferentes tasas de interés, se observa prácticamente un desplazamiento.
 Por último en la Figura~\ref{Tvscall}, que compara el precio de la opción con respecto a la variación de volatilidad, utilizando diferentes tiempos de madurez, se puede observa que mientras los contratos sean más largos la volatilidad tiene un mayor impacto sobre el precio.
 
@@ -382,19 +401,20 @@ cercanos a 0 en OTM van a tener mas precisión aunque el peso de la volatilidad 
 
 \section{Tiempo de Ejecución y Robustez}
 
-Una vez entrenada la red (Fue calculado sobre GPU(GeForce GTX 1080/PCIe/SSE2), RAM(15.6 GiB). La búsqueda de hiperpámetros en un tiempo $10.08$ horas, la búsqueda del algoritmo de la tasa de aprendizaje fue $11.72$ horas y entrenamiento de la red $3000$ épocas fue $8.83$ horas), vamos a observar el tiempo ejecución de evaluación de la misma sobre una muestra de $10000$. Ademas el tiempo de ejecución de los métodos de Brent y bisección sobre la misma muestra en una CPU(Intel(R) Core(TM) i5-8265U CPU @ 1.60GHz).
+Una vez entrenada la red (Fue calculado sobre GPU(GeForce GTX 1080/PCIe/SSE2), RAM(15.6 GiB). La búsqueda de hiperpámetros en un tiempo $10.08$ horas, la búsqueda del algoritmo de la tasa de aprendizaje fue $11.72$ horas y entrenamiento de la red $3000$ épocas fue $8.83$ horas), vamos a observar el tiempo ejecución de evaluación de la misma sobre una muestra de tamaño $10^{5}$. Ademas el tiempo de ejecución de los métodos de Brent y bisección sobre la misma muestra en una CPU(Intel(R) Core(TM) i5-8265U CPU @ 1.60GHz).
 
 También analizaremos su robustez, esto sería, si para todo elemento de la muestra el modelo genera una salida.
 
-En el Cuadro \textcolor{red}{usar referencias}6.8 se observan el tiempo de ejecución y la Robustez. 
+En el Cuadro~\ref{fig:robustez} se observan el tiempo de ejecución y la Robustez. 
 
 \begin{table}[!htbp]
 \begin{center}
 \caption{Robustez y Tiempo de Ejecución}
+\label{fig:robustez}
 \begin{tabular}{|l|l|l|l|l|}
 \hline
  & Red Neuronal & Método de Brent  &  Método de Bisección  \\ \hline
-Tiempo de Ejecución(segundos)  & $7.34$  & $157.05$ & $318.31$   \\ \hline
+Tiempo de Ejecución(s)  & $7.34$  & $157.05$ & $318.31$   \\ \hline
 Robustez & Si  &  No & No \\ \hline
   
 \end{tabular}

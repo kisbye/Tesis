@@ -35,21 +35,13 @@ Fischer Black and Myron Scholes.
 \newblock The pricing of options and corporate liabilities.
 \newblock {\em The Journal of Political Economy}, 81(3):637--654, mayo 1973.
 
-\bibitem{Acumulada}
-Jay~L. Devore.
-\newblock {\em Probabilidad y Estadística para Ingeniería y Ciencias}, páginas
-  144--148.
-\newblock Cengage Learning, séptima edición, 2009.
-
 \bibitem{Smile}
 John~C. Hull.
 \newblock {\em Options, Futures, and Other Derivatives}, páginas 381--387.
 \newblock Pearson Prentice Hall, séptima edición, 2009.
 
 \bibitem{Surface}
-John~C. Hull.
-\newblock {\em Options, Futures, and Other Derivatives}, páginas 387--389.
-\newblock Pearson Prentice Hall, séptima edición, 2009.
+Ibíd., páginas 387--389.
 
 \bibitem{Intermedio}
 Ward~Cheney y~David~Kincaid.
@@ -57,14 +49,10 @@ Ward~Cheney y~David~Kincaid.
 \newblock Cengage Learning, sexta edición, 2011.
 
 \bibitem{Bisec}
-Ward~Cheney y~David~Kincaid.
-\newblock {\em Métodos numéricos y computación}, páginas 76--82.
-\newblock Cengage Learning, sexta edición, 2011.
+Ibíd., páginas 76--82.
 
 \bibitem{Secante}
-Ward~Cheney y~David~Kincaid.
-\newblock {\em Métodos numéricos y computación}, páginas 111--112.
-\newblock Cengage Learning, sexta edición, 2011.
+Ward~Cheney y~David~Kincaid, op. cit., páginas 111--112.
 
 \bibitem{Brent}
   William~H. Press, Saul~A. Teukolsky, William~T. Vetterling, Brian~P. Flannery.
@@ -92,9 +80,7 @@ Ward~Cheney y~David~Kincaid.
   \newblock (2016),
   
 \bibitem{Exponential}
-  Wei~Di, Anurag~Bhardwaj, Jianing~Wei. 
-  \newblock {\em Deep Learning Essentials}. páginas 219 
-  \newblock Packt Publishing, (2018).
+  Wei~Di, Anurag~Bhardwaj, Jianing~Wei, op. cit., páginas 219.
 
 \bibitem{Smith}
   Leslie N. Smith. 
@@ -154,10 +140,6 @@ Ward~Cheney y~David~Kincaid.
   \newblock
     \url{https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV}
 
-\bibitem{Vega}
-John~C. Hull.
-\newblock {\em Options, Futures, and Other Derivatives}, páginas 365--367.
-\newblock Pearson Prentice Hall, séptima edición, 2009.
 
 \bibitem{Brentq}
   Método de Brent.
