@@ -679,7 +679,7 @@ ReLu(z) = \max(z,0)
 Elu(z)= \begin{cases}
           \alpha(e^{z -1}) & \mbox{si } z < 0\\
           z  &   \mbox{si }z \ge 0
-        \end{cases} .
+        \end{cases}
 \label{Elu}
 \end{eqnarray}
 
